@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>results</key>
+	<array>
+		<dict>
+			<key>backGroundMusic</key>
+			<string></string>
+			<key>backGroundImageUrl</key>
+			<string></string>
+			<key>level</key>
+			<integer>1</integer>
+			<key>numberOfBalls</key>
+			<integer>1</integer>
+			<key>numberOfDrops</key>
+			<integer>2000</integer>
+			<key>fallingSpeed</key>
+			<integer>1</integer>
+			<key>scoreGoal</key>
+			<integer>1000</integer>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>2</integer>
+			<key>numberOfBalls</key>
+			<integer>1</integer>
+			<key>numberOfDrops</key>
+			<real>3000</real>
+			<key>fallingSpeed</key>
+			<real>1.2</real>
+			<key>scoreGoal</key>
+			<real>2000</real>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>3</integer>
+			<key>numberOfBalls</key>
+			<integer>2</integer>
+			<key>numberOfDrops</key>
+			<real>3000</real>
+			<key>fallingSpeed</key>
+			<real>1.5</real>
+			<key>scoreGoal</key>
+			<real>1500</real>
+		</dict>
+		<dict>
+			<key>level</key>
+			<integer>4</integer>
+			<key>numberOfBalls</key>
+			<integer>2</integer>
+			<key>numberOfDrops</key>
+			<real>4000</real>
+			<key>fallingSpeed</key>
+			<real>1.6</real>
+			<key>scoreGoal</key>
+			<real>3000</real>
+		</dict>
+	</array>
+	<key>className</key>
+	<string>Level</string>
+</dict>
+</plist>
