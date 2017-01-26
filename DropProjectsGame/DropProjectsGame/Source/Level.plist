@@ -5,6 +5,8 @@
 	<key>results</key>
 	<array>
 		<dict>
+			<key>className</key>
+			<string>Level</string>
 			<key>backGroundMusic</key>
 			<string></string>
 			<key>backGroundImageUrl</key>
@@ -21,6 +23,8 @@
 			<integer>1000</integer>
 		</dict>
 		<dict>
+			<key>className</key>
+			<string>Level</string>
 			<key>level</key>
 			<integer>2</integer>
 			<key>numberOfBalls</key>
@@ -33,6 +37,8 @@
 			<real>2000</real>
 		</dict>
 		<dict>
+			<key>className</key>
+			<string>Level</string>
 			<key>level</key>
 			<integer>3</integer>
 			<key>numberOfBalls</key>
@@ -45,6 +51,8 @@
 			<real>1500</real>
 		</dict>
 		<dict>
+			<key>className</key>
+			<string>Level</string>
 			<key>level</key>
 			<integer>4</integer>
 			<key>numberOfBalls</key>
@@ -58,6 +66,6 @@
 		</dict>
 	</array>
 	<key>className</key>
-	<string>Level</string>
+	<string>LevelResponse</string>
 </dict>
 </plist>

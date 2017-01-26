@@ -16,13 +16,6 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
         static let width:CGFloat = 60
     }
     
-    struct PathNames{
-        static let paddleBundryName = "paddleName"
-        static let ballBundaryName = "ballViewName"
-    }
-    
-   /*----------end----------*/
-    
     
     /*-------初始化------*/
     override init(frame: CGRect) {
@@ -53,15 +46,13 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     /*-----------类变量------------*/
-    
+    let gameEngin:GameEngine = GameEngine.share
     var animate:Bool = false{
         didSet{
             if animate {
-              breakBehaviorDataSource.startAnimator()
-              fallingBehaviorDataSource.startAnimator()
+                gameEngin.gameStart(withReferenceView: self)
             }else{
-                breakBehaviorDataSource.stopAnimator();
-                fallingBehaviorDataSource.stopAnimator()
+                gameEngin.gameStop()
             }
         }
     }
@@ -88,8 +79,6 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
     
     var ballView:BallView?
     
-    lazy var breakBehaviorDataSource:BreakBehaviorDataSource = BreakBehaviorDataSource(referenceView:self);
-    lazy var fallingBehaviorDataSource:FallingObjectDatasource = FallingObjectDatasource(referenceView: self)
 
     /*------------方法-------------*/
     
@@ -119,9 +108,9 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
             paddleView!.center = CGPoint(x: touchX, y: paddleView!.center.y);
             
             let path:UIBezierPath = UIBezierPath.init(rect: paddleView!.frame);
-            breakBehaviorDataSource.addBundary(name: PathNames.paddleBundryName, path: path)
+            gameEngin.breakBehaviorDataSource!.addBundary(name: PathNames.paddleBundryName, path: path)
             //   print("volocity:\(sender.velocity(in: self))")
-            breakBehaviorDataSource.pushAngle = checkingAngle(velocity: sender.velocity(in: self))
+            gameEngin.breakBehaviorDataSource!.pushAngle = checkingAngle(velocity: sender.velocity(in: self))
 
             break;
         default:

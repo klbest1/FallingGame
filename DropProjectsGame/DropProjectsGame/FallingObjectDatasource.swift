@@ -8,6 +8,18 @@
 
 import UIKit
 
+struct FallingDropSetting {
+    var numberOfDrops:Int?
+    var fallingSpeed:Float?
+}
+
+protocol FallingObjectDatasourceDelegate:class{
+    func didCollisionWithTheBallBundary(sender:FallingObjectDatasource , numberOfDisappearedBalls:Int)
+    func didCollisionWithTheBottomBundary(sender:FallingObjectDatasource)
+}
+
+private let randomDropsPerRow = 5
+
 class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     private var sceneWidth:CGFloat = 0
     private var sceneHight:CGFloat = 0
@@ -15,25 +27,42 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     private var dropTimer:Timer?
     private var dropSize:CGSize?
     private var dynamicAnimator :UIDynamicAnimator?
-
-    public var numberOfDrops:Int = 400;
+    private var totalDrops:Int = 0
+    
+    private var numberOfDrops:Int = 400;
+    private var fallingSpeed:Float = 0
     public var numberOfDropsPerRow = 10;
     public var drops:[UIView] = [UIView]()
     public let fallingObjectBehavior = FallingObjectBehavior()
+    //笔记
+    public weak var delegate:FallingObjectDatasourceDelegate?
     
-    init(referenceView:GameSceneView) {
+    init(referenceView:GameSceneView, fallingDropsSetting:FallingDropSetting) {
         super.init()
         sceneWidth = referenceView.frame.size.width;
         sceneHight = referenceView.frame.size.height;
         gameView = referenceView;
         dynamicAnimator  = UIDynamicAnimator(referenceView: gameView!)
-
+        
         dropSize = CGSize(width: sceneWidth/CGFloat(numberOfDropsPerRow), height:  sceneWidth/CGFloat(numberOfDropsPerRow))
-        fallingObjectBehavior.gravityBehavior.action = {
+        
+
+        //设定下落球的总数
+        numberOfDrops = fallingDropsSetting.numberOfDrops!
+        //设定球下落的速度
+        fallingObjectBehavior.setfallingSpeed(speed: fallingDropsSetting.fallingSpeed!)
+        fallingObjectBehavior.gravityBehavior.action = {[unowned self] in
             self.fallingObjectBehavior.removeBundry()
             let path = UIBezierPath(ovalIn: referenceView.ballView!.frame);
-            self.fallingObjectBehavior.addBundry(name: GameSceneView.PathNames.ballBundaryName as NSCopying, path: path)
-//            self.numberOfDrops = 
+            self.fallingObjectBehavior.addBundry(name:PathNames.ballBundaryName as NSCopying, path: path)
+            //给referenceView添加边界，这样到达底部我才知道
+            var referenceFrame = referenceView.frame;
+            referenceFrame.origin = CGPoint(x: -20, y: -20);
+            referenceFrame.size.height -= 20;
+            referenceFrame.size.width += 40
+            let referencePath = UIBezierPath(rect: referenceFrame)
+            
+            self.fallingObjectBehavior.addBundry(name: PathNames.referenceBundayName as NSCopying, path: referencePath)
         }
     }
     
@@ -41,12 +70,19 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     func addDrops()  {
         var randomsLocation:[Int] = [CGFloat.random(max: numberOfDropsPerRow)]
         var i = 0
-        while ( i < 5) {
+        while ( i < randomDropsPerRow) {
             i += 1;
             let number = CGFloat.random(max: numberOfDropsPerRow);
             if(!randomsLocation.contains(number)){
                 randomsLocation.append(number);
             }
+        }
+        //统计产生的Drops
+        totalDrops += randomDropsPerRow
+
+        if self.numberOfDrops == totalDrops {
+            dropTimer?.invalidate()
+            return
         }
         
         for location in randomsLocation{
@@ -69,6 +105,10 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
         fallingObjectBehavior.removeItems(items: drops)
     }
     
+    func endingDrops() {
+        dropTimer?.invalidate()
+        self.stopDrops();
+    }
     
     func startAnimator()  {
         dynamicAnimator!.addBehavior(fallingObjectBehavior);
@@ -80,8 +120,8 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
         dynamicAnimator!.removeAllBehaviors()
     }
     
-    func collisionBehavior(_ behavior: UICollisionBehavior, endedContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?){
-         if(identifier != nil) , identifier as! String == GameSceneView.PathNames.ballBundaryName{
+    func collisionBehavior(_ behavior: UICollisionBehavior, endedContactFor item: UIDynamicItem, withBoundaryIdentifier identifier:  NSCopying?){
+         if(identifier != nil) , identifier as! String == PathNames.ballBundaryName{
             let toucheditem:UIView = item as! UIView
             toucheditem.backgroundColor = UIColor.red
             gameView?.viewDisappedAnimation(view: toucheditem, animationCompletion: { (value:Bool) in
@@ -90,8 +130,14 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
                         self.drops.remove(at: self.drops.index(of:toucheditem)!)
                     }
                     self.fallingObjectBehavior.removeItems(items: [toucheditem])
+                    
+                    self.delegate?.didCollisionWithTheBallBundary(sender: self, numberOfDisappearedBalls: self.totalDrops - self.drops.count)
                 }
             })
+         }else  if identifier as? String  == PathNames.referenceBundayName{
+            print("到达底边界！\(identifier)")
+            self.delegate?.didCollisionWithTheBottomBundary(sender: self)
+
         }
     }
 

@@ -9,35 +9,61 @@
 import UIKit
 
 let classNameKey = "className"
-let resultsKey = "results"
 
 extension NSDictionary{
 
-    static func decodeDic(dicOrigin:[String:AnyObject])->[AnyObject]?{
+    static func decodeDic(dicOrigin:[String:AnyObject])->AnyObject?{
         
         if let className:String = (dicOrigin[classNameKey] as? String){
 //            print("xx:\(NSClassFromString(className) as? NSObject.Type)")
             if let classType = (NSClassFromString(className) as? NSObject.Type){
-                var objects = [AnyObject]()
+                //获取类实例
+                let instance = classType.init()
+
+                let keys = dicOrigin.keys;
                 
-                let results:[AnyObject] = (dicOrigin[resultsKey] as? [AnyObject])!
-                for var dicItem in results{
-                    let instance = classType.init()
-                    let keys  = (dicItem as! NSDictionary).allKeys
-                    for key in keys{
-                        let value:AnyObject = dicItem[key] as AnyObject;
-                        if instance.responds(to: NSSelectorFromString(key as! String)) {
-                            instance.setValue(value, forKey: key as! String)
+                for var key in keys
+                {
+                    if key != classNameKey {
+                        var value = dicOrigin[key];
+                        //是数组，那么进行数组处理
+                        if (value is NSArray) {
+                            value = handleArray(originArray: value as! NSArray)
+                        //是字典，那么是类，进行类处理
+                        }else if (value is NSDictionary ){
+                            value = decodeDic(dicOrigin: value as! [String : AnyObject]) as AnyObject?
+                        }
+                        //类属性赋值
+                        if instance.responds(to: NSSelectorFromString(key)) {
+                            instance.setValue(value, forKey: key )
                         }
                     }
-                    objects.append(instance)
+                    
                 }
-                return objects
-
+                return instance ;
             }else{
                 print("\(className)没有此类型")
             }
         }
         return nil
     }
+    
+    static func handleArray(originArray:NSArray)->NSArray{
+        var arrayResult =  [AnyObject]()
+        for item in originArray{
+            var value = item
+            //是数组继续迭代
+            if item is NSArray {
+               value = handleArray(originArray: item as! NSArray)
+            }else if item is [String:AnyObject] {
+                //是字典转为类的处理
+                value =  NSDictionary.decodeDic(dicOrigin: item as! [String:AnyObject]) as AnyObject!
+            }
+            //其他类型则加入数组
+            arrayResult.append(value as AnyObject)
+        }
+        return arrayResult as NSArray
+    }
 }
+
+

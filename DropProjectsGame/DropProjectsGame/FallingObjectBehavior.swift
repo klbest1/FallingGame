@@ -8,7 +8,11 @@
 
 import UIKit
 
+let defaultYspeedItem:Float = 0.04
+
 class FallingObjectBehavior: UIDynamicBehavior {
+    
+    var ySpeed:Float = 1.0
     let gravityBehavior:UIGravityBehavior = UIGravityBehavior();
     let collisionBehavior:UICollisionBehavior = UICollisionBehavior()
     let dynamicItemBehavior:UIDynamicItemBehavior = UIDynamicItemBehavior()
@@ -19,7 +23,7 @@ class FallingObjectBehavior: UIDynamicBehavior {
         self.addChildBehavior(collisionBehavior)
         self.addChildBehavior(dynamicItemBehavior)
         gravityBehavior.magnitude = 4;
-        gravityBehavior.gravityDirection = CGVector(dx: 0, dy: 0.04)
+        gravityBehavior.gravityDirection = CGVector(dx: 0, dy:CGFloat(defaultYspeedItem*ySpeed))
 //        dynamicItemBehavior.allowsRotation = true
 //        dynamicItemBehavior.elasticity = 0.4
         collisionBehavior.translatesReferenceBoundsIntoBoundary = true;
@@ -46,5 +50,9 @@ class FallingObjectBehavior: UIDynamicBehavior {
     }
     func removeBundry( )  {
         collisionBehavior.removeAllBoundaries()
+    }
+    
+    func setfallingSpeed(speed:Float) {
+        gravityBehavior.gravityDirection = CGVector(dx: 0, dy:CGFloat(defaultYspeedItem*speed))
     }
 }

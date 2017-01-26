@@ -35,7 +35,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
 
     func addBallBehaviors(){
         let path:UIBezierPath = UIBezierPath.init(rect: gameView!.paddleView!.frame);
-        self.addBundary(name: GameSceneView.PathNames.paddleBundryName , path: path)
+        self.addBundary(name: PathNames.paddleBundryName , path: path)
         breakObjectBehavior!.addCollisionForItems(items: [gameView!.ballView!]);
         breakObjectBehavior!.addPush(item:gameView!.ballView!,angle:pushInitAngle);
     }
@@ -63,7 +63,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     
     
     func collisionBehavior(_ behavior: UICollisionBehavior, endedContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?){
-        if (identifier != nil) , identifier as! String == GameSceneView.PathNames.paddleBundryName  {
+        if (identifier != nil) , identifier as! String == PathNames.paddleBundryName  {
             breakObjectBehavior!.addPush(item: gameView!.ballView!, angle:pushAngle);
         }
     }
