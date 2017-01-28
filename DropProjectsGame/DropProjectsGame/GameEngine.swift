@@ -11,12 +11,11 @@ import UIKit
 struct PathNames{
     static let paddleBundryName = "paddleName"
     static let ballBundaryName = "ballViewName"
-    static let referenceBundayName = "referenceBunday"
 }
 
 private let shareInstance = GameEngine()
 
-class GameEngine: NSObject,FallingObjectDatasourceDelegate {
+class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSourceDelegate {
     class var share: GameEngine {
         return shareInstance
     }
@@ -34,6 +33,7 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate {
             self.breakBehaviorDataSource = BreakBehaviorDataSource(referenceView:self.referenceView!);
             fallingBehaviorDataSource = FallingObjectDatasource(referenceView: self.referenceView!, fallingDropsSetting: self.fallingDropsSetting)
             fallingBehaviorDataSource?.delegate = self
+            breakBehaviorDataSource?.delegate = self
         }
     }
     
@@ -65,6 +65,11 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate {
     func didCollisionWithTheBottomBundary(sender:FallingObjectDatasource)
     {
         print("游戏结束：\(score)")
+        fallingBehaviorDataSource?.endingDrops()
+    }
+
+    func didBallfallingOnTheGround(sender:BreakBehaviorDataSource){
+        print("球掉地上了，游戏结束");
         fallingBehaviorDataSource?.endingDrops()
     }
 

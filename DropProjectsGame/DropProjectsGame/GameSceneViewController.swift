@@ -54,21 +54,33 @@ class GameSceneViewController: UIViewController {
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         
-        appDelegate?.persistentContainer.viewContext.perform {
-            //            _ = Users.userWithUserInfo(gameUser:me, result:result ,context: appDelegate!.persistentContainer.viewContext)
-            _ = PlayIResults.playResultsUpdate(user: me, result: result, context: (appDelegate?.persistentContainer.viewContext)!)
-            
-            
-            do{
-                try appDelegate?.persistentContainer.viewContext.save()
-            }catch let error as NSError{
-                print(error);
+        if #available(iOS 10.0, *) {
+            appDelegate?.persistentContainer.viewContext.perform {
+                //            _ = Users.userWithUserInfo(gameUser:me, result:result ,context: appDelegate!.persistentContainer.viewContext)
+                appDelegate?.persistentContainer.viewContext.perform {
+                    //            _ = Users.userWithUserInfo(gameUser:me, result:result ,context: appDelegate!.persistentContainer.viewContext)
+                    _ = PlayIResults.playResultsUpdate(user: me, result: result, context: (appDelegate?.persistentContainer.viewContext)!)
+                    
+                    
+                    do{
+                        try appDelegate?.persistentContainer.viewContext.save()
+                    }catch let error as NSError{
+                        print(error);
+                    }
+                    
+                }
+                
+                do{
+                    try appDelegate?.persistentContainer.viewContext.save()
+                }catch let error as NSError{
+                    print(error);
+                }
             }
+            Users.printAllUsers(context: (appDelegate?.persistentContainer.viewContext)!)
         }
-        Users.printAllUsers(context: (appDelegate?.persistentContainer.viewContext)!)
-        
         let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
         print("path\(path)");
+
     }
 
     func testDicDecoding() {

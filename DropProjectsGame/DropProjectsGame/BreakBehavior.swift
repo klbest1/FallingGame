@@ -31,13 +31,13 @@ class BreakBehavior: UIDynamicBehavior {
        
     }
     
-    func addPush(item:UIView,angle:Double) {
-        print("angle:\(angle)")
+    func addPush(item:UIView,angle:Double,magnitude:CGFloat) {
+//        print("angle:\(angle)")
         if pushBehavior == nil {
             pushBehavior = UIPushBehavior(items: [item], mode: UIPushBehaviorMode.instantaneous)
             self.addChildBehavior(pushBehavior!)
         }
-        pushBehavior?.magnitude = 3;
+        pushBehavior?.magnitude = magnitude;
         pushBehavior!.angle = CGFloat(angle);
         pushBehavior!.action = { [unowned self] in
             if(!self.pushBehavior!.active){

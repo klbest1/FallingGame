@@ -74,6 +74,7 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
         return size;
     }
     
+    var yFingerMovingDistance:Double = 0
     
     var paddleView:UIView? = nil;
     
@@ -94,10 +95,18 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
     func handPan(_ sender:UIPanGestureRecognizer)  {
         let state = sender.state;
         let touchPoint:CGPoint = sender.location(in: self);
+        var lastPoint:CGPoint = CGPoint.zero
+        var fistPoint:CGPoint = (ballView?.center)!
         switch state {
         case .began:
+            fistPoint = touchPoint;
             break;
         case .changed:
+            lastPoint = touchPoint;
+            //计算手指移动的距离
+            yFingerMovingDistance = fabs(Double(lastPoint.y - fistPoint.y))
+            let velocity = sender.velocity(in: self)
+             //计算PaddleView的x轴移动位置
             var touchX:CGFloat = touchPoint.x;
             if touchX < paddleSize.width / 2 {
                 touchX = paddleSize.width/2;
@@ -109,10 +118,15 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
             
             let path:UIBezierPath = UIBezierPath.init(rect: paddleView!.frame);
             gameEngin.breakBehaviorDataSource!.addBundary(name: PathNames.paddleBundryName, path: path)
-            //   print("volocity:\(sender.velocity(in: self))")
-            gameEngin.breakBehaviorDataSource!.pushAngle = checkingAngle(velocity: sender.velocity(in: self))
-
+            gameEngin.breakBehaviorDataSource!.pushAngle = checkAngle(firstPoint: fistPoint, lastPoint: lastPoint)
+            gameEngin.breakBehaviorDataSource!.pushMagnitude = checkingSpeed(velocity: velocity)
+//            print("velocity:\(velocity)")
             break;
+        case .ended:
+            if yFingerMovingDistance > 20  {
+                gameEngin.breakBehaviorDataSource?.startPushing()
+                yFingerMovingDistance = 0;
+            }
         default:
             break;
         }
@@ -134,9 +148,31 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
         }
         return -angle
     }
+    
+    func checkingSpeed(velocity:CGPoint) -> CGFloat{
+        let velocityX = fabs(velocity.y)
+        let propotion  = velocityX / 200;
+        var speed:CGFloat = 0.0;
+        if propotion > 1 {
+            speed = fabs(velocity.y/200) * 0.01 +  3;
+        }else{
+            speed = 3 * fabs(velocity.y/200) * 0.01
+        }
+        
+        print("speed:\(speed)")
+        return speed
+    }
+    
+    func checkAngle(firstPoint:CGPoint , lastPoint:CGPoint) -> Double{
+        let yDistance = Double(lastPoint.y - firstPoint.y)
+        let xDistance = Double(lastPoint.x - firstPoint.x)
+        let angle = atan2(yDistance, xDistance)
+//        print("angle:\(angle/M_PI * 180)")
+        return angle
+    }
     //笔记
     func viewDisappedAnimation( view:UIView,animationCompletion:  @escaping ((_ finish:Bool)->())){
-        UIView.animate(withDuration: 0.5, delay: 0, options:[ .curveEaseOut], animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, options:[.curveEaseOut], animations: {
             view.transform = CGAffineTransform(rotationAngle: CGFloat(M_2_PI))
             view.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
         }, completion: {_ in

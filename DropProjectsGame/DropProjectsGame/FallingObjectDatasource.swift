@@ -41,12 +41,13 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
         super.init()
         sceneWidth = referenceView.frame.size.width;
         sceneHight = referenceView.frame.size.height;
+        print("sceneHight:\(sceneHight)")
         gameView = referenceView;
         dynamicAnimator  = UIDynamicAnimator(referenceView: gameView!)
         
         dropSize = CGSize(width: sceneWidth/CGFloat(numberOfDropsPerRow), height:  sceneWidth/CGFloat(numberOfDropsPerRow))
         
-
+//431 - 40 - 38  353
         //设定下落球的总数
         numberOfDrops = fallingDropsSetting.numberOfDrops!
         //设定球下落的速度
@@ -55,14 +56,13 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
             self.fallingObjectBehavior.removeBundry()
             let path = UIBezierPath(ovalIn: referenceView.ballView!.frame);
             self.fallingObjectBehavior.addBundry(name:PathNames.ballBundaryName as NSCopying, path: path)
-            //给referenceView添加边界，这样到达底部我才知道
-            var referenceFrame = referenceView.frame;
-            referenceFrame.origin = CGPoint(x: -20, y: -20);
-            referenceFrame.size.height -= 20;
-            referenceFrame.size.width += 40
-            let referencePath = UIBezierPath(rect: referenceFrame)
-            
-            self.fallingObjectBehavior.addBundry(name: PathNames.referenceBundayName as NSCopying, path: referencePath)
+            for var dropItem in self.drops{
+                if (dropItem as UIView).frame.origin.y > (self.sceneHight - (self.gameView?.paddleSize.height)! - 20 - (self.dropSize?.height)!) {
+                    print("到达底边界！\((dropItem as UIView).frame)")
+                    self.delegate?.didCollisionWithTheBottomBundary(sender: self)
+                    break;
+                }
+            }
         }
     }
     
@@ -134,11 +134,7 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
                     self.delegate?.didCollisionWithTheBallBundary(sender: self, numberOfDisappearedBalls: self.totalDrops - self.drops.count)
                 }
             })
-         }else  if identifier as? String  == PathNames.referenceBundayName{
-            print("到达底边界！\(identifier)")
-            self.delegate?.didCollisionWithTheBottomBundary(sender: self)
-
-        }
+         }
     }
 
     
