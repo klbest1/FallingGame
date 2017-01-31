@@ -34,6 +34,7 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     public var numberOfDropsPerRow = 10;
     public var drops:[UIView] = [UIView]()
     public let fallingObjectBehavior = FallingObjectBehavior()
+    private var touchingItemByBall:UIView?
     //笔记
     public weak var delegate:FallingObjectDatasourceDelegate?
     
@@ -117,7 +118,7 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     func stopAnimator() {
         dropTimer?.invalidate()
         dropTimer = nil
-        removeDropsFromBehaviorForInstantStop();
+        fallingObjectBehavior.removeItems(items: drops)
         dynamicAnimator!.removeAllBehaviors()
     }
     
@@ -134,6 +135,12 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     func collisionBehavior(_ behavior: UICollisionBehavior, endedContactFor item: UIDynamicItem, withBoundaryIdentifier identifier:  NSCopying?){
          if(identifier != nil) , identifier as! String == PathNames.ballBundaryName{
             let toucheditem:UIView = item as! UIView
+            //保证只执行一次
+            if(touchingItemByBall == toucheditem){
+                return;
+            }
+            touchingItemByBall = toucheditem;
+
             toucheditem.backgroundColor = UIColor.red
             gameView?.viewDisappedAnimation(view: toucheditem, animationCompletion: { (value:Bool) in
                 if(value){

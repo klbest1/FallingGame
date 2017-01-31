@@ -27,7 +27,6 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     var fallingBehaviorDataSource:FallingObjectDatasource?
     var fallingDropsSetting:FallingDropSetting = FallingDropSetting()
     let leveManager:LevelManager = LevelManager()
-    var gameFinish:Bool = false
     
     var referenceView:GameSceneView? {
         didSet{
@@ -64,13 +63,12 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     func gameRefresh()  {
         fallingBehaviorDataSource!.resetAnimator()
         breakBehaviorDataSource!.resetBallDynamic()
-        gameFinish = false
     }
     
     
     func didCollisionWithTheBallBundary(sender:FallingObjectDatasource , numberOfDisappearedBalls:Int){
         
-//        audioPlayer.playSoundWithSoundType(soundType: .collison)
+        audioPlayer.playSoundWithSoundType(soundType: .collison)
         audioPlayer.instantMusicRrepeateTime =  numberOfDisappearedBalls - score
         score = numberOfDisappearedBalls;
         print("游戏得分：\(score)");
@@ -78,23 +76,17 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     
     func didCollisionWithTheBottomBundary(sender:FallingObjectDatasource)
     {
-        if !gameFinish {
-            print("游戏结束：\(score)")
-            gameFinish = true
-            fallingBehaviorDataSource?.stopAnimator()
-            //这里最好建一个结果对象
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: score)
-        }
+        print("1游戏结束：\(score)")
+        fallingBehaviorDataSource?.stopAnimator()
+        //这里最好建一个结果对象
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: score)
+        
     }
 
     func didBallfallingOnTheGround(sender:BreakBehaviorDataSource){
-        if !gameFinish{
-            print("球掉地上了，游戏结束");
-            gameFinish = true
-            fallingBehaviorDataSource?.stopAnimator()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: score)
-        }
-       
+        print("球掉地上了，游戏结束");
+        gameStop()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: score)
     }
 
 }

@@ -20,7 +20,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     public weak var delegate:BreakBehaviorDataSourceDelegate?
 
     
-    private var breakObjectBehavior:BreakBehavior? = BreakBehavior();
+    private var breakObjectBehavior:BreakBehavior = BreakBehavior();
     private var gameView:GameSceneView?
     private var dynamicBreakerAnimator :UIDynamicAnimator?
     private var touchedPaddle:Bool = false;
@@ -29,18 +29,21 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
         super.init()
         gameView = referenceView
         dynamicBreakerAnimator  = UIDynamicAnimator(referenceView: gameView!)
-        breakObjectBehavior!.collisionBehavior.collisionDelegate = self;
-        self.breakObjectBehavior!.collisionBehavior.action = {
+        breakObjectBehavior.collisionBehavior.collisionDelegate = self;
+        self.breakObjectBehavior.collisionBehavior.action = {
             [unowned self] in
-            let item:UIView = self.breakObjectBehavior!.collisionBehavior.items.first as! UIView;
-            if( item.frame.origin.y > UIView.screenHight){
-               self.resetBallDynamic()
+            //笔记
+            let item:UIView? = self.breakObjectBehavior.collisionBehavior.items.first as? UIView;
+            if(item !=  nil){
+                if( item!.frame.origin.y > UIView.screenHight){
+                    self.resetBallDynamic()
+                }
             }
         }
         
-        self.breakObjectBehavior!.gravityBehavior.action = {
+        self.breakObjectBehavior.gravityBehavior.action = {
             [unowned self] in
-            let item:UIView = self.breakObjectBehavior!.gravityBehavior.items.first as! UIView;
+            let item:UIView = self.breakObjectBehavior.gravityBehavior.items.first as! UIView;
             if( item.frame.origin.y >=  (self.gameView!.hight - self.gameView!.ballView!.frame.size.height)){
                
                 self.delegate?.didBallfallingOnTheGround(sender: self)
@@ -53,8 +56,8 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     func addBallBehaviors(){
         let path:UIBezierPath = UIBezierPath.init(rect: gameView!.paddleView!.frame);
         self.addBundary(name: PathNames.paddleBundryName , path: path)
-        breakObjectBehavior!.addCollisionForItems(items: [gameView!.ballView!]);
-        breakObjectBehavior!.addPush(item:gameView!.ballView!,angle:pushInitAngle,magnitude: 3);
+        breakObjectBehavior.addCollisionForItems(items: [gameView!.ballView!]);
+        breakObjectBehavior.addPush(item:gameView!.ballView!,angle:pushInitAngle,magnitude: 3);
     }
     
     
@@ -62,27 +65,28 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
         self.gameView?.ballView?.removeFromSuperview()
         self.gameView?.ballView = nil;
         self.gameView!.addBallView()
-        breakObjectBehavior?.removeItemsFromGravityCollision();
-        addBallBehaviors()
+        stopAnimator()
+        startAnimator()
     }
     
     func startAnimator()  {
-        dynamicBreakerAnimator!.addBehavior(breakObjectBehavior!)
+        dynamicBreakerAnimator!.addBehavior(breakObjectBehavior)
         addBallBehaviors();
     }
     
     func stopAnimator() {
+        breakObjectBehavior.removeItemsFromGravityCollision()
         dynamicBreakerAnimator!.removeAllBehaviors()
     }
     
     func addBundary(name:String,path:UIBezierPath) {
-        breakObjectBehavior!.removeBundry(name:name as NSCopying)
-        breakObjectBehavior!.addBundry(name: name as NSCopying, path: path)
+        breakObjectBehavior.removeBundry(name:name as NSCopying)
+        breakObjectBehavior.addBundry(name: name as NSCopying, path: path)
     }
     
     func  startPushing() {
         if touchedPaddle{
-            breakObjectBehavior!.addPush(item: gameView!.ballView!, angle:pushAngle,magnitude: pushMagnitude);
+            breakObjectBehavior.addPush(item: gameView!.ballView!, angle:pushAngle,magnitude: pushMagnitude);
             touchedPaddle = false
         }
     }
