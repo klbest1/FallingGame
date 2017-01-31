@@ -8,28 +8,38 @@
 
 import UIKit
 
+let addGameResultsNotifiName = "GameResults"
+
 class GameSceneViewController: UIViewController {
 
+    var contentView:UIView = UIView()
     var gameSceneView:GameSceneView?  = nil;
-    
+    var gameResultView:GameResultView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "GameScene";
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
-        let viewSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 49);
-
-        gameSceneView = GameSceneView(frame:CGRect(origin: CGPoint.zero, size: viewSize));
-
-        self.view.addSubview(gameSceneView!);
+        contentView.frame = CGRect(origin: CGPoint.zero, size: self.view.frame.size)
         
-       testDicDecoding()
+        let viewSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 49);
+        gameSceneView = GameSceneView(frame:CGRect(origin: CGPoint.zero, size: viewSize));
+        gameResultView = GameResultView(frame: CGRect(origin: CGPoint.zero, size: viewSize));
+        // MVC 结构用户响应事件在控制层  笔记
+        gameResultView.resetButton.addTarget(self, action: #selector(resetTouched(_:)), for: .touchUpInside)
+        
+        self.view.addSubview(contentView)
+        contentView.addSubview(gameSceneView!);
+        
+        testDicDecoding()
     }
-
+    
     override func viewDidAppear(_ animated: Bool)
    {
         super.viewDidAppear(animated);
         gameSceneView!.animate = true;
+       //笔记  通知
+       NotificationCenter.default.addObserver(self, selector: #selector(addResultView(_:)), name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -87,6 +97,22 @@ class GameSceneViewController: UIViewController {
         let _ = LevelManager()
     }
    
+    
+    func resetTouched(_ sender:UIButton) {
+        gameSceneView?.gameEngin.gameRefresh()
+        gameResultView.removeFromSuperview()
+    }
+    
+    func addResultView(_ sender:NotificationCenter)  {
+        contentView.addSubview(gameResultView)
+        gameResultView.frame.origin = CGPoint(x:0, y: -gameResultView.frame.size.height)
+        UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: { 
+          self.gameResultView.frame.origin = CGPoint.zero
+        }) { ( finish:Bool) in
+            
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

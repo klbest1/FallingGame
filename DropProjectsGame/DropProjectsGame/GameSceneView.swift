@@ -37,8 +37,12 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
         if ballView == nil {
             ballView = BallView()
             ballView?.backgroundColor = UIColor.white
+
         }
         ballView!.frame = CGRect(origin: CGPoint(x:self.width-BallSize.width ,y:self.center.y - BallSize.width/2), size: CGSize(width: BallSize.width, height: BallSize.width));
+        ballView!.layer.cornerRadius = BallSize.width/2;
+        ballView!.clipsToBounds = true;
+
         self.addSubview(ballView!);
     }
     

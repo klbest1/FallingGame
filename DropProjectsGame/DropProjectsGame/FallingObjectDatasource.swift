@@ -98,28 +98,39 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
         if dropTimer == nil{
             dropTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(addDrops), userInfo: nil, repeats: true);
         }
-        self.perform(#selector(stopDrops), with: nil, afterDelay: 1)
+        self.perform(#selector(removeDropsFromBehaviorForInstantStop), with: nil, afterDelay: 1)
     }
-    
-    func stopDrops()  {
+    //暂停 方块移动
+    func removeDropsFromBehaviorForInstantStop()  {
         fallingObjectBehavior.removeItems(items: drops)
     }
     
-    func endingDrops() {
-        dropTimer?.invalidate()
-        self.stopDrops();
-    }
     
+    //开始游戏
     func startAnimator()  {
         dynamicAnimator!.addBehavior(fallingObjectBehavior);
         fallingObjectBehavior.collisionBehavior.collisionDelegate = self;
         addDrops();
     }
     
+    //停止所有的移动包括重力，碰撞，等
     func stopAnimator() {
+        dropTimer?.invalidate()
+        dropTimer = nil
+        removeDropsFromBehaviorForInstantStop();
         dynamicAnimator!.removeAllBehaviors()
     }
     
+    /*刷新游戏*/
+    func resetAnimator() {
+        for var item in drops{
+            item.removeFromSuperview()
+        }
+        drops.removeAll()
+        totalDrops = 0;
+        startAnimator()
+    }
+   
     func collisionBehavior(_ behavior: UICollisionBehavior, endedContactFor item: UIDynamicItem, withBoundaryIdentifier identifier:  NSCopying?){
          if(identifier != nil) , identifier as! String == PathNames.ballBundaryName{
             let toucheditem:UIView = item as! UIView

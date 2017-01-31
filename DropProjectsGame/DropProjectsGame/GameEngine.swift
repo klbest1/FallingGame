@@ -21,10 +21,14 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     }
     
     public var score:Int = 0
+    private let audioPlayer:AudioPlayer = AudioPlayer()
+    
     var breakBehaviorDataSource:BreakBehaviorDataSource?
     var fallingBehaviorDataSource:FallingObjectDatasource?
     var fallingDropsSetting:FallingDropSetting = FallingDropSetting()
     let leveManager:LevelManager = LevelManager()
+    var gameFinish:Bool = false
+    
     var referenceView:GameSceneView? {
         didSet{
             //这里先写死，随后要改成根据用户来获取
@@ -48,7 +52,7 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
         }
         breakBehaviorDataSource!.startAnimator()
         fallingBehaviorDataSource!.startAnimator()
-
+        audioPlayer.playSoundWithSoundType(soundType: .backround_one)
     }
     
     func gameStop() {
@@ -57,20 +61,40 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
 
     }
     
+    func gameRefresh()  {
+        fallingBehaviorDataSource!.resetAnimator()
+        breakBehaviorDataSource!.resetBallDynamic()
+        gameFinish = false
+    }
+    
+    
     func didCollisionWithTheBallBundary(sender:FallingObjectDatasource , numberOfDisappearedBalls:Int){
+        
+//        audioPlayer.playSoundWithSoundType(soundType: .collison)
+        audioPlayer.instantMusicRrepeateTime =  numberOfDisappearedBalls - score
         score = numberOfDisappearedBalls;
         print("游戏得分：\(score)");
     }
     
     func didCollisionWithTheBottomBundary(sender:FallingObjectDatasource)
     {
-        print("游戏结束：\(score)")
-        fallingBehaviorDataSource?.endingDrops()
+        if !gameFinish {
+            print("游戏结束：\(score)")
+            gameFinish = true
+            fallingBehaviorDataSource?.stopAnimator()
+            //这里最好建一个结果对象
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: score)
+        }
     }
 
     func didBallfallingOnTheGround(sender:BreakBehaviorDataSource){
-        print("球掉地上了，游戏结束");
-        fallingBehaviorDataSource?.endingDrops()
+        if !gameFinish{
+            print("球掉地上了，游戏结束");
+            gameFinish = true
+            fallingBehaviorDataSource?.stopAnimator()
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: score)
+        }
+       
     }
 
 }

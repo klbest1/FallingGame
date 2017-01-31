@@ -12,12 +12,13 @@ protocol BreakBehaviorDataSourceDelegate:class {
     func didBallfallingOnTheGround(sender:BreakBehaviorDataSource);
 }
 
+
 class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     public var pushInitAngle:Double = 0.04;
     public var pushAngle:Double =  -M_PI_4
     public var pushMagnitude:CGFloat = 0;
     public weak var delegate:BreakBehaviorDataSourceDelegate?
-    
+
     
     private var breakObjectBehavior:BreakBehavior? = BreakBehavior();
     private var gameView:GameSceneView?
@@ -33,8 +34,6 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
             [unowned self] in
             let item:UIView = self.breakObjectBehavior!.collisionBehavior.items.first as! UIView;
             if( item.frame.origin.y > UIView.screenHight){
-                item.removeFromSuperview();
-                self.gameView?.ballView = nil;
                self.resetBallDynamic()
             }
         }
@@ -43,12 +42,14 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
             [unowned self] in
             let item:UIView = self.breakObjectBehavior!.gravityBehavior.items.first as! UIView;
             if( item.frame.origin.y >=  (self.gameView!.hight - self.gameView!.ballView!.frame.size.height)){
+               
                 self.delegate?.didBallfallingOnTheGround(sender: self)
             }
         }
         
     }
 
+    
     func addBallBehaviors(){
         let path:UIBezierPath = UIBezierPath.init(rect: gameView!.paddleView!.frame);
         self.addBundary(name: PathNames.paddleBundryName , path: path)
@@ -58,9 +59,11 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     
     
     func resetBallDynamic() {
-       self.gameView!.addBallView()
-       breakObjectBehavior?.removeItemsFromGravityCollision();
-       addBallBehaviors()
+        self.gameView?.ballView?.removeFromSuperview()
+        self.gameView?.ballView = nil;
+        self.gameView!.addBallView()
+        breakObjectBehavior?.removeItemsFromGravityCollision();
+        addBallBehaviors()
     }
     
     func startAnimator()  {
