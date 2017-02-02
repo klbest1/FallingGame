@@ -21,6 +21,7 @@ class BreakBehavior: UIDynamicBehavior {
 
     var gravityBehavior:UIGravityBehavior = {
         let gravity = UIGravityBehavior();
+        print("1一次")
         return gravity;
     }();
     
@@ -33,10 +34,13 @@ class BreakBehavior: UIDynamicBehavior {
     
     func addPush(item:UIView,angle:Double,magnitude:CGFloat) {
 //        print("angle:\(angle)")
-        if pushBehavior == nil {
-            pushBehavior = UIPushBehavior(items: [item], mode: UIPushBehaviorMode.instantaneous)
-            self.addChildBehavior(pushBehavior!)
+        if(pushBehavior != nil){
+            self.removeChildBehavior(self.pushBehavior!);
+            self.pushBehavior = nil
         }
+        pushBehavior = UIPushBehavior(items: [item], mode: UIPushBehaviorMode.instantaneous)
+        self.addChildBehavior(pushBehavior!)
+        
         pushBehavior?.magnitude = magnitude;
         pushBehavior!.angle = CGFloat(angle);
         pushBehavior!.action = { [unowned self] in
@@ -54,7 +58,7 @@ class BreakBehavior: UIDynamicBehavior {
         }
     }
     
-    func removeItemsFromGravityCollision(){
+    func removeItemsFromBehaviors(){
         var items = NSArray().addingObjects(from: collisionBehavior.items);
         for item in items{
             collisionBehavior.removeItem(item as! UIDynamicItem)
@@ -64,7 +68,7 @@ class BreakBehavior: UIDynamicBehavior {
         for item in items{
             gravityBehavior.removeItem(item as! UIDynamicItem)
         }
-
+      
     }
     
     

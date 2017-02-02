@@ -20,7 +20,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     public weak var delegate:BreakBehaviorDataSourceDelegate?
 
     
-    private var breakObjectBehavior:BreakBehavior = BreakBehavior();
+    private var breakObjectBehavior:BreakBehavior?;
     private var gameView:GameSceneView?
     private var dynamicBreakerAnimator :UIDynamicAnimator?
     private var touchedPaddle:Bool = false;
@@ -29,35 +29,47 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
         super.init()
         gameView = referenceView
         dynamicBreakerAnimator  = UIDynamicAnimator(referenceView: gameView!)
-        breakObjectBehavior.collisionBehavior.collisionDelegate = self;
-        self.breakObjectBehavior.collisionBehavior.action = {
+    }
+    
+    func  lazyInitBehaviors()  {
+        let behavior:BreakBehavior = BreakBehavior()
+        behavior.collisionBehavior.collisionDelegate = self;
+        behavior.collisionBehavior.action = {
             [unowned self] in
             //笔记
-            let item:UIView? = self.breakObjectBehavior.collisionBehavior.items.first as? UIView;
+            let item:UIView? = behavior.collisionBehavior.items.first as? UIView;
             if(item !=  nil){
                 if( item!.frame.origin.y > UIView.screenHight){
+                    self.stopAnimator()
                     self.resetBallDynamic()
                 }
             }
         }
         
-        self.breakObjectBehavior.gravityBehavior.action = {
+        behavior.gravityBehavior.action = {
             [unowned self] in
-            let item:UIView = self.breakObjectBehavior.gravityBehavior.items.first as! UIView;
+            let item:UIView = behavior.gravityBehavior.items.first as! UIView;
             if( item.frame.origin.y >=  (self.gameView!.hight - self.gameView!.ballView!.frame.size.height)){
-               
                 self.delegate?.didBallfallingOnTheGround(sender: self)
             }
         }
         
+        breakObjectBehavior = behavior;
+        
     }
-
+    
+    func unInitBehavior()  {
+        breakObjectBehavior?.removeItemsFromBehaviors()
+        breakObjectBehavior?.removeChildBehavior(breakObjectBehavior!.collisionBehavior)
+        breakObjectBehavior?.removeChildBehavior(breakObjectBehavior!.gravityBehavior)
+        breakObjectBehavior = nil;
+    }
     
     func addBallBehaviors(){
         let path:UIBezierPath = UIBezierPath.init(rect: gameView!.paddleView!.frame);
         self.addBundary(name: PathNames.paddleBundryName , path: path)
-        breakObjectBehavior.addCollisionForItems(items: [gameView!.ballView!]);
-        breakObjectBehavior.addPush(item:gameView!.ballView!,angle:pushInitAngle,magnitude: 3);
+        breakObjectBehavior!.addCollisionForItems(items: [gameView!.ballView!]);
+        breakObjectBehavior!.addPush(item:gameView!.ballView!,angle:pushInitAngle,magnitude: 3);
     }
     
     
@@ -65,28 +77,29 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
         self.gameView?.ballView?.removeFromSuperview()
         self.gameView?.ballView = nil;
         self.gameView!.addBallView()
-        stopAnimator()
         startAnimator()
     }
     
     func startAnimator()  {
-        dynamicBreakerAnimator!.addBehavior(breakObjectBehavior)
+        lazyInitBehaviors()
+        dynamicBreakerAnimator!.addBehavior(breakObjectBehavior!)
         addBallBehaviors();
+        print("start.....")
     }
     
     func stopAnimator() {
-        breakObjectBehavior.removeItemsFromGravityCollision()
-        dynamicBreakerAnimator!.removeAllBehaviors()
+        dynamicBreakerAnimator!.removeBehavior(breakObjectBehavior!)
+        unInitBehavior()
     }
     
     func addBundary(name:String,path:UIBezierPath) {
-        breakObjectBehavior.removeBundry(name:name as NSCopying)
-        breakObjectBehavior.addBundry(name: name as NSCopying, path: path)
+        breakObjectBehavior?.removeBundry(name:name as NSCopying)
+        breakObjectBehavior?.addBundry(name: name as NSCopying, path: path)
     }
     
     func  startPushing() {
         if touchedPaddle{
-            breakObjectBehavior.addPush(item: gameView!.ballView!, angle:pushAngle,magnitude: pushMagnitude);
+            breakObjectBehavior?.addPush(item: gameView!.ballView!, angle:pushAngle,magnitude: pushMagnitude);
             touchedPaddle = false
         }
     }
@@ -94,6 +107,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     func collisionBehavior(_ behavior: UICollisionBehavior, endedContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?){
         if (identifier != nil) , identifier as! String == PathNames.paddleBundryName  {
             touchedPaddle = true
+            print("TouchPaddle:\(touchedPaddle)")
         }
     }
 }

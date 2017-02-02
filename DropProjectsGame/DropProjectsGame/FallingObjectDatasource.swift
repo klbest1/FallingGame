@@ -33,8 +33,9 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     private var fallingSpeed:Float = 0
     public var numberOfDropsPerRow = 10;
     public var drops:[UIView] = [UIView]()
-    public let fallingObjectBehavior = FallingObjectBehavior()
+    public var fallingObjectBehavior:FallingObjectBehavior?
     private var touchingItemByBall:UIView?
+    private var fallingSetting:FallingDropSetting!
     //笔记
     public weak var delegate:FallingObjectDatasourceDelegate?
     
@@ -51,12 +52,18 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
 //431 - 40 - 38  353
         //设定下落球的总数
         numberOfDrops = fallingDropsSetting.numberOfDrops!
+        fallingSetting = fallingDropsSetting
+    }
+    
+    func lazyInitBehavior()  {
+        let behavior:FallingObjectBehavior = FallingObjectBehavior()
+        behavior.collisionBehavior.collisionDelegate = self;
         //设定球下落的速度
-        fallingObjectBehavior.setfallingSpeed(speed: fallingDropsSetting.fallingSpeed!)
-        fallingObjectBehavior.gravityBehavior.action = {[unowned self] in
-            self.fallingObjectBehavior.removeBundry()
-            let path = UIBezierPath(ovalIn: referenceView.ballView!.frame);
-            self.fallingObjectBehavior.addBundry(name:PathNames.ballBundaryName as NSCopying, path: path)
+        behavior.setfallingSpeed(speed: fallingSetting.fallingSpeed!)
+        behavior.gravityBehavior.action = {[unowned self] in
+            behavior.removeBundry()
+            let path = UIBezierPath(ovalIn: self.gameView!.ballView!.frame);
+            behavior.addBundry(name:PathNames.ballBundaryName as NSCopying, path: path)
             for var dropItem in self.drops{
                 if (dropItem as UIView).frame.origin.y > (self.sceneHight - (self.gameView?.paddleSize.height)! - 20 - (self.dropSize?.height)!) {
                     print("到达底边界！\((dropItem as UIView).frame)")
@@ -65,8 +72,17 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
                 }
             }
         }
+        
+        fallingObjectBehavior = behavior
     }
     
+    func  unInitBehavior()  {
+        fallingObjectBehavior?.removeItems(items: drops)
+        fallingObjectBehavior?.removeChildBehavior(fallingObjectBehavior!.collisionBehavior)
+        fallingObjectBehavior?.removeChildBehavior(fallingObjectBehavior!.gravityBehavior)
+        fallingObjectBehavior?.removeChildBehavior(fallingObjectBehavior!.dynamicItemBehavior)
+        fallingObjectBehavior = nil
+    }
     
     func addDrops()  {
         var randomsLocation:[Int] = [CGFloat.random(max: numberOfDropsPerRow)]
@@ -94,23 +110,24 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
             gameView?.addSubview(drop)
             drops.append(drop);
         }
-        fallingObjectBehavior.addItems(items: drops)
+        fallingObjectBehavior!.addItems(items: drops)
         
         if dropTimer == nil{
             dropTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(addDrops), userInfo: nil, repeats: true);
         }
         self.perform(#selector(removeDropsFromBehaviorForInstantStop), with: nil, afterDelay: 1)
     }
+    
     //暂停 方块移动
     func removeDropsFromBehaviorForInstantStop()  {
-        fallingObjectBehavior.removeItems(items: drops)
+        fallingObjectBehavior?.removeItems(items: drops)
     }
     
     
     //开始游戏
     func startAnimator()  {
-        dynamicAnimator!.addBehavior(fallingObjectBehavior);
-        fallingObjectBehavior.collisionBehavior.collisionDelegate = self;
+        lazyInitBehavior()
+        dynamicAnimator!.addBehavior(fallingObjectBehavior!);
         addDrops();
     }
     
@@ -118,8 +135,8 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     func stopAnimator() {
         dropTimer?.invalidate()
         dropTimer = nil
-        fallingObjectBehavior.removeItems(items: drops)
         dynamicAnimator!.removeAllBehaviors()
+        unInitBehavior()
     }
     
     /*刷新游戏*/
@@ -147,7 +164,7 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
                     if((self.drops.index(of:toucheditem)) != nil){
                         self.drops.remove(at: self.drops.index(of:toucheditem)!)
                     }
-                    self.fallingObjectBehavior.removeItems(items: [toucheditem])
+                    self.fallingObjectBehavior?.removeItems(items: [toucheditem])
                     
                     self.delegate?.didCollisionWithTheBallBundary(sender: self, numberOfDisappearedBalls: self.totalDrops - self.drops.count)
                 }
