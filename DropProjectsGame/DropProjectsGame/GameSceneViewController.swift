@@ -25,7 +25,7 @@ class GameSceneViewController: UIViewController {
         let viewSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 49);
         gameSceneView = GameSceneView(frame:CGRect(origin: CGPoint.zero, size: viewSize));
         gameResultView = GameResultView(frame: CGRect(origin: CGPoint.zero, size: viewSize));
-        // MVC 结构用户响应事件在控制层  笔记
+        // MVC 结构用户响应事件在控制层
         gameResultView.resetButton.addTarget(self, action: #selector(resetTouched(_:)), for: .touchUpInside)
         
         self.view.addSubview(contentView)
@@ -45,6 +45,7 @@ class GameSceneViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated);
         gameSceneView!.animate = false;
+        NotificationCenter.default.removeObserver(self)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

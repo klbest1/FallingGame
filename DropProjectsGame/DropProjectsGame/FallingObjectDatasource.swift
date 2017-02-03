@@ -14,7 +14,7 @@ struct FallingDropSetting {
 }
 
 protocol FallingObjectDatasourceDelegate:class{
-    func didCollisionWithTheBallBundary(sender:FallingObjectDatasource , numberOfDisappearedBalls:Int)
+    func didScoreChanged(sender:FallingObjectDatasource , aScore:Int)
     func didCollisionWithTheBottomBundary(sender:FallingObjectDatasource)
 }
 
@@ -36,7 +36,8 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     public var fallingObjectBehavior:FallingObjectBehavior?
     private var touchingItemByBall:UIView?
     private var fallingSetting:FallingDropSetting!
-    //笔记
+    private var currentScore:Int = 0
+    
     public weak var delegate:FallingObjectDatasourceDelegate?
     
     init(referenceView:GameSceneView, fallingDropsSetting:FallingDropSetting) {
@@ -165,8 +166,11 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
                         self.drops.remove(at: self.drops.index(of:toucheditem)!)
                     }
                     self.fallingObjectBehavior?.removeItems(items: [toucheditem])
-                    
-                    self.delegate?.didCollisionWithTheBallBundary(sender: self, numberOfDisappearedBalls: self.totalDrops - self.drops.count)
+                    let score:Int = self.totalDrops - self.drops.count
+                    if(score != self.currentScore){
+                        self.currentScore = score
+                        self.delegate?.didScoreChanged(sender: self, aScore:self.currentScore)
+                    }
                 }
             })
          }

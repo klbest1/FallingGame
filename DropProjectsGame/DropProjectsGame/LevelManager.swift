@@ -14,9 +14,7 @@ class LevelManager: NSObject {
         super.init()
         let path = Bundle.main.path(forResource: "Level", ofType: "plist")
         let levelDic = NSDictionary(contentsOfFile: path!)
-        //笔记
         levelResponse = NSDictionary.decodeDic(dicOrigin: levelDic as! [String : AnyObject]) as? LevelResponse
-        //笔记
         if levelResponse != nil {
             for var item in (levelResponse?.results)!{
                 print("results:\(item.numberOfDrops)")

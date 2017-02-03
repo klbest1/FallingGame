@@ -36,7 +36,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
         behavior.collisionBehavior.collisionDelegate = self;
         behavior.collisionBehavior.action = {
             [unowned self] in
-            //笔记
+           
             let item:UIView? = behavior.collisionBehavior.items.first as? UIView;
             if(item !=  nil){
                 if( item!.frame.origin.y > UIView.screenHight){
@@ -49,6 +49,11 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
         behavior.gravityBehavior.action = {
             [unowned self] in
             let item:UIView = behavior.gravityBehavior.items.first as! UIView;
+            if(Int(item.frame.origin.y) == Int(self.gameView!.paddleView!.frame.origin.y - self.gameView!.ballView!.frame.size.height)){
+                print("item.frame.origin.y:\(item.frame.origin.y)");
+                self.touchedPaddle = true;
+
+            }
             if( item.frame.origin.y >=  (self.gameView!.hight - self.gameView!.ballView!.frame.size.height)){
                 self.delegate?.didBallfallingOnTheGround(sender: self)
             }
@@ -89,6 +94,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     
     func stopAnimator() {
         dynamicBreakerAnimator!.removeBehavior(breakObjectBehavior!)
+        dynamicBreakerAnimator!.removeAllBehaviors()
         unInitBehavior()
     }
     
@@ -103,6 +109,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
             touchedPaddle = false
         }
     }
+    //p.hight-ballView.size.hight
     
     func collisionBehavior(_ behavior: UICollisionBehavior, endedContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?){
         if (identifier != nil) , identifier as! String == PathNames.paddleBundryName  {

@@ -174,7 +174,8 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
 //        print("angle:\(angle/M_PI * 180)")
         return angle
     }
-    //笔记
+
+    
     func viewDisappedAnimation( view:UIView,animationCompletion:  @escaping ((_ finish:Bool)->())){
         UIView.animate(withDuration: 0.5, delay: 0, options:[.curveEaseOut], animations: {
             view.transform = CGAffineTransform(rotationAngle: CGFloat(M_2_PI))
