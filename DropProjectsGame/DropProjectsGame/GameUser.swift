@@ -9,9 +9,14 @@
 import UIKit
 
 public class GameUser: NSObject {
+
      public var accountName: String?
-     public var lastLoginTime: String?
+     public var lastLoginTime: Date?
+     public var isCurrentUser:Bool = false //  笔记
      public var ballImageUrl: String?
      public var profileImageUrl: String?
-     public var result: PlayIResults?
+     public var result: Result?
+    override init() {
+        
+    }
 }

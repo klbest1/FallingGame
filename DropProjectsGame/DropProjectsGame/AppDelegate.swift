@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 
+let appDelegate = UIApplication.shared.delegate as? AppDelegate
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,6 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        if #available(iOS 10.0, *) {
+            _ = Users.updateUser(user: UserManager.share.currentUser, context: self.persistentContainer.viewContext)
+            
+        }else{
+            _ =  Users.updateUser(user: UserManager.share.currentUser, context: self.managedObjectContext)
+        }
+        saveDataBase()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -47,8 +55,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
+        if #available(iOS 10.0, *) {
+           _ = Users.updateUser(user: UserManager.share.currentUser, context: self.persistentContainer.viewContext)
 
+        }else{
+          _ =  Users.updateUser(user: UserManager.share.currentUser, context: self.managedObjectContext)
+        }
+        saveDataBase()
+    }
+    
+    func saveDataBase() {
+        do{
+            try appDelegate?.managedObjectContext.save()
+        }catch let error as NSError{
+            print(error);
+        }
+    }
     // MARK: - Core Data stack
     
     @available(iOS 10.0, *)
@@ -126,7 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     lazy var managedObjectModel: NSManagedObjectModel = {
         // The managed object model for the application. This property is not optional. It is a fatal error for the application not to be able to find and load its model.
-        let modelURL = Bundle.main.url(forResource: "Model", withExtension: "momd")!
+        let modelURL = Bundle.main.url(forResource: "Drop", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     

@@ -12,17 +12,27 @@ import CoreData
 
 public class Users: NSManagedObject {
 
-    class func userWithUserInfo( gameUser:GameUser ,result:Result ,context:NSManagedObjectContext)->Users?{
+    class func getCurrentUser(context:NSManagedObjectContext)->Users?{
         let request:NSFetchRequest = Users.fetchRequest()
-        request.predicate = NSPredicate.init(format: "accountName = %@", gameUser.accountName!)
+        request.predicate = NSPredicate.init(format: "isCurrentUser = true")
         if let user = (try? context.fetch(request))?.first  {
             return user
-        }else if let insertUser = NSEntityDescription.insertNewObject(forEntityName: "Users", into: context) as? Users{
-            insertUser.accountName = gameUser.accountName
-            insertUser.ballImageUrl = gameUser.ballImageUrl
-            insertUser.lastLoginTime = gameUser.lastLoginTime
-            insertUser.profileImageUrl = gameUser.profileImageUrl
-            insertUser.result = PlayIResults.playResultsWithResults(user:insertUser , result:result,context: context)
+        }
+        return nil
+    }
+    
+    class func updateUser(user:GameUser,context:NSManagedObjectContext) ->Users?{
+        let request:NSFetchRequest = Users.fetchRequest()
+        request.predicate = NSPredicate.init(format: "accountName = %@", user.accountName!)
+        if let user = (try? context.fetch(request))?.first {
+            return user
+        }else if let inserUser = NSEntityDescription.insertNewObject(forEntityName: "Users", into: context) as? Users{
+            inserUser.accountName = user.accountName
+            inserUser.lastLoginTime = user.lastLoginTime
+            inserUser.isCurrentUser = user.isCurrentUser
+            inserUser.profileImageUrl = user.profileImageUrl
+            inserUser.result = PlayIResults.playResultsUpdate(user: inserUser, result: user.result!, context: context)
+            return inserUser
         }
         return nil
     }

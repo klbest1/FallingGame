@@ -65,8 +65,29 @@ class GameMusicEffectsDatasource: NSObject {
         }
     }
     
+    func playMusic(musicName:String)  {
+        let path = Bundle.main.path(forResource: musicName, ofType: nil)
+        var kRepeat:Bool = false
+        kRepeat = true
+        
+        if (path != nil){
+            let uuid =  audioHandler.playSoundWithSoundType(path: path! as String, kRepeat: kRepeat)
+            if uuid != nil{
+                musicIDs[musicName] = uuid
+            }
+        }
+        else{
+            print("不存在音乐文件\(musicName)")
+        }
+    }
+    
     func stopMusic(musicType:GameAudioType) {
         let uuid = musicIDs[musicType.getStateMusicName()]
+        audioHandler.stopSoundWithSoundType(soundID: uuid!)
+    }
+    
+    func stopMusic(musicName:String) {
+        let uuid = musicIDs[musicName]
         audioHandler.stopSoundWithSoundType(soundID: uuid!)
     }
 }

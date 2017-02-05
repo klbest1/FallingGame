@@ -10,6 +10,6 @@ import UIKit
 
 public class Result: NSObject {
      public var score: Int32 = 0
-     public var user: Users?
      public var level: Int16 = 0
+     public var passLevel:Bool = false
 }

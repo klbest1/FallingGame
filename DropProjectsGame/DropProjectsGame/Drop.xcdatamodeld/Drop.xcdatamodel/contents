@@ -8,13 +8,14 @@
     <entity name="Users" representedClassName=".Users" syncable="YES">
         <attribute name="accountName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ballImageUrl" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="lastLoginTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isCurrentUser" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastLoginTime" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="loginArea" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profileImageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="result" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayIResults" inverseName="user" inverseEntity="PlayIResults" syncable="YES"/>
     </entity>
     <elements>
         <element name="PlayIResults" positionX="-54" positionY="9" width="128" height="90"/>
-        <element name="Users" positionX="151" positionY="-9" width="128" height="133"/>
+        <element name="Users" positionX="151" positionY="-9" width="128" height="150"/>
     </elements>
 </model>

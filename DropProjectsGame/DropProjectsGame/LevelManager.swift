@@ -8,7 +8,14 @@
 
 import UIKit
 
+private let shareInstance = LevelManager()
+
 class LevelManager: NSObject {
+    
+    class var share: LevelManager {
+        return shareInstance
+    }
+    
     var levelResponse:LevelResponse?
     override init() {
         super.init()
@@ -17,7 +24,7 @@ class LevelManager: NSObject {
         levelResponse = NSDictionary.decodeDic(dicOrigin: levelDic as! [String : AnyObject]) as? LevelResponse
         if levelResponse != nil {
             for var item in (levelResponse?.results)!{
-                print("results:\(item.numberOfDrops)")
+                print("Plist中的results:\(item.numberOfDrops)")
             }
         }
         

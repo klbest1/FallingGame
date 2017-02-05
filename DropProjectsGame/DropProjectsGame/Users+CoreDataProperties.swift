@@ -17,9 +17,10 @@ extension Users {
     }
 
     @NSManaged public var accountName: String?
-    @NSManaged public var lastLoginTime: String?
+    @NSManaged public var lastLoginTime: Date?
     @NSManaged public var ballImageUrl: String?
     @NSManaged public var profileImageUrl: String?
+    @NSManaged public var isCurrentUser: Bool
     @NSManaged public var result: PlayIResults?
 
 }

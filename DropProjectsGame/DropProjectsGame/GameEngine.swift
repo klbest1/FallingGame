@@ -26,17 +26,21 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     var breakBehaviorDataSource:BreakBehaviorDataSource?
     var fallingBehaviorDataSource:FallingObjectDatasource?
     var fallingDropsSetting:FallingDropSetting = FallingDropSetting()
-    let leveManager:LevelManager = LevelManager()
+    var currentLevel:Level?
+    var currentLevelIndex:Int = 0
     
     var referenceView:GameSceneView? {
         didSet{
             //这里先写死，随后要改成根据用户来获取
-            self.fallingDropsSetting.fallingSpeed = 1.5
-            self.fallingDropsSetting.numberOfDrops = 500;
+            currentLevelIndex = Int((UserManager.share.currentUser.result?.level)!)
+            currentLevel = (LevelManager.share.levelResponse?.results?[currentLevelIndex])!
+            gameSetting()
             self.breakBehaviorDataSource = BreakBehaviorDataSource(referenceView:self.referenceView!);
             fallingBehaviorDataSource = FallingObjectDatasource(referenceView: self.referenceView!, fallingDropsSetting: self.fallingDropsSetting)
             fallingBehaviorDataSource?.delegate = self
             breakBehaviorDataSource?.delegate = self
+            
+        
         }
     }
     
@@ -45,13 +49,18 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
         
     }
     
+    func gameSetting()  {
+        fallingDropsSetting.fallingSpeed = currentLevel!.fallingSpeed! as Float?
+        fallingDropsSetting.numberOfDrops = currentLevel!.numberOfBalls! as Int?;
+    }
+    
     func gameStart(withReferenceView _referenceView:GameSceneView) {
         if referenceView == nil {
             referenceView = _referenceView
         }
         breakBehaviorDataSource!.startAnimator()
         fallingBehaviorDataSource!.startAnimator()
-        musicDatasource.playMusic(musicType: .backround_one)
+        musicDatasource.playMusic(musicName: (currentLevel?.backGroundMusic)!)
     }
     
     func gameStop() {
@@ -63,9 +72,37 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     func gameRefresh()  {
         fallingBehaviorDataSource!.resetAnimator()
         breakBehaviorDataSource!.resetBallDynamic()
-        musicDatasource.playMusic(musicType: .backround_one)
+        musicDatasource.playMusic(musicName: (currentLevel?.backGroundMusic)!)
     }
     
+    func gotoNextLevel() {
+        currentLevelIndex += 1
+        if currentLevelIndex >= (LevelManager.share.levelResponse?.results?.count)!{
+            currentLevelIndex = (LevelManager.share.levelResponse?.results?.count)!
+        }
+        currentLevel = (LevelManager.share.levelResponse?.results?[currentLevelIndex])!
+        gameSetting()
+        gameRefresh()
+    }
+    
+    func gameResultsChecking() {
+        musicDatasource.stopMusic(musicName: (currentLevel?.backGroundMusic)!)
+        gameStop()
+
+        let result:Result = Result()
+        result.score = Int32(score);
+        result.level = Int16(currentLevelIndex)
+        result.passLevel = ((currentLevel?.scoreGoal?.intValue)! <= score)
+        if(result.passLevel){
+            musicDatasource.playMusic(musicType: .gameWin)
+            gotoNextLevel()
+            
+        }else{
+            musicDatasource.playMusic(musicType: .gameOver)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: result)
+        }
+        UserManager.share.currentUser.result = result
+    }
     
     func didScoreChanged(sender:FallingObjectDatasource , aScore:Int)
     {
@@ -77,19 +114,12 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     func didCollisionWithTheBottomBundary(sender:FallingObjectDatasource)
     {
         print("1游戏结束：\(score)")
-        musicDatasource.stopMusic(musicType: .backround_one)
-        musicDatasource.playMusic(musicType: .gameWin)
-        fallingBehaviorDataSource?.stopAnimator()
-        //这里最好建一个结果对象
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: score)
+        gameResultsChecking()
     }
 
     func didBallfallingOnTheGround(sender:BreakBehaviorDataSource){
-        print("球掉地上了，游戏结束");
-        musicDatasource.stopMusic(musicType: .backround_one)
-        musicDatasource.playMusic(musicType: .gameOver)
-        gameStop()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: score)
+       print("球掉地上了，游戏结束");
+       gameResultsChecking()
     }
 
 }

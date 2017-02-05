@@ -8,7 +8,7 @@
 			<key>className</key>
 			<string>Level</string>
 			<key>backGroundMusic</key>
-			<string></string>
+			<string>backGroundMusic_1.mp3</string>
 			<key>backGroundImageUrl</key>
 			<string></string>
 			<key>level</key>
@@ -20,11 +20,15 @@
 			<key>fallingSpeed</key>
 			<integer>1</integer>
 			<key>scoreGoal</key>
-			<integer>1000</integer>
+			<integer>20</integer>
 		</dict>
 		<dict>
 			<key>className</key>
 			<string>Level</string>
+			<key>backGroundMusic</key>
+			<string>backGroundMusic_2.mp3</string>
+			<key>backGroundImageUrl</key>
+			<string></string>
 			<key>level</key>
 			<integer>2</integer>
 			<key>numberOfBalls</key>
@@ -37,6 +41,10 @@
 			<real>2000</real>
 		</dict>
 		<dict>
+			<key>backGroundMusic</key>
+			<string>backGroundMusic_3.mp3</string>
+			<key>backGroundImageUrl</key>
+			<string></string>
 			<key>className</key>
 			<string>Level</string>
 			<key>level</key>
@@ -51,6 +59,10 @@
 			<real>1500</real>
 		</dict>
 		<dict>
+			<key>backGroundImageUrl</key>
+			<string></string>
+			<key>backGroundMusic</key>
+			<string>backGroundMusic_4.mp3</string>
 			<key>className</key>
 			<string>Level</string>
 			<key>level</key>

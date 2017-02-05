@@ -27,11 +27,14 @@ class GameSceneViewController: UIViewController {
         gameResultView = GameResultView(frame: CGRect(origin: CGPoint.zero, size: viewSize));
         // MVC 结构用户响应事件在控制层
         gameResultView.resetButton.addTarget(self, action: #selector(resetTouched(_:)), for: .touchUpInside)
-        
+
         self.view.addSubview(contentView)
         contentView.addSubview(gameSceneView!);
         
-        testDicDecoding()
+        
+//        testDicDecoding()
+//        testUserName()
+//        testDataBase()
     }
     
     override func viewDidAppear(_ animated: Bool)
@@ -52,42 +55,46 @@ class GameSceneViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func testUserName() {
+        print("userName:\(String.getRandomString(length: 4))")
+    }
+    
     func testDataBase() {
+        //笔记
         let me:GameUser = GameUser()
         me.accountName = "kanglin"
         me.ballImageUrl = "http://xx.com"
-        me.lastLoginTime = "20/01/2017"
+        //笔记
+        me.lastLoginTime = DateFormatter().date(from: "2010/08/02")
         me.profileImageUrl = "http://xx.com"
         
         let result = Result();
         result.level = 4;
         result.score = 4000
-        
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        me.result = result
         
         if #available(iOS 10.0, *) {
             appDelegate?.persistentContainer.viewContext.perform {
-                //            _ = Users.userWithUserInfo(gameUser:me, result:result ,context: appDelegate!.persistentContainer.viewContext)
-                appDelegate?.persistentContainer.viewContext.perform {
-                    //            _ = Users.userWithUserInfo(gameUser:me, result:result ,context: appDelegate!.persistentContainer.viewContext)
-                    _ = PlayIResults.playResultsUpdate(user: me, result: result, context: (appDelegate?.persistentContainer.viewContext)!)
-                    
-                    
-                    do{
-                        try appDelegate?.persistentContainer.viewContext.save()
-                    }catch let error as NSError{
-                        print(error);
-                    }
-                    
-                }
-                
+//                _ = PlayIResults.playResultsUpdate(user: me, result: result, context: (appDelegate?.persistentContainer.viewContext)!)
+                _ = Users.updateUser(user: me, context: (appDelegate?.persistentContainer.viewContext)!)
                 do{
                     try appDelegate?.persistentContainer.viewContext.save()
                 }catch let error as NSError{
                     print(error);
                 }
+                Users.printAllUsers(context: (appDelegate?.persistentContainer.viewContext)!)
             }
-            Users.printAllUsers(context: (appDelegate?.persistentContainer.viewContext)!)
+        }else{
+            appDelegate?.managedObjectContext.perform{
+//                _ = PlayIResults.playResultsUpdate(user: me, result: result, context: (appDelegate?.managedObjectContext)!)
+                _ = Users.updateUser(user: me, context: (appDelegate?.managedObjectContext)!)
+                do{
+                    try appDelegate?.managedObjectContext.save()
+                }catch let error as NSError{
+                    print(error);
+                }
+                Users.printAllUsers(context: (appDelegate?.managedObjectContext)!)
+            }
         }
         let path = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first
         print("path\(path)");
@@ -104,10 +111,13 @@ class GameSceneViewController: UIViewController {
         gameResultView.removeFromSuperview()
     }
     
-    func addResultView(_ sender:NotificationCenter)  {
+
+    func addResultView(_ sender:Notification)  {
+        let result:Result = sender.object as! Result
+        gameResultView.gameScoreLabel.text = String(format: "%d", arguments: [result.score])
         contentView.addSubview(gameResultView)
         gameResultView.frame.origin = CGPoint(x:0, y: -gameResultView.frame.size.height)
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: { 
+        UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
           self.gameResultView.frame.origin = CGPoint.zero
         }) { ( finish:Bool) in
             
