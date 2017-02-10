@@ -14,9 +14,8 @@ protocol BreakBehaviorDataSourceDelegate:class {
 
 
 class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
-    public var pushInitAngle:Double = 0.04;
-    public var pushAngle:Double =  -M_PI_4
-    public var pushMagnitude:CGFloat = 0;
+    public var pushAngle:Double =  M_PI_4*3
+    public var pushMagnitude:CGFloat = 1.7;
     public weak var delegate:BreakBehaviorDataSourceDelegate?
 
     
@@ -24,6 +23,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     private var gameView:GameSceneView?
     private var dynamicBreakerAnimator :UIDynamicAnimator?
     private var touchedPaddle:Bool = false;
+    private var firstPushBallDown:Bool = false
     
      init(referenceView:GameSceneView) {
         super.init()
@@ -50,9 +50,15 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
             [unowned self] in
             let item:UIView = behavior.gravityBehavior.items.first as! UIView;
             if(Int(item.frame.origin.y) == Int(self.gameView!.paddleView!.frame.origin.y - self.gameView!.ballView!.frame.size.height)){
-                print("item.frame.origin.y:\(item.frame.origin.y)");
+//                print("item.frame.origin.y:\(item.frame.origin.y)");
                 self.touchedPaddle = true;
-
+                //第一次接触板时让球停下
+                if (self.firstPushBallDown )  {
+                    self.pushAngle = -M_PI_4
+                    self.pushMagnitude = 0.8
+                    self.startPushing()
+                    self.firstPushBallDown = false
+                }
             }
             if( item.frame.origin.y >=  (self.gameView!.hight - self.gameView!.ballView!.frame.size.height)){
                 self.delegate?.didBallfallingOnTheGround(sender: self)
@@ -74,11 +80,14 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
         let path:UIBezierPath = UIBezierPath.init(rect: gameView!.paddleView!.frame);
         self.addBundary(name: PathNames.paddleBundryName , path: path)
         breakObjectBehavior!.addCollisionForItems(items: [gameView!.ballView!]);
-        breakObjectBehavior!.addPush(item:gameView!.ballView!,angle:pushInitAngle,magnitude: 3);
+        breakObjectBehavior!.addPush(item:gameView!.ballView!,angle:pushAngle,magnitude: pushMagnitude);
+        firstPushBallDown = true
     }
     
     
     func resetBallDynamic() {
+        pushAngle =  M_PI_4*3
+        pushMagnitude = 1.8
         self.gameView?.ballView?.removeFromSuperview()
         self.gameView?.ballView = nil;
         self.gameView!.addBallView()
@@ -98,6 +107,11 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
         unInitBehavior()
     }
     
+    func pauseAnimator()  {
+        dynamicBreakerAnimator!.removeBehavior(breakObjectBehavior!)
+        dynamicBreakerAnimator!.removeAllBehaviors()
+    }
+    
     func addBundary(name:String,path:UIBezierPath) {
         breakObjectBehavior?.removeBundry(name:name as NSCopying)
         breakObjectBehavior?.addBundry(name: name as NSCopying, path: path)
@@ -114,6 +128,13 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     func collisionBehavior(_ behavior: UICollisionBehavior, endedContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?){
         if (identifier != nil) , identifier as! String == PathNames.paddleBundryName  {
             touchedPaddle = true
+            //第一次接触板时让球停下
+            if (self.firstPushBallDown )  {
+                self.pushAngle = -M_PI_4
+                self.pushMagnitude = 0.8
+                self.startPushing()
+                self.firstPushBallDown = false
+            }
             print("TouchPaddle:\(touchedPaddle)")
         }
     }

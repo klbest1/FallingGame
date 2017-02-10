@@ -15,15 +15,14 @@ let appDelegate = UIApplication.shared.delegate as? AppDelegate
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var rootNav:UINavigationController?
-    var rootTabCtrl:RootTabBarViewController?
+    var gameSceneVC:GameSceneViewController!
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UIApplication.shared.setStatusBarHidden(true, with: .none)
         window = UIWindow(frame: UIScreen.main.bounds)
-        rootTabCtrl = RootTabBarViewController();
-        rootNav = UINavigationController(rootViewController: rootTabCtrl!)
-        window!.rootViewController = rootNav
+        gameSceneVC = GameSceneViewController();
+        window!.rootViewController = gameSceneVC
         window!.makeKeyAndVisible()
         return true
     }

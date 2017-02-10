@@ -8,29 +8,45 @@
 
 import UIKit
 
-let addGameResultsNotifiName = "GameResults"
+let handleGameResultsNotifiName = "GameResults"
+let handleGamePlayingNotifiName = "GamePlayingInfo"
 
 class GameSceneViewController: UIViewController {
 
     var contentView:UIView = UIView()
+    var gameScoreTitleView:GameScoreView?
     var gameSceneView:GameSceneView?  = nil;
     var gameResultView:GameResultView!
+    var gameCountingDownView:CountDownView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //笔记  通知
+        NotificationCenter.default.addObserver(self, selector: #selector(handleGameResult(_:)), name: NSNotification.Name(rawValue: handleGameResultsNotifiName), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleGamePlaying(_:)), name: NSNotification.Name(rawValue: handleGamePlayingNotifiName), object: nil)
+
         self.title = "GameScene";
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor.white
         contentView.frame = CGRect(origin: CGPoint.zero, size: self.view.frame.size)
+        self.view.addSubview(contentView)
+
         
-        let viewSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 49);
+        let viewSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height);
+        //tile
+        gameScoreTitleView = GameScoreView(frame: CGRect(origin: CGPoint(x:0,y:10), size:CGSize(width: viewSize.width, height: 64)));
+        
+        //游戏主界面
         gameSceneView = GameSceneView(frame:CGRect(origin: CGPoint.zero, size: viewSize));
         gameResultView = GameResultView(frame: CGRect(origin: CGPoint.zero, size: viewSize));
-        // MVC 结构用户响应事件在控制层
+        //游戏失败
+        //MVC 结构用户响应事件在控制层
         gameResultView.resetButton.addTarget(self, action: #selector(resetTouched(_:)), for: .touchUpInside)
-
-        self.view.addSubview(contentView)
-        contentView.addSubview(gameSceneView!);
+        //倒计时
+        gameCountingDownView = CountDownView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size))
         
+        contentView.addSubview(gameSceneView!);
+        contentView.addSubview(gameScoreTitleView!)
         
 //        testDicDecoding()
 //        testUserName()
@@ -39,15 +55,14 @@ class GameSceneViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool)
    {
-        super.viewDidAppear(animated);
-        gameSceneView!.animate = true;
-       //笔记  通知
-       NotificationCenter.default.addObserver(self, selector: #selector(addResultView(_:)), name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: nil)
+    super.viewDidAppear(animated);
+    gameSceneView!.animate = true;
+    
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated);
-        gameSceneView!.animate = false;
+//        gameSceneView!.animate = false;
         NotificationCenter.default.removeObserver(self)
     }
     override func didReceiveMemoryWarning() {
@@ -112,17 +127,37 @@ class GameSceneViewController: UIViewController {
     }
     
 
-    func addResultView(_ sender:Notification)  {
+    func handleGameResult(_ sender:Notification)  {
         let result:Result = sender.object as! Result
-        gameResultView.gameScoreLabel.text = String(format: "%d", arguments: [result.score])
-        contentView.addSubview(gameResultView)
-        gameResultView.frame.origin = CGPoint(x:0, y: -gameResultView.frame.size.height)
-        UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-          self.gameResultView.frame.origin = CGPoint.zero
-        }) { ( finish:Bool) in
-            
+        if result.passLevel{
+            //进入下一关
+            contentView.addSubview(gameCountingDownView!)
+            gameCountingDownView?.countDownNumber = GameEngine.share.timeDelayWhenGotoNext
+            gameCountingDownView?.startCouting()
+            gameCountingDownView?.setHint(hint: "恭喜过关，下一关即将开始！")
+        }else{
+            //弹出游戏结果
+            gameResultView.gameScoreLabel.text = String(format: "%d", arguments: [result.score])
+            contentView.addSubview(gameResultView)
+            gameResultView.frame.origin = CGPoint(x:0, y: -gameResultView.frame.size.height)
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                self.gameResultView.frame.origin = CGPoint.zero
+            }) { ( finish:Bool) in
+                
+            }
         }
     }
+    
+    func handleGamePlaying(_ sender:Notification)  {
+        let titleObject:TitleObject = sender.object as! TitleObject
+        gameScoreTitleView?.showScoreBarWithCurrentLevel(level: titleObject.currentLevel! + 1, currentScore: titleObject.currenScore!, golaScore: titleObject.goalScore!)
+
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+  
     
     /*
     // MARK: - Navigation

@@ -44,9 +44,13 @@ class BreakBehavior: UIDynamicBehavior {
         pushBehavior?.magnitude = magnitude;
         pushBehavior!.angle = CGFloat(angle);
         pushBehavior!.action = { [unowned self] in
-            if(!self.pushBehavior!.active){
-                self.removeChildBehavior(self.pushBehavior!);
-                self.pushBehavior = nil
+            if(self.pushBehavior != nil){
+                if(!self.pushBehavior!.active){
+                    self.pushBehavior?.removeItem(item)
+                    self.removeChildBehavior(self.pushBehavior!);
+                    self.pushBehavior = nil
+                }
+                
             }
         }
     }
@@ -82,3 +86,4 @@ class BreakBehavior: UIDynamicBehavior {
 
     }
 }
+

@@ -21,6 +21,9 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addGestureRecognizer(panGuesture);
+        let backGroundImageView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: frame.size))
+        backGroundImageView.image = UIImage(named: "Background_Diffuse")
+        self.addSubview(backGroundImageView)
         
         let originX = (self.width-self.paddleSize.width)/2.0
         let orignY = self.hight - 20-self.paddleSize.height;
@@ -33,15 +36,24 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
         addBallView()
     }
     
+    func resetPaddleView()  {
+        let originX = (self.width-self.paddleSize.width)/2.0
+        let orignY = self.hight - 20-self.paddleSize.height;
+        let origin =  CGPoint(x:originX,y:orignY)
+        paddleView?.frame.origin = origin
+        let path:UIBezierPath = UIBezierPath.init(rect: paddleView!.frame);
+        gameEngin.breakBehaviorDataSource!.addBundary(name: PathNames.paddleBundryName, path: path)
+    }
+    
     func  addBallView()  {
         if ballView == nil {
             ballView = BallView()
             ballView?.backgroundColor = UIColor.white
 
         }
-        ballView!.frame = CGRect(origin: CGPoint(x:self.width-BallSize.width ,y:self.center.y - BallSize.width/2), size: CGSize(width: BallSize.width, height: BallSize.width));
+        ballView!.frame = CGRect(origin: CGPoint(x:self.width-BallSize.width/2 ,y:self.center.y - BallSize.width/2), size: CGSize(width: BallSize.width, height: BallSize.width));
         ballView!.layer.cornerRadius = BallSize.width/2;
-        ballView!.clipsToBounds = true;
+        ballView!.layer.masksToBounds = true;
 
         self.addSubview(ballView!);
     }
@@ -163,7 +175,7 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
             speed = 3 * fabs(velocity.y/200) * 0.01
         }
         
-        print("speed:\(speed)")
+//        print("speed:\(speed)")
         return speed
     }
     

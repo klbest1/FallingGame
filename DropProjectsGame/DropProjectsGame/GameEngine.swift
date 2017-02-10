@@ -22,12 +22,14 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     
     public var score:Int = 0
     private let musicDatasource:GameMusicEffectsDatasource = GameMusicEffectsDatasource()
+    private let particleHander:ParticleHandler = ParticleHandler()
     
     var breakBehaviorDataSource:BreakBehaviorDataSource?
     var fallingBehaviorDataSource:FallingObjectDatasource?
     var fallingDropsSetting:FallingDropSetting = FallingDropSetting()
     var currentLevel:Level?
     var currentLevelIndex:Int = 0
+    var timeDelayWhenGotoNext:Int = 3
     
     var referenceView:GameSceneView? {
         didSet{
@@ -40,7 +42,6 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
             fallingBehaviorDataSource?.delegate = self
             breakBehaviorDataSource?.delegate = self
             
-        
         }
     }
     
@@ -61,6 +62,16 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
         breakBehaviorDataSource!.startAnimator()
         fallingBehaviorDataSource!.startAnimator()
         musicDatasource.playMusic(musicName: (currentLevel?.backGroundMusic)!)
+        sentGamePlayingInfoNoti()
+    }
+    
+    func sentGamePlayingInfoNoti() {
+        let titleObject = TitleObject()
+        titleObject.currenScore = score
+        titleObject.currentLevel = currentLevelIndex
+        titleObject.goalScore = currentLevel?.scoreGoal! as Int?
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: handleGamePlayingNotifiName), object: titleObject)
+
     }
     
     func gameStop() {
@@ -70,9 +81,12 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     }
     
     func gameRefresh()  {
+        score = 0
         fallingBehaviorDataSource!.resetAnimator()
         breakBehaviorDataSource!.resetBallDynamic()
+        referenceView?.resetPaddleView()
         musicDatasource.playMusic(musicName: (currentLevel?.backGroundMusic)!)
+        sentGamePlayingInfoNoti()
     }
     
     func gotoNextLevel() {
@@ -95,20 +109,21 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
         result.passLevel = ((currentLevel?.scoreGoal?.intValue)! <= score)
         if(result.passLevel){
             musicDatasource.playMusic(musicType: .gameWin)
-            gotoNextLevel()
-            
+            self.perform(#selector(gotoNextLevel), with: nil, afterDelay: TimeInterval(timeDelayWhenGotoNext))
         }else{
             musicDatasource.playMusic(musicType: .gameOver)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: addGameResultsNotifiName), object: result)
         }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: handleGameResultsNotifiName), object: result)
         UserManager.share.currentUser.result = result
     }
     
-    func didScoreChanged(sender:FallingObjectDatasource , aScore:Int)
+    func didScoreChanged(sender:UIDynamicItem , aScore:Int)
     {
         musicDatasource.playMusic(musicType: .collison)
         score = aScore;
         print("游戏得分：\(score)");
+        sentGamePlayingInfoNoti()
+        particleHander.addExplodeEmitter(destiantionView: referenceView!, location: sender.center,color:(sender as! UIView).layer.borderColor!)
     }
     
     func didCollisionWithTheBottomBundary(sender:FallingObjectDatasource)

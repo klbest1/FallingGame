@@ -14,7 +14,7 @@ struct FallingDropSetting {
 }
 
 protocol FallingObjectDatasourceDelegate:class{
-    func didScoreChanged(sender:FallingObjectDatasource , aScore:Int)
+    func didScoreChanged(sender:UIDynamicItem , aScore:Int)
     func didCollisionWithTheBottomBundary(sender:FallingObjectDatasource)
 }
 
@@ -34,7 +34,6 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     public var numberOfDropsPerRow = 10;
     public var drops:[UIView] = [UIView]()
     public var fallingObjectBehavior:FallingObjectBehavior?
-    private var touchingItemByBall:UIView?
     private var fallingSetting:FallingDropSetting!
     private var currentScore:Int = 0
     
@@ -105,7 +104,7 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
         
         for location in randomsLocation{
             let orignX:CGFloat = (dropSize?.width)! * CGFloat( location )
-            let drop:UIView =  UIView(frame: CGRect(origin: CGPoint(x:orignX,y:0), size: dropSize!))
+            let drop:UIView =  Drop(frame: CGRect(origin: CGPoint(x:orignX,y:0), size: dropSize!))
             drop.layer.borderWidth = 2;
             drop.layer.borderColor = UIColor.color.cgColor;
             gameView?.addSubview(drop)
@@ -152,27 +151,22 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
    
     func collisionBehavior(_ behavior: UICollisionBehavior, endedContactFor item: UIDynamicItem, withBoundaryIdentifier identifier:  NSCopying?){
          if(identifier != nil) , identifier as! String == PathNames.ballBundaryName{
-            let toucheditem:UIView = item as! UIView
+            let toucheditem:Drop = item as! Drop
             //保证只执行一次
-            if(touchingItemByBall == toucheditem){
-                return;
+            toucheditem.backgroundColor = UIColor.init(cgColor: toucheditem.layer.borderColor!)
+            if((self.drops.index(of:toucheditem)) != nil){
+                self.drops.remove(at: self.drops.index(of:toucheditem)!)
             }
-            touchingItemByBall = toucheditem;
-
-            toucheditem.backgroundColor = UIColor.red
+            self.fallingObjectBehavior?.removeItems(items: [toucheditem])
             gameView?.viewDisappedAnimation(view: toucheditem, animationCompletion: { (value:Bool) in
-                if(value){
-                    if((self.drops.index(of:toucheditem)) != nil){
-                        self.drops.remove(at: self.drops.index(of:toucheditem)!)
-                    }
-                    self.fallingObjectBehavior?.removeItems(items: [toucheditem])
-                    let score:Int = self.totalDrops - self.drops.count
-                    if(score != self.currentScore){
-                        self.currentScore = score
-                        self.delegate?.didScoreChanged(sender: self, aScore:self.currentScore)
-                    }
-                }
             })
+            let score:Int = self.totalDrops - self.drops.count
+            if(score != self.currentScore){
+                self.currentScore = score
+                self.delegate?.didScoreChanged(sender: item, aScore:self.currentScore)
+                
+            }
+            
          }
     }
 
