@@ -80,6 +80,14 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
 
     }
     
+    func gamePause()  {
+        fallingBehaviorDataSource?.pauseDrops()
+    }
+    
+    func gameContinue()  {
+        fallingBehaviorDataSource?.addDrops()
+    }
+    
     func gameRefresh()  {
         score = 0
         fallingBehaviorDataSource!.resetAnimator()

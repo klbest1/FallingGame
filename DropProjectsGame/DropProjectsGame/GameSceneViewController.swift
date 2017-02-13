@@ -18,6 +18,7 @@ class GameSceneViewController: UIViewController {
     var gameSceneView:GameSceneView?  = nil;
     var gameResultView:GameResultView!
     var gameCountingDownView:CountDownView?
+    var gamePauseView:GamePauseview?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +34,9 @@ class GameSceneViewController: UIViewController {
 
         
         let viewSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height);
-        //tile
+        //游戏分数
         gameScoreTitleView = GameScoreView(frame: CGRect(origin: CGPoint(x:0,y:10), size:CGSize(width: viewSize.width, height: 64)));
-        
+        gameScoreTitleView?.pauseButton.addTarget(self, action: #selector(pauseClicked), for:.touchUpInside)
         //游戏主界面
         gameSceneView = GameSceneView(frame:CGRect(origin: CGPoint.zero, size: viewSize));
         gameResultView = GameResultView(frame: CGRect(origin: CGPoint.zero, size: viewSize));
@@ -44,6 +45,9 @@ class GameSceneViewController: UIViewController {
         gameResultView.resetButton.addTarget(self, action: #selector(resetTouched(_:)), for: .touchUpInside)
         //倒计时
         gameCountingDownView = CountDownView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size))
+        //游戏暂停
+        gamePauseView = GamePauseview(frame: contentView.frame)
+        gamePauseView?.resumeButton.addTarget(self, action: #selector(resumeClicked), for: .touchUpInside)
         
         contentView.addSubview(gameSceneView!);
         contentView.addSubview(gameScoreTitleView!)
@@ -53,11 +57,9 @@ class GameSceneViewController: UIViewController {
 //        testDataBase()
     }
     
-    override func viewDidAppear(_ animated: Bool)
-   {
-    super.viewDidAppear(animated);
-    gameSceneView!.animate = true;
-    
+    override func viewDidAppear(_ animated: Bool){
+        super.viewDidAppear(animated);
+        gameSceneView!.animate = true;
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -126,6 +128,15 @@ class GameSceneViewController: UIViewController {
         gameResultView.removeFromSuperview()
     }
     
+    func pauseClicked()  {
+        gameSceneView?.gameEngin.gamePause()
+        contentView.addSubview(gamePauseView!)
+    }
+    
+    func resumeClicked()  {
+        gamePauseView?.removeFromSuperview()
+        gameSceneView?.gameEngin.gameContinue()
+    }
 
     func handleGameResult(_ sender:Notification)  {
         let result:Result = sender.object as! Result

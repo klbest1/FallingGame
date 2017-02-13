@@ -123,6 +123,11 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
         fallingObjectBehavior?.removeItems(items: drops)
     }
     
+    func pauseDrops()  {
+        dropTimer?.invalidate()
+        dropTimer = nil
+        removeDropsFromBehaviorForInstantStop()
+    }
     
     //开始游戏
     func startAnimator()  {

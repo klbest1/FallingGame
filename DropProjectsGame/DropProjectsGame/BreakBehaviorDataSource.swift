@@ -56,10 +56,12 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
                 if (self.firstPushBallDown )  {
                     self.pushAngle = -M_PI_4
                     self.pushMagnitude = 0.8
+                    print("push了一次")
                     self.startPushing()
                     self.firstPushBallDown = false
                 }
             }
+//            print("item:\(item.frame)")
             if( item.frame.origin.y >=  (self.gameView!.hight - self.gameView!.ballView!.frame.size.height)){
                 self.delegate?.didBallfallingOnTheGround(sender: self)
             }
@@ -134,6 +136,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
                 self.pushMagnitude = 0.8
                 self.startPushing()
                 self.firstPushBallDown = false
+                print("push了一次")
             }
             print("TouchPaddle:\(touchedPaddle)")
         }

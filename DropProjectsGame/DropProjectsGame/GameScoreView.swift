@@ -28,6 +28,7 @@ class GameScoreView: UIView {
     var showCurrentScoreLabel:UILabel = UILabel()
     var showGoalScoreHintLabel:UILabel = UILabel()
     var showGoalScoreLabel:UILabel = UILabel()
+    var pauseButton:UIButton = UIButton()
     override init(frame: CGRect) {
         super.init(frame: frame)
 //        self.alpha = 0
@@ -71,12 +72,15 @@ class GameScoreView: UIView {
         showLevelLabel.textColor = UIColor.white
 //        showLevelLabel.center = CGPoint(x:showLevelLabel.frame.midX,y:contentView.center.y)
        
+        pauseButton.frame = CGRect(origin: CGPoint(x:showLevelLabel.frame.maxX + 10,y:showGoalScoreHintLabel.frame.minY), size: CGSize(width: 36, height: 36))
+        pauseButton.setBackgroundImage(UIImage.init(named: "pause.png"), for: .normal)
         
         contentView.addSubview(showLevelLabel)
         contentView.addSubview(showCurrentScoreHintLabel)
         contentView.addSubview(showCurrentScoreLabel)
         contentView.addSubview(showGoalScoreHintLabel)
         contentView.addSubview(showGoalScoreLabel)
+        contentView.addSubview(pauseButton)
     }
     
     func showScoreBarWithCurrentLevel(level:Int,currentScore:Int,golaScore:Int)  {
