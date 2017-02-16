@@ -43,6 +43,7 @@ class BreakBehavior: UIDynamicBehavior {
         
         pushBehavior?.magnitude = magnitude;
         pushBehavior!.angle = CGFloat(angle);
+        //笔记，区别
         pushBehavior!.action = { [unowned self] in
             if(self.pushBehavior != nil){
                 if(!self.pushBehavior!.active){

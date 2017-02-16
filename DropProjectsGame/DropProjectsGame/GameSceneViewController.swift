@@ -55,6 +55,7 @@ class GameSceneViewController: UIViewController {
 //        testDicDecoding()
 //        testUserName()
 //        testDataBase()
+        
     }
     
     override func viewDidAppear(_ animated: Bool){
@@ -157,6 +158,7 @@ class GameSceneViewController: UIViewController {
                 
             }
         }
+        LeanCloundDealer.share().updateUser(user: UserManager.share.currentUser)
     }
     
     func handleGamePlaying(_ sender:Notification)  {
