@@ -12,7 +12,7 @@ public class Result: AVObject {
      public var score: Int32 = 0
      public var level: Int16 = 0
      public var passLevel:Bool = false
-     public var rangking:Int?
+     public var ranking:Int?
     
     class func parseClassName()->String {
         return "Result";
@@ -21,6 +21,8 @@ public class Result: AVObject {
     func createResult(compele: @escaping ((Result)->()))  {
         self.setObject(score, forKey: "score")
         self.setObject(level, forKey: "level")
+        self.setObject(0, forKey: "ranking")
+
         self.saveInBackground { (success, error) in
             if (error != nil){
                 print("创建结果发生错误\(error?.localizedDescription ?? "result 创建失败了")" )
@@ -47,13 +49,36 @@ public class Result: AVObject {
     }
     
     func updateRanking()  {
-        let cql:String = "update Result set ranking = T.ranking from Result,(select score,row_number() over(order by ranking desc)ranking from Result) T where Result.score = T.score"
-        AVQuery.doCloudQueryInBackground(withCQL: cql, callback: { (results, error) in
-            if(error != nil){
-                print("更新排名发生错误\(error?.localizedDescription)")
-                return
+        let query : AVQuery = Result.query()
+        query.order(byDescending: "score")
+        query.findObjectsInBackground { (results, error) in
+            if((error) != nil){
+                if ((error as? NSError)?.code != 101){
+                    print("查询玩耍结果发生错误:\(error?.localizedDescription ?? "fuckxxxx")")
+                    return
+                }
             }
-            print("排名更新成功，恭喜！")
-        })
+            if (results != nil ){
+                //笔记
+                var updateResults = [Result]()
+                for i in 0..<results!.count{
+                    let resultItem = results![i] as? Result
+                    let updateResultItem = Result(className: "Result", objectId: (resultItem?.objectId)!)
+                    updateResultItem.setObject(i + 1, forKey: "ranking")
+                    updateResults.append(updateResultItem)
+                }
+                if (updateResults.count > 0){
+                    AVObject.saveAll(inBackground: updateResults, block: { (succes, error) in
+                        if((error) != nil){
+                            if ((error as? NSError)?.code != 101){
+                                print("更新排名发生错误:\(error?.localizedDescription ?? "fuckxxxx")")
+                                return
+                            }
+                        }
+                        print("更新排名成功")
+                    })
+                }
+            }
+        }
     }
 }

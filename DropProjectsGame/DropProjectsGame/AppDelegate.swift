@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         AVOSCloud.setApplicationId("I4bnta9SCTCkgSYnQCPmhYoG-gzGzoHsz", clientKey: "WyARJ12gJOQCjtWWFFOgeSzW")
         GameUser.registerSubclass()
+        Result.registerSubclass()
         return true
     }
 

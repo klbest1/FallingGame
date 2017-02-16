@@ -42,6 +42,20 @@ class LeanCloundDealer: NSObject {
         }
     }
     
+    /*
+     #pragma mark - Safe way to call block
+     
+     #define safeBlock(first_param) \
+     if (block) { \
+     if ([NSThread isMainThread]) { \
+     block(first_param, error); \
+     } else {\
+     dispatch_async(dispatch_get_main_queue(), ^{ \
+     block(first_param, error); \
+     }); \
+     } \
+     }
+     */
   
     
     
