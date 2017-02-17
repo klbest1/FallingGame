@@ -9,7 +9,7 @@
 import UIKit
 
 
-class GameSceneView: UIView,UICollisionBehaviorDelegate {
+class GameSceneView: BaseView,UICollisionBehaviorDelegate {
     /*------常量-----------*/
     struct  BallSize {
         //代替define
@@ -78,12 +78,7 @@ class GameSceneView: UIView,UICollisionBehaviorDelegate {
         return pan
     }
     
-    var width:CGFloat {
-        return self.frame.size.width
-    }
-    var hight:CGFloat{
-        return self.frame.size.height;
-    }
+   
     
     var paddleSize:CGSize{
         let size = CGSize(width: 80, height: 20);

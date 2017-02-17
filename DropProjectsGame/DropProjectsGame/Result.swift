@@ -28,7 +28,6 @@ public class Result: AVObject {
                 print("创建结果发生错误\(error?.localizedDescription ?? "result 创建失败了")" )
             }
             if (success ){
-                self.updateRanking()
                 compele(self)
             }
         }
@@ -42,7 +41,6 @@ public class Result: AVObject {
                 print("更新玩耍结果发生错误\(error?.localizedDescription ?? "result 更新失败了")" )
             }
             if (success ){
-                self.updateRanking()
                 compele(self)
             }
         }

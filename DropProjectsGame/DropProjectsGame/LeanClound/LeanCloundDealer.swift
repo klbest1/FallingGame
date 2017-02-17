@@ -42,6 +42,23 @@ class LeanCloundDealer: NSObject {
         }
     }
     
+    func selectUser(user:GameUser,complete:@escaping ((_ findedUser:GameUser)->()))  {
+        let query : AVQuery = GameUser.query()
+        query.limit = 1
+        query.whereKey("accountName", equalTo: user.accountName!)
+        query.findObjectsInBackground { (objects, error) in
+            if((error) != nil){
+                if ((error as? NSError)?.code != 101){
+                    print("查询USER发生错误:\(error?.localizedDescription ?? "fuckxxxx")")
+                    return
+                }
+            }
+            
+            if let downLoadUser = objects?.first as? GameUser {
+                complete(_ :downLoadUser)
+            }
+        }
+    }
     /*
      #pragma mark - Safe way to call block
      

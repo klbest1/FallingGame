@@ -22,7 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.setStatusBarHidden(true, with: .none)
         window = UIWindow(frame: UIScreen.main.bounds)
         gameSceneVC = GameSceneViewController();
-        window!.rootViewController = gameSceneVC
+        let naviCtrl = UINavigationController(rootViewController: gameSceneVC)
+        naviCtrl.setNavigationBarHidden(true, animated: false)
+        window!.rootViewController = naviCtrl
         window!.makeKeyAndVisible()
         
         AVOSCloud.setApplicationId("I4bnta9SCTCkgSYnQCPmhYoG-gzGzoHsz", clientKey: "WyARJ12gJOQCjtWWFFOgeSzW")

@@ -48,6 +48,7 @@ class GameSceneViewController: UIViewController {
         //游戏暂停
         gamePauseView = GamePauseview(frame: contentView.frame)
         gamePauseView?.resumeButton.addTarget(self, action: #selector(resumeClicked), for: .touchUpInside)
+        gameResultView.randButton.addTarget(self, action: #selector(rankingCliked), for: .touchUpInside)
         
         contentView.addSubview(gameSceneView!);
         contentView.addSubview(gameScoreTitleView!)
@@ -56,6 +57,10 @@ class GameSceneViewController: UIViewController {
 //        testUserName()
 //        testDataBase()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool){
@@ -166,6 +171,12 @@ class GameSceneViewController: UIViewController {
         gameScoreTitleView?.showScoreBarWithCurrentLevel(level: titleObject.currentLevel! + 1, currentScore: titleObject.currenScore!, golaScore: titleObject.goalScore!)
 
     }
+    
+    func rankingCliked(){
+        let rankingCtrl = RankingViewController()
+        self.navigationController?.pushViewController(rankingCtrl, animated: true)
+    }
+    
     
     override var prefersStatusBarHidden: Bool {
         return true
