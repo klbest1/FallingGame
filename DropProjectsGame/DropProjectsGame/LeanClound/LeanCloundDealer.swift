@@ -26,7 +26,7 @@ class LeanCloundDealer: NSObject {
                     return
                 }
             }
-            if(objects?.count ==  0){
+            if(objects?.count ==  0 || objects == nil){
                 user.createUser()
             }else{
                 // 第一个参数是 className，第二个参数是 objectId
@@ -41,7 +41,7 @@ class LeanCloundDealer: NSObject {
             }
         }
     }
-    
+    //获取当前用户信息
     func selectUser(user:GameUser,complete:@escaping ((_ findedUser:GameUser)->()))  {
         let query : AVQuery = GameUser.query()
         query.limit = 1
@@ -55,10 +55,23 @@ class LeanCloundDealer: NSObject {
             }
             
             if let downLoadUser = objects?.first as? GameUser {
+                let query : AVQuery = Result.query()
+                query.limit = 1
+                let result = query.getObjectWithId((downLoadUser.result?.objectId)!) as! Result
+                downLoadUser.result = result
                 complete(_ :downLoadUser)
             }
         }
     }
+    
+    //更新排名，
+    func updateRanking(complete:@escaping ((_ objects:[Result])->())) {
+        let result = Result()
+        result.updateRanking { (objects) in
+            complete(objects)
+        }
+    }
+    
     /*
      #pragma mark - Safe way to call block
      

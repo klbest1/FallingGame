@@ -29,13 +29,17 @@ public class GameUser: BaseObject {
 //    }
     
     func createUser()  {
-        self.result?.createResult(compele: { (result) in
+        self.result?.createResult(user: self, compele: { (result) in
             self.setObject(self.accountName, forKey: "accountName")
             self.setObject(self.profileImageUrl, forKey: "profileImageUrl")
             self.setObject(self.result, forKey: "result")
             self.saveInBackground { (success, error) in
                 if (error != nil){
                     print("创建用户发生错误\(error?.localizedDescription ?? "fuck创建失败")")
+                }
+                if (success){
+                    self.result?.setObject(self, forKey: "user")
+                    self.result?.save()
                 }
             }
         })
@@ -56,7 +60,7 @@ public class GameUser: BaseObject {
      }];
      */
     func updateUser(newUser:GameUser)  {
-        self.result?.updateResult(newResult: newUser.result!, compele: { (result) in
+        self.result?.updateResult(user: newUser, compele: { (result) in
             self.setObject(self.profileImageUrl, forKey: "profileImageUrl")
             self.setObject(result, forKey: "result")
             self.saveInBackground { (success, error) in
@@ -65,6 +69,10 @@ public class GameUser: BaseObject {
                 }
                 if success{
                     print("用户玩耍信息更新成功")
+                    if (success){
+                        self.result?.setObject(self, forKey: "user")
+                        self.result?.save()
+                    }
                 }
             }
         })

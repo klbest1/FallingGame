@@ -29,13 +29,26 @@ class RankingTableViewCell: UITableViewCell {
         name.text = "accy"
         self.contentView.addSubview(name)
         
-        score.frame = CGRect(origin: CGPoint(x:name.frame.maxX + 10,y:(self.contentView.frame.size.height - 19)/2), size: CGSize(width: 100, height: 19));
+        score.frame = CGRect(origin: CGPoint(x:name.frame.maxX,y:(self.contentView.frame.size.height - 19)/2), size: CGSize(width: 100, height: 19));
         score.font = UIFont(name: "HYXueFengF", size: 19)
         score.textColor = UIColor.orange
         score.textAlignment = .left
         score.text = "1000"
         self.contentView.addSubview(score)
+        
+        self.contentView.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.clear
 
+    }
+    
+    func setCell(result:Result)  {
+        rankging.text = String(format: "%d", result.ranking)
+        let query = GameUser.query()
+        query.getObjectInBackground(withId: (result.user?.objectId)!) { (object, error) in
+            let user = object as! GameUser
+            self.name.text = user.accountName
+        }
+        score.text = String(format: "%d", result.score)
     }
     
     required init?(coder aDecoder: NSCoder) {

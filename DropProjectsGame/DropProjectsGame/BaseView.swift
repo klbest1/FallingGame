@@ -13,6 +13,7 @@ class BaseView: UIView {
     var width:CGFloat {
         return self.frame.size.width
     }
+    
     var hight:CGFloat{
         return self.frame.size.height;
     }

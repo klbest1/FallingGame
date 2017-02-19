@@ -11,6 +11,7 @@ import UIKit
 class RankingViewController: UIViewController,UITableViewDataSource {
 
     var rankingView:RankingView!
+    var rankingResult:[Result] = [Result]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,15 @@ class RankingViewController: UIViewController,UITableViewDataSource {
         rankingView.tableView.dataSource = self
         self.view.addSubview(rankingView)
         // Do any additional setup after loading the view.
+        LeanCloundDealer.share().updateRanking { (objects) in
+            self.rankingResult = objects
+            self.rankingView.tableView.reloadData()
+            LeanCloundDealer.share().selectUser(user: UserManager.share.currentUser) { (user) in
+                self.rankingView.myNameLabel.text = user.accountName
+                self.rankingView.myRanking.text = String(format: "%d", (user.result?.ranking)!)
+                self.rankingView.myScore.text = String(format: "%d", (user.result?.score)!)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,7 +39,7 @@ class RankingViewController: UIViewController,UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 8
+        return rankingResult.count
     }
     
     // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -44,6 +54,8 @@ class RankingViewController: UIViewController,UITableViewDataSource {
             cell = RankingTableViewCell(style: .default, reuseIdentifier: cellIdentify)
         }
         
+        let result = rankingResult[indexPath.row]
+        cell?.setCell(result: result)
         return cell!
     }
     /*

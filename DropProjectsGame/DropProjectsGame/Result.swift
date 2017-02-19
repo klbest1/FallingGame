@@ -12,17 +12,18 @@ public class Result: AVObject {
      public var score: Int32 = 0
      public var level: Int16 = 0
      public var passLevel:Bool = false
-     public var ranking:Int?
+    // 注意
+     public var ranking:Int32 = 0
+     public var user:GameUser?
     
     class func parseClassName()->String {
         return "Result";
     }
     
-    func createResult(compele: @escaping ((Result)->()))  {
+    func createResult(user:GameUser,compele: @escaping ((Result)->()))  {
         self.setObject(score, forKey: "score")
         self.setObject(level, forKey: "level")
         self.setObject(0, forKey: "ranking")
-
         self.saveInBackground { (success, error) in
             if (error != nil){
                 print("创建结果发生错误\(error?.localizedDescription ?? "result 创建失败了")" )
@@ -33,9 +34,9 @@ public class Result: AVObject {
         }
     }
     
-    func updateResult(newResult:Result ,compele: @escaping ((Result)->())) {
-        self.setObject(newResult.score, forKey: "score")
-        self.setObject(newResult.level, forKey: "level")
+    func updateResult(user:GameUser ,compele: @escaping ((Result)->())) {
+        self.setObject(user.result!.score, forKey: "score")
+        self.setObject(user.result!.level, forKey: "level")
         self.saveInBackground { (success, error) in
             if (error != nil){
                 print("更新玩耍结果发生错误\(error?.localizedDescription ?? "result 更新失败了")" )
@@ -46,7 +47,7 @@ public class Result: AVObject {
         }
     }
     
-    func updateRanking()  {
+    func updateRanking(complete:@escaping ((_ objects:[Result])->()))  {
         let query : AVQuery = Result.query()
         query.order(byDescending: "score")
         query.findObjectsInBackground { (results, error) in
@@ -63,6 +64,7 @@ public class Result: AVObject {
                     let resultItem = results![i] as? Result
                     let updateResultItem = Result(className: "Result", objectId: (resultItem?.objectId)!)
                     updateResultItem.setObject(i + 1, forKey: "ranking")
+                    resultItem?.ranking = Int32( i + 1 )
                     updateResults.append(updateResultItem)
                 }
                 if (updateResults.count > 0){
@@ -73,6 +75,7 @@ public class Result: AVObject {
                                 return
                             }
                         }
+                        complete(results as! [Result])
                         print("更新排名成功")
                     })
                 }

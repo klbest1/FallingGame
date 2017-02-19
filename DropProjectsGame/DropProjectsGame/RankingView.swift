@@ -36,10 +36,10 @@ class RankingView: BaseView {
         myNameLabelHint.text = "我的名字:"
         contentView.addSubview(myNameLabelHint)
         
-        myNameLabel.frame = CGRect(origin: CGPoint(x:myNameLabelHint.frame.maxX + 5,y:84), size: CGSize(width: 150, height: 20))
+        myNameLabel.frame = CGRect(origin: CGPoint(x:myNameLabelHint.frame.maxX - 30,y:myNameLabelHint.frame.minY + 2), size: CGSize(width: 150, height: 20))
        //笔记 使用自定义字体
-        myNameLabel.font = UIFont.systemFont(ofSize: 20)
-        myNameLabel.textColor = UIColor.lightGray
+        myNameLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        myNameLabel.textColor = UIColor.brown
         myNameLabel.textAlignment = .left
         contentView.addSubview(myNameLabel)
         
@@ -51,10 +51,10 @@ class RankingView: BaseView {
         myRankingHint.text = "我的排名:"
         contentView.addSubview(myRankingHint)
         
-        myRanking.frame = CGRect(origin: CGPoint(x:myRankingHint.frame.maxX + 5,y:myRankingHint.frame.minY), size: CGSize(width: 150, height: 20))
+        myRanking.frame = CGRect(origin: CGPoint(x:myRankingHint.frame.maxX - 30,y:myRankingHint.frame.minY + 4), size: CGSize(width: 150, height: 20))
         //笔记 使用自定义字体
-        myRanking.font = UIFont.systemFont(ofSize: 20)
-        myRanking.textColor = UIColor.lightGray
+        myRanking.font = UIFont.boldSystemFont(ofSize: 20)
+        myRanking.textColor = UIColor.brown
         myRanking.textAlignment = .left
         contentView.addSubview(myRanking)
         
@@ -66,13 +66,14 @@ class RankingView: BaseView {
         myScoreHint.text = "我的分数:"
         contentView.addSubview(myScoreHint)
         
-        myRanking.frame = CGRect(origin: CGPoint(x:myScoreHint.frame.maxX + 5,y:myScoreHint.frame.minY), size: CGSize(width: 150, height: 20))
+        myScore.frame = CGRect(origin: CGPoint(x:myScoreHint.frame.maxX - 30,y:myScoreHint.frame.minY + 4), size: CGSize(width: 150, height: 20))
         //笔记 使用自定义字体
-        myRanking.font = UIFont.systemFont(ofSize: 20)
-        myRanking.textColor = UIColor.lightGray
-        myRanking.textAlignment = .left
-        contentView.addSubview(myRanking)
+        myScore.font = UIFont.boldSystemFont(ofSize: 20)
+        myScore.textColor = UIColor.brown
+        myScore.textAlignment = .left
+        contentView.addSubview(myScore)
         
+        ///************列表 表头的提示****************/
         let tableRankingHint:UILabel = UILabel(frame: CGRect(origin: CGPoint(x:50 + 5,y:myScoreHint.frame.maxY + 20), size: CGSize(width: 100, height: 20)))
         //笔记 使用自定义字体
         tableRankingHint.font = UIFont.systemFont(ofSize: 20)
@@ -98,7 +99,7 @@ class RankingView: BaseView {
         contentView.addSubview(tableScoreHint)
         
         tableView.frame = CGRect(origin: CGPoint(x:50,y:tableRankingHint.frame.maxY + 20), size: CGSize(width: 260, height: self.hight - tableRankingHint.frame.maxY - 20 - 40 ))
-//        tableView.backgroundColor = UIColor.red
+        tableView.backgroundColor = UIColor.clear
         contentView.addSubview(tableView)
         
     }
