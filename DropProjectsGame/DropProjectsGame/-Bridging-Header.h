@@ -10,5 +10,9 @@
 #define _Bridging_Header_h
 
 #import <AVOSCloud/AVOSCloud.h>
-
+#import "WXApi.h"
+#import "WXApiObject.h"
+#import "WXApiManager.h"
+#import "WXApiRequestHandler.h"
+#import "Constant.h"
 #endif /* _Bridging_Header_h */

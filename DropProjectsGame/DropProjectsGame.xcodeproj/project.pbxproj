@@ -48,6 +48,21 @@
 		A09797411E20B6E100DC3E2D /* GameSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09797401E20B6E100DC3E2D /* GameSceneViewController.swift */; };
 		A09BC6681E334E9200AA0E7E /* GameUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09BC6671E334E9200AA0E7E /* GameUser.swift */; };
 		A09BC66A1E334E9E00AA0E7E /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09BC6691E334E9E00AA0E7E /* Result.swift */; };
+		A0A59CD61E5A94AC00FD58E3 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A59CD11E5A94AC00FD58E3 /* libWeChatSDK.a */; };
+		A0A59CD71E5A94AC00FD58E3 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = A0A59CD21E5A94AC00FD58E3 /* README.txt */; };
+		A0A59CDF1E5A94C900FD58E3 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A59CDA1E5A94C900FD58E3 /* WXApiManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A0A59CE01E5A94C900FD58E3 /* WXApiRequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A59CDC1E5A94C900FD58E3 /* WXApiRequestHandler.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A0A59CE11E5A94C900FD58E3 /* WXApiResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A59CDE1E5A94C900FD58E3 /* WXApiResponseHandler.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A0A59CEA1E5A974400FD58E3 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A59CE51E5A974400FD58E3 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A0A59CEB1E5A974400FD58E3 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A59CE71E5A974400FD58E3 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A0A59CEC1E5A974400FD58E3 /* WXMediaMessage+messageConstruct.m in Sources */ = {isa = PBXBuildFile; fileRef = A0A59CE91E5A974400FD58E3 /* WXMediaMessage+messageConstruct.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A0A59CEE1E5A9BCE00FD58E3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A59CED1E5A9BCE00FD58E3 /* SystemConfiguration.framework */; };
+		A0A59CF01E5A9BE400FD58E3 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A59CEF1E5A9BE400FD58E3 /* libsqlite3.0.tbd */; };
+		A0A59CF21E5A9BEA00FD58E3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A59CF11E5A9BEA00FD58E3 /* libz.tbd */; };
+		A0A59CF41E5A9BF400FD58E3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A59CF31E5A9BF400FD58E3 /* libc++.tbd */; };
+		A0A59CF61E5A9C0400FD58E3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A59CF51E5A9C0400FD58E3 /* Security.framework */; };
+		A0A59CF81E5A9C0900FD58E3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A59CF71E5A9C0900FD58E3 /* CoreTelephony.framework */; };
+		A0A59CFA1E5A9C0F00FD58E3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A59CF91E5A9C0F00FD58E3 /* CFNetwork.framework */; };
 		A0AAE6B51E487D0B00C59AD1 /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AAE6B41E487D0B00C59AD1 /* CountDownView.swift */; };
 		A0AC33041E21BCCF0063FF9A /* GameSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC33031E21BCCF0063FF9A /* GameSceneView.swift */; };
 		A0B519C71E271515006CDA4A /* FallingObjectBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B519C61E271515006CDA4A /* FallingObjectBehavior.swift */; };
@@ -113,6 +128,31 @@
 		A09797401E20B6E100DC3E2D /* GameSceneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneViewController.swift; sourceTree = "<group>"; };
 		A09BC6671E334E9200AA0E7E /* GameUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameUser.swift; sourceTree = "<group>"; };
 		A09BC6691E334E9E00AA0E7E /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		A0A59CD11E5A94AC00FD58E3 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		A0A59CD21E5A94AC00FD58E3 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		A0A59CD31E5A94AC00FD58E3 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		A0A59CD41E5A94AC00FD58E3 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		A0A59CD51E5A94AC00FD58E3 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		A0A59CD91E5A94C900FD58E3 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
+		A0A59CDA1E5A94C900FD58E3 /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
+		A0A59CDB1E5A94C900FD58E3 /* WXApiRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiRequestHandler.h; sourceTree = "<group>"; };
+		A0A59CDC1E5A94C900FD58E3 /* WXApiRequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiRequestHandler.m; sourceTree = "<group>"; };
+		A0A59CDD1E5A94C900FD58E3 /* WXApiResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiResponseHandler.h; sourceTree = "<group>"; };
+		A0A59CDE1E5A94C900FD58E3 /* WXApiResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiResponseHandler.m; sourceTree = "<group>"; };
+		A0A59CE31E5A974400FD58E3 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
+		A0A59CE41E5A974400FD58E3 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GetMessageFromWXResp+responseWithTextOrMediaMessage.h"; sourceTree = "<group>"; };
+		A0A59CE51E5A974400FD58E3 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GetMessageFromWXResp+responseWithTextOrMediaMessage.m"; sourceTree = "<group>"; };
+		A0A59CE61E5A974400FD58E3 /* SendMessageToWXReq+requestWithTextOrMediaMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SendMessageToWXReq+requestWithTextOrMediaMessage.h"; sourceTree = "<group>"; };
+		A0A59CE71E5A974400FD58E3 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SendMessageToWXReq+requestWithTextOrMediaMessage.m"; sourceTree = "<group>"; };
+		A0A59CE81E5A974400FD58E3 /* WXMediaMessage+messageConstruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WXMediaMessage+messageConstruct.h"; sourceTree = "<group>"; };
+		A0A59CE91E5A974400FD58E3 /* WXMediaMessage+messageConstruct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WXMediaMessage+messageConstruct.m"; sourceTree = "<group>"; };
+		A0A59CED1E5A9BCE00FD58E3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A0A59CEF1E5A9BE400FD58E3 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		A0A59CF11E5A9BEA00FD58E3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		A0A59CF31E5A9BF400FD58E3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		A0A59CF51E5A9C0400FD58E3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A0A59CF71E5A9C0900FD58E3 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		A0A59CF91E5A9C0F00FD58E3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A0AAE6B41E487D0B00C59AD1 /* CountDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
 		A0AC33031E21BCCF0063FF9A /* GameSceneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSceneView.swift; sourceTree = "<group>"; };
 		A0B519C61E271515006CDA4A /* FallingObjectBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FallingObjectBehavior.swift; sourceTree = "<group>"; };
@@ -140,6 +180,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0A59CFA1E5A9C0F00FD58E3 /* CFNetwork.framework in Frameworks */,
+				A0A59CF81E5A9C0900FD58E3 /* CoreTelephony.framework in Frameworks */,
+				A0A59CF61E5A9C0400FD58E3 /* Security.framework in Frameworks */,
+				A0A59CF41E5A9BF400FD58E3 /* libc++.tbd in Frameworks */,
+				A0A59CF21E5A9BEA00FD58E3 /* libz.tbd in Frameworks */,
+				A0A59CF01E5A9BE400FD58E3 /* libsqlite3.0.tbd in Frameworks */,
+				A0A59CEE1E5A9BCE00FD58E3 /* SystemConfiguration.framework in Frameworks */,
+				A0A59CD61E5A94AC00FD58E3 /* libWeChatSDK.a in Frameworks */,
 				BE7A9953228EFD2E10B00B61 /* libPods-DropProjectsGame.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,6 +198,13 @@
 		90524899F0900C69379EBBF2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A0A59CF91E5A9C0F00FD58E3 /* CFNetwork.framework */,
+				A0A59CF71E5A9C0900FD58E3 /* CoreTelephony.framework */,
+				A0A59CF51E5A9C0400FD58E3 /* Security.framework */,
+				A0A59CF31E5A9BF400FD58E3 /* libc++.tbd */,
+				A0A59CF11E5A9BEA00FD58E3 /* libz.tbd */,
+				A0A59CEF1E5A9BE400FD58E3 /* libsqlite3.0.tbd */,
+				A0A59CED1E5A9BCE00FD58E3 /* SystemConfiguration.framework */,
 				16132A96B23D31149F8B3B75 /* libPods-DropProjectsGame.a */,
 			);
 			name = Frameworks;
@@ -289,6 +344,7 @@
 		A097972D1E20B59A00DC3E2D /* DropProjectsGame */ = {
 			isa = PBXGroup;
 			children = (
+				A0A59CC61E5A934700FD58E3 /* ThirdPart */,
 				A0DD55091E51877D00A4BB81 /* LeanClound */,
 				A03A49A31E32F9D60047D433 /* Source */,
 				A09394301E32F523006C7E2E /* CoreData */,
@@ -302,6 +358,63 @@
 				A09394331E32F57E006C7E2E /* Util */,
 			);
 			path = DropProjectsGame;
+			sourceTree = "<group>";
+		};
+		A0A59CC61E5A934700FD58E3 /* ThirdPart */ = {
+			isa = PBXGroup;
+			children = (
+				A0A59CCF1E5A949100FD58E3 /* WeiChat */,
+			);
+			path = ThirdPart;
+			sourceTree = "<group>";
+		};
+		A0A59CCF1E5A949100FD58E3 /* WeiChat */ = {
+			isa = PBXGroup;
+			children = (
+				A0A59CE21E5A974400FD58E3 /* Helper */,
+				A0A59CD81E5A94C900FD58E3 /* Control */,
+				A0A59CD01E5A94AC00FD58E3 /* WeiChatSDKExport */,
+			);
+			path = WeiChat;
+			sourceTree = "<group>";
+		};
+		A0A59CD01E5A94AC00FD58E3 /* WeiChatSDKExport */ = {
+			isa = PBXGroup;
+			children = (
+				A0A59CD11E5A94AC00FD58E3 /* libWeChatSDK.a */,
+				A0A59CD21E5A94AC00FD58E3 /* README.txt */,
+				A0A59CD31E5A94AC00FD58E3 /* WechatAuthSDK.h */,
+				A0A59CD41E5A94AC00FD58E3 /* WXApi.h */,
+				A0A59CD51E5A94AC00FD58E3 /* WXApiObject.h */,
+			);
+			path = WeiChatSDKExport;
+			sourceTree = "<group>";
+		};
+		A0A59CD81E5A94C900FD58E3 /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				A0A59CD91E5A94C900FD58E3 /* WXApiManager.h */,
+				A0A59CDA1E5A94C900FD58E3 /* WXApiManager.m */,
+				A0A59CDB1E5A94C900FD58E3 /* WXApiRequestHandler.h */,
+				A0A59CDC1E5A94C900FD58E3 /* WXApiRequestHandler.m */,
+				A0A59CDD1E5A94C900FD58E3 /* WXApiResponseHandler.h */,
+				A0A59CDE1E5A94C900FD58E3 /* WXApiResponseHandler.m */,
+			);
+			path = Control;
+			sourceTree = "<group>";
+		};
+		A0A59CE21E5A974400FD58E3 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				A0A59CE31E5A974400FD58E3 /* Constant.h */,
+				A0A59CE41E5A974400FD58E3 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.h */,
+				A0A59CE51E5A974400FD58E3 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */,
+				A0A59CE61E5A974400FD58E3 /* SendMessageToWXReq+requestWithTextOrMediaMessage.h */,
+				A0A59CE71E5A974400FD58E3 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */,
+				A0A59CE81E5A974400FD58E3 /* WXMediaMessage+messageConstruct.h */,
+				A0A59CE91E5A974400FD58E3 /* WXMediaMessage+messageConstruct.m */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		A0DD55091E51877D00A4BB81 /* LeanClound */ = {
@@ -406,6 +519,7 @@
 				A09413AC1E4F2B2A002FD070 /* start.png in Resources */,
 				A0B888901E4CA84A00B8A980 /* DazHeart.png in Resources */,
 				A09797391E20B59A00DC3E2D /* LaunchScreen.storyboard in Resources */,
+				A0A59CD71E5A94AC00FD58E3 /* README.txt in Resources */,
 				A091A6C31E3E18A10025D2C2 /* collision.wav in Resources */,
 				A09797361E20B59A00DC3E2D /* Assets.xcassets in Resources */,
 				A09413AB1E4F2B2A002FD070 /* pause.png in Resources */,
@@ -470,10 +584,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0BDD26F1E25E775003FC07B /* BreakBehaviorDataSource.swift in Sources */,
+				A0A59CE11E5A94C900FD58E3 /* WXApiResponseHandler.m in Sources */,
 				A0137A0D1E570CB000416A5C /* RankingView.swift in Sources */,
 				A0B519CB1E271E99006CDA4A /* UIkit Extension.swift in Sources */,
 				A0B519C71E271515006CDA4A /* FallingObjectBehavior.swift in Sources */,
 				A09413AE1E4F3292002FD070 /* GamePauseview.swift in Sources */,
+				A0A59CEA1E5A974400FD58E3 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */,
 				A09BC66A1E334E9E00AA0E7E /* Result.swift in Sources */,
 				A0FC0A561E49CD24002D62FC /* TitleObject.swift in Sources */,
 				A03A49B31E3301660047D433 /* Users+CoreDataProperties.swift in Sources */,
@@ -482,12 +598,15 @@
 				A0AAE6B51E487D0B00C59AD1 /* CountDownView.swift in Sources */,
 				A097972F1E20B59A00DC3E2D /* AppDelegate.swift in Sources */,
 				A0DD550D1E51953700A4BB81 /* BaseObject.swift in Sources */,
+				A0A59CEC1E5A974400FD58E3 /* WXMediaMessage+messageConstruct.m in Sources */,
+				A0A59CDF1E5A94C900FD58E3 /* WXApiManager.m in Sources */,
 				A0FC0A541E49C0CF002D62FC /* GameScoreView.swift in Sources */,
 				A08D4D781E376BAF005C342C /* GameEngine.swift in Sources */,
 				A0DD550B1E5187FC00A4BB81 /* LeanCloundDealer.swift in Sources */,
 				A09BC6681E334E9200AA0E7E /* GameUser.swift in Sources */,
 				A0B8888E1E4CA64B00B8A980 /* Drop.swift in Sources */,
 				A0C27A141E438A8300FEC1C1 /* GameMusicEffectsDatasource.swift in Sources */,
+				A0A59CE01E5A94C900FD58E3 /* WXApiRequestHandler.m in Sources */,
 				A08B43501E224DCA00D5AF7E /* BreakBehavior.swift in Sources */,
 				A091A6CA1E3E1AAC0025D2C2 /* AudioHandler.swift in Sources */,
 				A096740B1E34529E003F2A17 /* Dictionary Extention.swift in Sources */,
@@ -502,6 +621,7 @@
 				A0C27A101E43844B00FEC1C1 /* AVAudioCustomPlayer.swift in Sources */,
 				A0964A8F1E4DC5EE0006A905 /* ParticleHandler.swift in Sources */,
 				A0137A131E57223400416A5C /* RankingTableViewCell.swift in Sources */,
+				A0A59CEB1E5A974400FD58E3 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m in Sources */,
 				A09674071E34469A003F2A17 /* LevelManager.swift in Sources */,
 				A09674091E3451DD003F2A17 /* Level.swift in Sources */,
 				A093942F1E32F50F006C7E2E /* Drop.xcdatamodeld in Sources */,
@@ -627,7 +747,37 @@
 				INFOPLIST_FILE = DropProjectsGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kl.DropProjectsGame;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DropProjectsGame/ThirdPart/WeiChat/WeiChatSDKExport",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AVOSCloud\"",
+					"-l\"icucore\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-Objc",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kl.push.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DropProjectsGame/-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -643,7 +793,37 @@
 				INFOPLIST_FILE = DropProjectsGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kl.DropProjectsGame;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DropProjectsGame/ThirdPart/WeiChat/WeiChatSDKExport",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AVOSCloud\"",
+					"-l\"icucore\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-Objc",
+					"-all_load",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = kl.push.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DropProjectsGame/-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

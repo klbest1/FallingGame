@@ -30,6 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AVOSCloud.setApplicationId("I4bnta9SCTCkgSYnQCPmhYoG-gzGzoHsz", clientKey: "WyARJ12gJOQCjtWWFFOgeSzW")
         GameUser.registerSubclass()
         Result.registerSubclass()
+        
+        WXApi.registerApp("wxd930ea5d5a258f4f", enableMTA: true)
+        //向微信注册支持的文件类型
+        let typeFlag:UInt64 = 0x1 | 0x2 | 0x4 | 0x20;
+//
+        WXApi.registerAppSupportContentFlag(typeFlag);
+
         return true
     }
 
@@ -58,7 +65,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
+    
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        
+        return WXApi.handleOpen( url , delegate: WXApiManager.shared())
+    }
 
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool
+    {
+        return WXApi.handleOpen( url , delegate: WXApiManager.shared())
+    }
+    
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         if #available(iOS 10.0, *) {

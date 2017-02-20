@@ -13,6 +13,7 @@ class GameResultView: UIView {
     public var resetButton:UIButton!
     public var randButton:UIButton!
     public var gameScoreLabel:UILabel!
+    public var weiChatLoginButton:UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,11 +56,16 @@ class GameResultView: UIView {
         gameScoreLabel.font = UIFont.systemFont(ofSize: 21);
         gameScoreLabel.center = CGPoint(x:contentView.frame.size.width/2,y:contentView.frame.size.height/2);
         
+        weiChatLoginButton = UIButton(frame: CGRect(origin: CGPoint(x:resetButton.frame.maxX + 10,y:contentView.frame.size.height - 50), size: CGSize(width: 40, height: 40)))
+        weiChatLoginButton.setTitle("微信", for: .normal)
+        weiChatLoginButton.setTitleColor(UIColor.black, for: .normal)
+        
         contentView.addSubview(hintScoreLabel)
         contentView.addSubview(titleLable)
         contentView.addSubview(resetButton)
         contentView.addSubview(randButton)
         contentView.addSubview(gameScoreLabel)
+        contentView.addSubview(weiChatLoginButton)
     }
     
     required init?(coder aDecoder: NSCoder) {

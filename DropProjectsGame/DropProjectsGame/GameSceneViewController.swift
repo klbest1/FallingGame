@@ -11,7 +11,7 @@ import UIKit
 let handleGameResultsNotifiName = "GameResults"
 let handleGamePlayingNotifiName = "GamePlayingInfo"
 
-class GameSceneViewController: UIViewController {
+class GameSceneViewController: UIViewController,WXApiManagerDelegate {
 
     var contentView:UIView = UIView()
     var gameScoreTitleView:GameScoreView?
@@ -25,6 +25,7 @@ class GameSceneViewController: UIViewController {
         //笔记  通知
         NotificationCenter.default.addObserver(self, selector: #selector(handleGameResult(_:)), name: NSNotification.Name(rawValue: handleGameResultsNotifiName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleGamePlaying(_:)), name: NSNotification.Name(rawValue: handleGamePlayingNotifiName), object: nil)
+        WXApiManager.shared().delegate = self;
 
         self.title = "GameScene";
         // Do any additional setup after loading the view.
@@ -40,9 +41,10 @@ class GameSceneViewController: UIViewController {
         //游戏主界面
         gameSceneView = GameSceneView(frame:CGRect(origin: CGPoint.zero, size: viewSize));
         gameResultView = GameResultView(frame: CGRect(origin: CGPoint.zero, size: viewSize));
-        //游戏失败
+        //游戏结束
         //MVC 结构用户响应事件在控制层
         gameResultView.resetButton.addTarget(self, action: #selector(resetTouched(_:)), for: .touchUpInside)
+        gameResultView.weiChatLoginButton.addTarget(self, action: #selector(weiChatLogin(_:)), for: .touchUpInside)
         //倒计时
         gameCountingDownView = CountDownView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size))
         //游戏暂停
@@ -177,6 +179,15 @@ class GameSceneViewController: UIViewController {
         self.navigationController?.pushViewController(rankingCtrl, animated: true)
     }
     
+   
+    func weiChatLogin(_ sender:AnyObject)  {
+        WXApiRequestHandler.sendAuthRequestScope(kAuthScope, state: kAuthState, openID: kAuthOpenID, in: self)
+    }
+    
+    
+    func managerDidRecvAuthResponse(_ response: SendAuthResp!) {
+        print("xxx微信登录：\(response.code)--\(response.state)--\(response.errCode)")
+    }
     
     override var prefersStatusBarHidden: Bool {
         return true
