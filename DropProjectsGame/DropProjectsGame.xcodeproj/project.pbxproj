@@ -77,6 +77,15 @@
 		A0DD550B1E5187FC00A4BB81 /* LeanCloundDealer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD550A1E5187FC00A4BB81 /* LeanCloundDealer.swift */; };
 		A0DD550D1E51953700A4BB81 /* BaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DD550C1E51953700A4BB81 /* BaseObject.swift */; };
 		A0E26C491E46DE5600E1A652 /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E26C481E46DE5600E1A652 /* head.png */; };
+		A0E9F8A71E5D96D1002C270C /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E9F8A61E5D96D1002C270C /* ShareView.swift */; };
+		A0E9F8A91E5D9747002C270C /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0E9F8A81E5D9747002C270C /* ShareView.xib */; };
+		A0E9F8AC1E5DA35A002C270C /* weixin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E9F8AA1E5DA35A002C270C /* weixin@2x.png */; };
+		A0E9F8AD1E5DA35A002C270C /* weixin@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E9F8AB1E5DA35A002C270C /* weixin@3x.png */; };
+		A0E9F8B01E5DA369002C270C /* QQ@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E9F8AE1E5DA369002C270C /* QQ@2x.png */; };
+		A0E9F8B11E5DA369002C270C /* QQ@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E9F8AF1E5DA369002C270C /* QQ@3x.png */; };
+		A0E9F8B41E5DA7CB002C270C /* pengyouquan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E9F8B21E5DA7CB002C270C /* pengyouquan@2x.png */; };
+		A0E9F8B51E5DA7CB002C270C /* pengyouquan@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E9F8B31E5DA7CB002C270C /* pengyouquan@3x.png */; };
+		A0E9F8B71E5DC831002C270C /* weiLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E9F8B61E5DC831002C270C /* weiLogo.png */; };
 		A0FC0A541E49C0CF002D62FC /* GameScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FC0A531E49C0CF002D62FC /* GameScoreView.swift */; };
 		A0FC0A561E49CD24002D62FC /* TitleObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FC0A551E49CD24002D62FC /* TitleObject.swift */; };
 		A0FC0A591E49D0EF002D62FC /* snow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0FC0A581E49D0EF002D62FC /* snow.ttf */; };
@@ -168,6 +177,15 @@
 		A0DD550A1E5187FC00A4BB81 /* LeanCloundDealer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeanCloundDealer.swift; sourceTree = "<group>"; };
 		A0DD550C1E51953700A4BB81 /* BaseObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseObject.swift; sourceTree = "<group>"; };
 		A0E26C481E46DE5600E1A652 /* head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head.png; sourceTree = "<group>"; };
+		A0E9F8A61E5D96D1002C270C /* ShareView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
+		A0E9F8A81E5D9747002C270C /* ShareView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShareView.xib; sourceTree = "<group>"; };
+		A0E9F8AA1E5DA35A002C270C /* weixin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weixin@2x.png"; sourceTree = "<group>"; };
+		A0E9F8AB1E5DA35A002C270C /* weixin@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weixin@3x.png"; sourceTree = "<group>"; };
+		A0E9F8AE1E5DA369002C270C /* QQ@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QQ@2x.png"; sourceTree = "<group>"; };
+		A0E9F8AF1E5DA369002C270C /* QQ@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "QQ@3x.png"; sourceTree = "<group>"; };
+		A0E9F8B21E5DA7CB002C270C /* pengyouquan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pengyouquan@2x.png"; sourceTree = "<group>"; };
+		A0E9F8B31E5DA7CB002C270C /* pengyouquan@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pengyouquan@3x.png"; sourceTree = "<group>"; };
+		A0E9F8B61E5DC831002C270C /* weiLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weiLogo.png; sourceTree = "<group>"; };
 		A0FC0A531E49C0CF002D62FC /* GameScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScoreView.swift; sourceTree = "<group>"; };
 		A0FC0A551E49CD24002D62FC /* TitleObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleObject.swift; sourceTree = "<group>"; };
 		A0FC0A581E49D0EF002D62FC /* snow.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = snow.ttf; sourceTree = "<group>"; };
@@ -213,6 +231,13 @@
 		A00151B71E40763400398B58 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A0E9F8B61E5DC831002C270C /* weiLogo.png */,
+				A0E9F8B21E5DA7CB002C270C /* pengyouquan@2x.png */,
+				A0E9F8B31E5DA7CB002C270C /* pengyouquan@3x.png */,
+				A0E9F8AE1E5DA369002C270C /* QQ@2x.png */,
+				A0E9F8AF1E5DA369002C270C /* QQ@3x.png */,
+				A0E9F8AA1E5DA35A002C270C /* weixin@2x.png */,
+				A0E9F8AB1E5DA35A002C270C /* weixin@3x.png */,
 				A0137A0E1E570EBF00416A5C /* ranking_background.png */,
 				A09413A91E4F2B2A002FD070 /* pause.png */,
 				A09413AA1E4F2B2A002FD070 /* start.png */,
@@ -277,6 +302,8 @@
 				A0137A0C1E570CB000416A5C /* RankingView.swift */,
 				A0137A101E571FAB00416A5C /* BaseView.swift */,
 				A0137A121E57223400416A5C /* RankingTableViewCell.swift */,
+				A0E9F8A61E5D96D1002C270C /* ShareView.swift */,
+				A0E9F8A81E5D9747002C270C /* ShareView.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -507,9 +534,13 @@
 			files = (
 				A091A6C11E3E18A10025D2C2 /* backGroundMusic_3.mp3 in Resources */,
 				A0FC0A591E49D0EF002D62FC /* snow.ttf in Resources */,
+				A0E9F8A91E5D9747002C270C /* ShareView.xib in Resources */,
+				A0E9F8B11E5DA369002C270C /* QQ@3x.png in Resources */,
+				A0E9F8AD1E5DA35A002C270C /* weixin@3x.png in Resources */,
 				A00151B91E40763E00398B58 /* refresh.png in Resources */,
 				A091A6BF1E3E18A10025D2C2 /* backGroundMusic_1.mp3 in Resources */,
 				A0137A0F1E570EBF00416A5C /* ranking_background.png in Resources */,
+				A0E9F8B71E5DC831002C270C /* weiLogo.png in Resources */,
 				A091A6C41E3E18A10025D2C2 /* fallingOn.mp3 in Resources */,
 				A091A6C61E3E18A10025D2C2 /* gameWin.wav in Resources */,
 				A03A49A51E32F9EE0047D433 /* Level.plist in Resources */,
@@ -518,13 +549,17 @@
 				A0E26C491E46DE5600E1A652 /* head.png in Resources */,
 				A09413AC1E4F2B2A002FD070 /* start.png in Resources */,
 				A0B888901E4CA84A00B8A980 /* DazHeart.png in Resources */,
+				A0E9F8AC1E5DA35A002C270C /* weixin@2x.png in Resources */,
+				A0E9F8B01E5DA369002C270C /* QQ@2x.png in Resources */,
 				A09797391E20B59A00DC3E2D /* LaunchScreen.storyboard in Resources */,
 				A0A59CD71E5A94AC00FD58E3 /* README.txt in Resources */,
 				A091A6C31E3E18A10025D2C2 /* collision.wav in Resources */,
 				A09797361E20B59A00DC3E2D /* Assets.xcassets in Resources */,
+				A0E9F8B51E5DA7CB002C270C /* pengyouquan@3x.png in Resources */,
 				A09413AB1E4F2B2A002FD070 /* pause.png in Resources */,
 				A0964A911E4DDD1A0006A905 /* Background_Diffuse.png in Resources */,
 				A091A6C01E3E18A10025D2C2 /* backGroundMusic_2.mp3 in Resources */,
+				A0E9F8B41E5DA7CB002C270C /* pengyouquan@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +620,7 @@
 			files = (
 				A0BDD26F1E25E775003FC07B /* BreakBehaviorDataSource.swift in Sources */,
 				A0A59CE11E5A94C900FD58E3 /* WXApiResponseHandler.m in Sources */,
+				A0E9F8A71E5D96D1002C270C /* ShareView.swift in Sources */,
 				A0137A0D1E570CB000416A5C /* RankingView.swift in Sources */,
 				A0B519CB1E271E99006CDA4A /* UIkit Extension.swift in Sources */,
 				A0B519C71E271515006CDA4A /* FallingObjectBehavior.swift in Sources */,

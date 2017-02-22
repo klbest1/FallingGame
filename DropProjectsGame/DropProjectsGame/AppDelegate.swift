@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GameUser.registerSubclass()
         Result.registerSubclass()
         
-        WXApi.registerApp("wxd930ea5d5a258f4f", enableMTA: true)
+        WXApi.registerApp(kWeiChatAppID, enableMTA: true)
         //向微信注册支持的文件类型
         let typeFlag:UInt64 = 0x1 | 0x2 | 0x4 | 0x20;
 //

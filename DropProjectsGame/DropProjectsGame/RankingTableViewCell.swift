@@ -45,8 +45,8 @@ class RankingTableViewCell: UITableViewCell {
         rankging.text = String(format: "%d", result.ranking)
         let query = GameUser.query()
         query.getObjectInBackground(withId: (result.user?.objectId)!) { (object, error) in
-            let user = object as! GameUser
-            self.name.text = user.accountName
+            let user:GameUser? = object as? GameUser
+            self.name.text = user?.accountName
         }
         score.text = String(format: "%d", result.score)
     }

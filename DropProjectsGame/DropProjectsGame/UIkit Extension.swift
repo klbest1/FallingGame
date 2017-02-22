@@ -196,4 +196,20 @@ extension UIView{
     }
 
     
+    ///  填充子视图
+    ///
+    ///  - parameter referView: 参考视图
+    ///  - parameter insets:    间距
+    public func ff_Fill(_ referView: UIView, insets: UIEdgeInsets = UIEdgeInsets.zero) -> [NSLayoutConstraint] {
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        var cons = [NSLayoutConstraint]()
+        
+        cons += NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(insets.left)-[subView]-\(insets.right)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: ["subView" : self])
+        cons += NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(insets.top)-[subView]-\(insets.bottom)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: ["subView" : self])
+        
+        superview?.addConstraints(cons)
+        
+        return cons
+    }
 }

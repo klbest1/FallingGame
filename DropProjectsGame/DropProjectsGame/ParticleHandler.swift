@@ -4,7 +4,6 @@
 //
 //  Created by lin kang on 17/2/10.
 //  Copyright © 2017年 lin kang. All rights reserved.
-//  分数没刷新，初次碰撞有问题
 
 import UIKit
 

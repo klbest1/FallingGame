@@ -65,7 +65,7 @@ class GameResultView: UIView {
         contentView.addSubview(resetButton)
         contentView.addSubview(randButton)
         contentView.addSubview(gameScoreLabel)
-        contentView.addSubview(weiChatLoginButton)
+//        contentView.addSubview(weiChatLoginButton)
     }
     
     required init?(coder aDecoder: NSCoder) {

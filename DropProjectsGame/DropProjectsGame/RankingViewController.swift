@@ -12,14 +12,23 @@ class RankingViewController: UIViewController,UITableViewDataSource {
 
     var rankingView:RankingView!
     var rankingResult:[Result] = [Result]()
-    
+    var shareView:ShareView?
+    var currenScene:WXScene = WXSceneTimeline
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "weiLogo.png"), style: UIBarButtonItemStyle.done, target: self, action: #selector(share));
+        
         self.navigationController?.navigationBar.barStyle = UIBarStyle.blackTranslucent
         rankingView = RankingView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size))
         rankingView.tableView.dataSource = self
         self.view.addSubview(rankingView)
+        
+        shareView = ShareView.createShareView()
+        shareView?.weChatFriends.addTarget(self, action: #selector(sendToFriend), for: .touchUpInside)
+        shareView?.weChatMoment.addTarget(self, action: #selector(shareToWeiChatMoment), for: .touchUpInside)
+        
         // Do any additional setup after loading the view.
         LeanCloundDealer.share().updateRanking { (objects) in
             self.rankingResult = objects
@@ -58,6 +67,24 @@ class RankingViewController: UIViewController,UITableViewDataSource {
         cell?.setCell(result: result)
         return cell!
     }
+    
+    func sendToFriend() {
+        currenScene = WXSceneSession
+        let thumbImage:UIImage  =  UIImage.init(named: "head.png")!;
+        WXApiRequestHandler.sendLinkURL(kLinkURL, tagName: kLinkTagName, title: kLinkTitle, description: kLinkDescription, thumbImage: thumbImage, in: currenScene)
+    }
+    
+    func shareToWeiChatMoment()  {
+        currenScene = WXSceneTimeline
+        let thumbImage:UIImage  =  UIImage.init(named: "head.png")!;
+        WXApiRequestHandler.sendLinkURL(kLinkURL, tagName: kLinkTagName, title: kLinkTitle, description: kLinkDescription, thumbImage: thumbImage, in: currenScene)
+        
+    }
+    
+    func share()  {
+        shareView?.showShareView()
+    }
+    
     /*
     // MARK: - Navigation
 

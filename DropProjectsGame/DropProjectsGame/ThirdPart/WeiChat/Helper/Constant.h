@@ -68,4 +68,6 @@ static const NSInteger kOpenHBSignAlertTag = 8002;
 static NSString *kProfileExtMsg = @"http://we.qq.com/d/AQCIc9a3EqRfb19z8WnLB6iFNCxX5bO2S3lHwMQL";
 static NSString *kBizWebviewExtMsg = @"KOoCKdavezBjdj2wJZsq67N2j_g3XEQ5JP_pkLhBYS4";
 
+static NSString *kWeiChatAppID = @"wx3b2de6f3fe33e6f0";
+static NSString *kWeiChatSecret = @"f6c76b45c9baae55cc71964bf8fb6085";
 #endif

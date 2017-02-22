@@ -44,7 +44,6 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
         //游戏结束
         //MVC 结构用户响应事件在控制层
         gameResultView.resetButton.addTarget(self, action: #selector(resetTouched(_:)), for: .touchUpInside)
-        gameResultView.weiChatLoginButton.addTarget(self, action: #selector(weiChatLogin(_:)), for: .touchUpInside)
         //倒计时
         gameCountingDownView = CountDownView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size))
         //游戏暂停
@@ -179,16 +178,7 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
         self.navigationController?.pushViewController(rankingCtrl, animated: true)
     }
     
-   
-    func weiChatLogin(_ sender:AnyObject)  {
-        WXApiRequestHandler.sendAuthRequestScope(kAuthScope, state: kAuthState, openID: kAuthOpenID, in: self)
-    }
-    
-    
-    func managerDidRecvAuthResponse(_ response: SendAuthResp!) {
-        print("xxx微信登录：\(response.code)--\(response.state)--\(response.errCode)")
-    }
-    
+     
     override var prefersStatusBarHidden: Bool {
         return true
     }
