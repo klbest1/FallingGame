@@ -212,4 +212,10 @@ extension UIView{
         
         return cons
     }
+    
+    func alertInfo(msg:String)  {
+        let alert :UIAlertView = UIAlertView (title: "", message: msg, delegate: nil, cancelButtonTitle: "确定");
+        self.addSubview(alert)
+        alert.show()
+    }
 }

@@ -15,10 +15,10 @@ class LeanCloundDealer: NSObject {
         return instance
     }
     
-    func updateUser(user:GameUser)  {
+    func updateUserPlayingResult(user:GameUser,updateCompelete:@escaping (Bool)->())  {
         let query : AVQuery = GameUser.query()
         query.limit = 1
-        query.whereKey("accountName", equalTo: user.accountName!)
+        query.whereKey(kAcountNameKey, equalTo: user.accountName!)
         query.findObjectsInBackground { (objects, error) in
             if((error) != nil){
                 if ((error as? NSError)?.code != 101){
@@ -27,7 +27,9 @@ class LeanCloundDealer: NSObject {
                 }
             }
             if(objects?.count ==  0 || objects == nil){
-                user.createUser()
+                user.createUser(createSuccess: {(success) in
+                    updateCompelete(success)
+                })
             }else{
                 // 第一个参数是 className，第二个参数是 objectId
                 if let downLoadUser = objects?.first as? GameUser {
@@ -36,20 +38,24 @@ class LeanCloundDealer: NSObject {
                     //笔记，safeBlock
                     recordUser.result = Result.init(className: "Result", objectId: (downLoadUser.result?.objectId)!)
                     recordUser.profileImageUrl = (downLoadUser.profileImageUrl as! NSCopying) as? String
-                    recordUser.updateUser(newUser: UserManager.share.currentUser)
+                    recordUser.updateUser(newUser: UserManager.share.currentUser,compelete: { (success)in
+                        updateCompelete(success)
+                        
+                    })
                 }
             }
         }
     }
     //获取当前用户信息
-    func selectUser(user:GameUser,complete:@escaping ((_ findedUser:GameUser)->()))  {
+    func selectUser(user:GameUser,complete:@escaping ((_ findedUser:GameUser?)->()))  {
         let query : AVQuery = GameUser.query()
         query.limit = 1
-        query.whereKey("accountName", equalTo: user.accountName!)
+        query.whereKey(kAcountNameKey, equalTo: user.accountName!)
         query.findObjectsInBackground { (objects, error) in
             if((error) != nil){
                 if ((error as? NSError)?.code != 101){
                     print("查询USER发生错误:\(error?.localizedDescription ?? "fuckxxxx")")
+                    complete(_ :nil)
                     return
                 }
             }
@@ -70,6 +76,47 @@ class LeanCloundDealer: NSObject {
         result.updateRanking { (objects) in
             complete(objects)
         }
+    }
+    
+    func updateUserInfo(oldUser:GameUser,newUser:GameUser,complete:@escaping (Bool)->()) {
+        let query : AVQuery = GameUser.query()
+        query.limit = 1
+        query.whereKey(kAcountNameKey, equalTo: newUser.accountName!)
+        query.findObjectsInBackground { (objects, error) in
+            if objects != nil && (objects?.count)! > 0{
+                complete(false)
+            }else{
+                let query : AVQuery = GameUser.query()
+                query.limit = 1
+                query.whereKey(kAcountNameKey, equalTo: oldUser.accountName!)
+                query.findObjectsInBackground { (objects, error) in
+                    if((error) != nil){
+                        if ((error as? NSError)?.code != 101){
+                            print("查询USER发生错误:\(error?.localizedDescription ?? "fuckxxxx")")
+                            return
+                        }
+                    }
+                    // 第一个参数是 className，第二个参数是 objectId
+                    if let downLoadUser = objects?.first as? GameUser {
+                        let recordUser:GameUser = GameUser.init(className: "GameUser", objectId: downLoadUser.objectId!)
+                        //笔记，赋值操作不会复制内存地址，
+                        if newUser.accountName != nil{
+                            recordUser.setObject(newUser.accountName, forKey: kAcountNameKey)
+                        }
+                        if newUser.profileImageUrl != nil{
+                            recordUser.setObject(newUser.profileImageUrl, forKey: kProfileUrlKey)
+                        }
+                        recordUser.saveInBackground({ (success, error) in
+                            if (success){
+                                complete(true)
+                            }
+                        })
+                    }
+                    
+                }
+            }
+        }
+
     }
     
     /*

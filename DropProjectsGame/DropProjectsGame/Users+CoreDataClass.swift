@@ -23,9 +23,14 @@ public class Users: NSManagedObject {
     
     class func updateUser(user:GameUser,context:NSManagedObjectContext) ->Users?{
         let request:NSFetchRequest = Users.fetchRequest()
-        request.predicate = NSPredicate.init(format: "accountName = %@", user.accountName!)
-        if let user = (try? context.fetch(request))?.first {
-            return user
+        request.predicate = NSPredicate.init(format: "isCurrentUser = true")
+        if let userIndataBase = (try? context.fetch(request))?.first {
+            userIndataBase.accountName = user.accountName
+            userIndataBase.lastLoginTime = user.lastLoginTime
+            userIndataBase.isCurrentUser = user.isCurrentUser
+            userIndataBase.profileImageUrl = user.profileImageUrl
+            userIndataBase.result = PlayIResults.playResultsUpdate(user: userIndataBase, result: user.result!, context: context)
+            return userIndataBase
         }else if let inserUser = NSEntityDescription.insertNewObject(forEntityName: "Users", into: context) as? Users{
             inserUser.accountName = user.accountName
             inserUser.lastLoginTime = user.lastLoginTime

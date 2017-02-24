@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		A00151B61E4071E600398B58 /* GameResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00151B51E4071E600398B58 /* GameResultView.swift */; };
 		A00151B91E40763E00398B58 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A00151B81E40763E00398B58 /* refresh.png */; };
+		A00505991E5EEA5800641C6A /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = A00505981E5EEA5800641C6A /* share.png */; };
+		A005059B1E5EFBE500641C6A /* meng.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A005059A1E5EFBE500641C6A /* meng.ttf */; };
+		A005059F1E5F065100641C6A /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = A005059E1E5F065100641C6A /* setting.png */; };
+		A00505A11E5F0AC800641C6A /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A00505A01E5F0AC800641C6A /* edit.png */; };
 		A0137A0B1E570C6500416A5C /* RankingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0137A0A1E570C6500416A5C /* RankingViewController.swift */; };
 		A0137A0D1E570CB000416A5C /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0137A0C1E570CB000416A5C /* RankingView.swift */; };
 		A0137A0F1E570EBF00416A5C /* ranking_background.png in Resources */ = {isa = PBXBuildFile; fileRef = A0137A0E1E570EBF00416A5C /* ranking_background.png */; };
@@ -96,6 +100,10 @@
 		16132A96B23D31149F8B3B75 /* libPods-DropProjectsGame.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DropProjectsGame.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A00151B51E4071E600398B58 /* GameResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameResultView.swift; sourceTree = "<group>"; };
 		A00151B81E40763E00398B58 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh.png; sourceTree = "<group>"; };
+		A00505981E5EEA5800641C6A /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		A005059A1E5EFBE500641C6A /* meng.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = meng.ttf; sourceTree = "<group>"; };
+		A005059E1E5F065100641C6A /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		A00505A01E5F0AC800641C6A /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		A0137A0A1E570C6500416A5C /* RankingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingViewController.swift; sourceTree = "<group>"; };
 		A0137A0C1E570CB000416A5C /* RankingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
 		A0137A0E1E570EBF00416A5C /* ranking_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ranking_background.png; sourceTree = "<group>"; };
@@ -231,6 +239,9 @@
 		A00151B71E40763400398B58 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A00505A01E5F0AC800641C6A /* edit.png */,
+				A005059E1E5F065100641C6A /* setting.png */,
+				A00505981E5EEA5800641C6A /* share.png */,
 				A0E9F8B61E5DC831002C270C /* weiLogo.png */,
 				A0E9F8B21E5DA7CB002C270C /* pengyouquan@2x.png */,
 				A0E9F8B31E5DA7CB002C270C /* pengyouquan@3x.png */,
@@ -455,6 +466,7 @@
 		A0FC0A571E49D0C6002D62FC /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				A005059A1E5EFBE500641C6A /* meng.ttf */,
 				A0FC0A581E49D0EF002D62FC /* snow.ttf */,
 			);
 			path = Font;
@@ -533,9 +545,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A091A6C11E3E18A10025D2C2 /* backGroundMusic_3.mp3 in Resources */,
+				A00505A11E5F0AC800641C6A /* edit.png in Resources */,
+				A00505991E5EEA5800641C6A /* share.png in Resources */,
 				A0FC0A591E49D0EF002D62FC /* snow.ttf in Resources */,
 				A0E9F8A91E5D9747002C270C /* ShareView.xib in Resources */,
 				A0E9F8B11E5DA369002C270C /* QQ@3x.png in Resources */,
+				A005059F1E5F065100641C6A /* setting.png in Resources */,
+				A005059B1E5EFBE500641C6A /* meng.ttf in Resources */,
 				A0E9F8AD1E5DA35A002C270C /* weixin@3x.png in Resources */,
 				A00151B91E40763E00398B58 /* refresh.png in Resources */,
 				A091A6BF1E3E18A10025D2C2 /* backGroundMusic_1.mp3 in Resources */,

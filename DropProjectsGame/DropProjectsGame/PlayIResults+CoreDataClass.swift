@@ -23,7 +23,7 @@ public class PlayIResults: NSManagedObject {
     class func playResultsUpdate(user:Users, result:Result, context:NSManagedObjectContext)->PlayIResults?{
         
         let request:NSFetchRequest = PlayIResults.fetchRequest()
-        request.predicate = NSPredicate.init(format: "user.accountName = %@", user.accountName!)
+        request.predicate = NSPredicate.init(format: "user.isCurrentUser = true")
         if let findingResult  = (try? context.fetch(request))?.first{
             findingResult.level = result.level;
             findingResult.score = result.score

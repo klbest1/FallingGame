@@ -8,6 +8,9 @@
 
 import UIKit
 
+let kAcountNameKey = "accountName"
+let kProfileUrlKey = "profileImageUrl"
+
 public class GameUser: BaseObject {
 
      class func parseClassName()->String {
@@ -28,12 +31,13 @@ public class GameUser: BaseObject {
 //        fatalError("init(coder:) has not been implemented")
 //    }
     
-    func createUser()  {
+    func createUser(createSuccess:@escaping (Bool)->())  {
         self.result?.createResult(user: self, compele: { (result) in
-            self.setObject(self.accountName, forKey: "accountName")
-            self.setObject(self.profileImageUrl, forKey: "profileImageUrl")
+            self.setObject(self.accountName, forKey: kAcountNameKey)
+            self.setObject(self.profileImageUrl, forKey: kProfileUrlKey)
             self.setObject(self.result, forKey: "result")
             self.saveInBackground { (success, error) in
+                createSuccess(success)
                 if (error != nil){
                     print("创建用户发生错误\(error?.localizedDescription ?? "fuck创建失败")")
                 }
@@ -59,11 +63,12 @@ public class GameUser: BaseObject {
      NSLog(@"results:%@", result.results);
      }];
      */
-    func updateUser(newUser:GameUser)  {
+    func updateUser(newUser:GameUser,compelete:@escaping (Bool)->())  {
         self.result?.updateResult(user: newUser, compele: { (result) in
-            self.setObject(self.profileImageUrl, forKey: "profileImageUrl")
+            self.setObject(self.profileImageUrl, forKey: kProfileUrlKey)
             self.setObject(result, forKey: "result")
             self.saveInBackground { (success, error) in
+                compelete(success)
                 if (error != nil){
                     print("更新用户玩耍结果发生错误\(error?.localizedDescription ?? "fuck更新失败")")
                 }

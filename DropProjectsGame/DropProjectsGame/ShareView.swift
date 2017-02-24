@@ -44,6 +44,8 @@ class ShareView: UIView {
         }
         dissmissButton.backgroundColor = UIColor(white: 0, alpha: 0.2)
         shareContentView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        cancelButton.layer.cornerRadius = 5
+        cancelButton.layer.masksToBounds = true
         cancelButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
     }
     
@@ -55,7 +57,7 @@ class ShareView: UIView {
         let window:UIWindow = UIApplication.shared.keyWindow!
         window.addSubview(self)
         dissmissButton.alpha = 0
-        self.ff_Fill(window)
+        _ = self.ff_Fill(window)
         self.layoutIfNeeded()
         UIView.animate(withDuration: 0.6) {
             self.dissmissButton.alpha = 1

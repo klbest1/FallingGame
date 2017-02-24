@@ -49,12 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         //游戏没有结束时，不用上传
-        if #available(iOS 10.0, *) {
-            _ = Users.updateUser(user: UserManager.share.currentUser, context: self.persistentContainer.viewContext)
-            
-        }else{
-            _ =  Users.updateUser(user: UserManager.share.currentUser, context: self.managedObjectContext)
-        }
         saveDataBase()
     }
 
@@ -78,21 +72,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        if #available(iOS 10.0, *) {
-           _ = Users.updateUser(user: UserManager.share.currentUser, context: self.persistentContainer.viewContext)
-
-        }else{
-          _ =  Users.updateUser(user: UserManager.share.currentUser, context: self.managedObjectContext)
-        }
+      
         saveDataBase()
     }
     
     func saveDataBase() {
-        do{
-            try appDelegate?.managedObjectContext.save()
-        }catch let error as NSError{
-            print(error);
+        if #available(iOS 10.0, *) {
+            _ = Users.updateUser(user: UserManager.share.currentUser, context: self.persistentContainer.viewContext)
+            do{
+                try appDelegate?.persistentContainer.viewContext.save()
+            }catch let error as NSError{
+                print(error);
+            }
+            
+        }else{
+            _ =  Users.updateUser(user: UserManager.share.currentUser, context: self.managedObjectContext)
+            do{
+                try appDelegate?.managedObjectContext.save()
+            }catch let error as NSError{
+                print(error);
+            }
         }
+        
     }
     // MARK: - Core Data stack
     

@@ -43,11 +43,15 @@ class RankingTableViewCell: UITableViewCell {
     
     func setCell(result:Result)  {
         rankging.text = String(format: "%d", result.ranking)
-        let query = GameUser.query()
-        query.getObjectInBackground(withId: (result.user?.objectId)!) { (object, error) in
-            let user:GameUser? = object as? GameUser
-            self.name.text = user?.accountName
+        if (result.user?.accountName == nil ){
+            let query = GameUser.query()
+            query.getObjectInBackground(withId: (result.user?.objectId)!) { (object, error) in
+                let user:GameUser? = object as? GameUser
+                result.user?.accountName = user?.accountName
+                self.name.text = user?.accountName
+            }
         }
+        
         score.text = String(format: "%d", result.score)
     }
     

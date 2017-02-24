@@ -108,6 +108,7 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     }
     
     func gameResultsChecking() {
+        print("检查游戏结果")
         musicDatasource.stopMusic(musicName: (currentLevel?.backGroundMusic)!)
         gameStop()
 
@@ -121,7 +122,8 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
         }else{
             musicDatasource.playMusic(musicType: .gameOver)
         }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: handleGameResultsNotifiName), object: result)
+        NotificationCenter.default.post(name: NSNotification.Name(handleGameResultsNotifiName), object: result)
+        print("执行了通知\(result)")
         UserManager.share.currentUser.result = result
     }
     

@@ -19,6 +19,8 @@ class RankingView: BaseView {
     var myScore:UILabel = UILabel()
     var tableView:UITableView = UITableView()
     
+    var editButton:UIButton!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
@@ -36,12 +38,16 @@ class RankingView: BaseView {
         myNameLabelHint.text = "我的名字:"
         contentView.addSubview(myNameLabelHint)
         
-        myNameLabel.frame = CGRect(origin: CGPoint(x:myNameLabelHint.frame.maxX - 30,y:myNameLabelHint.frame.minY + 2), size: CGSize(width: 150, height: 20))
+        myNameLabel.frame = CGRect(origin: CGPoint(x:myNameLabelHint.frame.maxX - 30,y:myNameLabelHint.frame.minY + 2), size: CGSize(width: 150, height: 24))
        //笔记 使用自定义字体
-        myNameLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        myNameLabel.font = UIFont(name: "MComicHKS-Medium", size: 24)
         myNameLabel.textColor = UIColor.brown
         myNameLabel.textAlignment = .left
         contentView.addSubview(myNameLabel)
+        
+        editButton = UIButton(frame: CGRect(origin: CGPoint(x:myNameLabel.frame.minX + 120,y:myNameLabel.frame.minY), size: CGSize(width: 24, height: 24)))
+        editButton.setBackgroundImage(UIImage.init(named: "edit.png"), for: .normal)
+        contentView.addSubview(editButton)
         
         //排名
         myRankingHint.frame = CGRect(origin: CGPoint(x:50,y:myNameLabelHint.frame.maxY + 10), size: CGSize(width: 150, height: 21))
@@ -51,9 +57,9 @@ class RankingView: BaseView {
         myRankingHint.text = "我的排名:"
         contentView.addSubview(myRankingHint)
         
-        myRanking.frame = CGRect(origin: CGPoint(x:myRankingHint.frame.maxX - 30,y:myRankingHint.frame.minY + 4), size: CGSize(width: 150, height: 20))
+        myRanking.frame = CGRect(origin: CGPoint(x:myRankingHint.frame.maxX - 30,y:myRankingHint.frame.minY + 4), size: CGSize(width: 150, height: 24))
         //笔记 使用自定义字体
-        myRanking.font = UIFont.boldSystemFont(ofSize: 20)
+        myRanking.font = UIFont(name: "MComicHKS-Medium", size: 24)
         myRanking.textColor = UIColor.brown
         myRanking.textAlignment = .left
         contentView.addSubview(myRanking)
@@ -66,9 +72,9 @@ class RankingView: BaseView {
         myScoreHint.text = "我的分数:"
         contentView.addSubview(myScoreHint)
         
-        myScore.frame = CGRect(origin: CGPoint(x:myScoreHint.frame.maxX - 30,y:myScoreHint.frame.minY + 4), size: CGSize(width: 150, height: 20))
+        myScore.frame = CGRect(origin: CGPoint(x:myScoreHint.frame.maxX - 30,y:myScoreHint.frame.minY + 4), size: CGSize(width: 150, height: 24))
         //笔记 使用自定义字体
-        myScore.font = UIFont.boldSystemFont(ofSize: 20)
+        myScore.font = UIFont(name: "MComicHKS-Medium", size: 24)
         myScore.textColor = UIColor.brown
         myScore.textAlignment = .left
         contentView.addSubview(myScore)
@@ -108,4 +114,5 @@ class RankingView: BaseView {
         fatalError("init(coder:) has not been implemented")
     }
 
+ 
 }

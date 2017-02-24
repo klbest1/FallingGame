@@ -4,7 +4,8 @@
 //
 //  Created by lin kang on 17/1/7.
 //  Copyright © 2017年 lin kang. All rights reserved.
-//
+//bug 数据库名字没有更新，滑动列表crash
+//回来会有声音
 
 import UIKit
 
@@ -23,7 +24,7 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         //笔记  通知
-        NotificationCenter.default.addObserver(self, selector: #selector(handleGameResult(_:)), name: NSNotification.Name(rawValue: handleGameResultsNotifiName), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleGameResult(_:)), name: NSNotification.Name(handleGameResultsNotifiName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleGamePlaying(_:)), name: NSNotification.Name(rawValue: handleGamePlayingNotifiName), object: nil)
         WXApiManager.shared().delegate = self;
 
@@ -57,6 +58,7 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
 //        testDicDecoding()
 //        testUserName()
 //        testDataBase()
+        gameSceneView!.animate = true;
         
     }
     
@@ -66,13 +68,10 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated);
-        gameSceneView!.animate = true;
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated);
-//        gameSceneView!.animate = false;
-        NotificationCenter.default.removeObserver(self)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -146,6 +145,7 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
     }
 
     func handleGameResult(_ sender:Notification)  {
+        print("到达通知")
         let result:Result = sender.object as! Result
         if result.passLevel{
             //进入下一关
@@ -154,17 +154,25 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
             gameCountingDownView?.startCouting()
             gameCountingDownView?.setHint(hint: "恭喜过关，下一关即将开始！")
         }else{
+            print("到达加载游戏结果页面")
             //弹出游戏结果
             gameResultView.gameScoreLabel.text = String(format: "%d", arguments: [result.score])
+            gameResultView.randButton.isEnabled = false
+            gameResultView.randButton.alpha = 0.5
             contentView.addSubview(gameResultView)
             gameResultView.frame.origin = CGPoint(x:0, y: -gameResultView.frame.size.height)
+            gameResultView.activityView.startAnimating()
             UIView.animate(withDuration: 0.3, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
                 self.gameResultView.frame.origin = CGPoint.zero
             }) { ( finish:Bool) in
                 
             }
         }
-        LeanCloundDealer.share().updateUser(user: UserManager.share.currentUser)
+        LeanCloundDealer.share().updateUserPlayingResult(user: UserManager.share.currentUser,updateCompelete: {(updateSucees)in
+            self.gameResultView.randButton.alpha = 1
+            self.gameResultView.randButton.isEnabled = true;
+            self.gameResultView.activityView.stopAnimating()
+        })
     }
     
     func handleGamePlaying(_ sender:Notification)  {
