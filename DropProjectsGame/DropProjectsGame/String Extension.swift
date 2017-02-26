@@ -48,6 +48,10 @@ extension String {
         let end = index(startIndex, offsetBy: r.upperBound)
         return self[start...end]
     }
+    
+    func localString()->String  {
+        return NSLocalizedString(self, comment: "")
+    }
 }
 
 extension NSMutableAttributedString {
@@ -63,4 +67,5 @@ extension NSMutableAttributedString {
         self.append(normal)
         return self
     }
+
 }

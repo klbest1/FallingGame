@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="meng.ttf">
+            <string>MComicHKS-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="GameRuleView" customModule="DropProjectsGame" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="首先，很高兴您能来玩这款娱乐小游戏😋😋  如何玩？ 向上滑动您的纤细的(壮实的)手指，击中5颜6色的小方块即可。  注意： 只有方块移动的时候，才可以撞击得分" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hA9-DR-pkh">
+                    <rect key="frame" x="12" y="69" width="295" height="341"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qid-de-QHi">
+                    <rect key="frame" x="96" y="439" width="128" height="34"/>
+                    <fontDescription key="fontDescription" name="MComicHKS-Medium" family="MComic HKS" pointSize="17"/>
+                    <state key="normal" title="开始游戏">
+                        <color key="titleColor" red="0.99931365251541138" green="0.18923121690750122" blue="0.00075776752782985568" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.30054664611816406" green="0.1704196035861969" blue="0.064481824636459351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="游戏规则" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="agD-8x-Dzm">
+                    <rect key="frame" x="124" y="40" width="70" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="qid-de-QHi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ffs-ec-Xb2"/>
+                <constraint firstItem="qid-de-QHi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="439" id="qOo-Dj-SlU"/>
+            </constraints>
+            <point key="canvasLocation" x="-1377" y="-371"/>
+        </view>
+    </objects>
+</document>

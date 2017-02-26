@@ -13,7 +13,7 @@ class GameResultView: UIView {
     public var resetButton:UIButton!
     public var randButton:UIButton!
     public var gameScoreLabel:UILabel!
-    public var weiChatLoginButton:UIButton!
+    public var helPButton:UIButton!
     var     activityView:UIActivityIndicatorView! = UIActivityIndicatorView()
     
     override init(frame: CGRect) {
@@ -46,10 +46,10 @@ class GameResultView: UIView {
         hintScoreLabel.font = UIFont.init(name: "HYXueFengF", size: 20)
         hintScoreLabel.textColor = UIColor.init(red: 0.3, green: 0.7, blue: 0.5, alpha: 0.8)
         
-        resetButton = UIButton(frame: CGRect(origin: CGPoint(x:frame.origin.x + 30,y:contentView.frame.size.height - 50), size: CGSize(width: 40, height: 36)))
+        resetButton = UIButton(frame: CGRect(origin: CGPoint(x:frame.origin.x + 20,y:contentView.frame.size.height - 50), size: CGSize(width: 40, height: 36)))
         resetButton.setBackgroundImage(UIImage(named:"refresh.png"), for: .normal)
         
-        randButton = UIButton(frame: CGRect(origin: CGPoint(x:contentView.frame.size.width - 60 - 30,y:contentView.frame.size.height - 50), size: CGSize(width: 60, height: 36)))
+        randButton = UIButton(frame: CGRect(origin: CGPoint(x:contentView.frame.size.width - 60 - 10,y:contentView.frame.size.height - 50), size: CGSize(width: 60, height: 36)))
         randButton.setTitle("排名", for: .normal)
         randButton.titleLabel?.font = UIFont(name: "MComicHKS-Medium", size: 20)
         randButton.setTitleColor(UIColor.init(red: 1, green: 0.5, blue: 0.5, alpha: 1), for: .normal)
@@ -60,9 +60,11 @@ class GameResultView: UIView {
         gameScoreLabel.center = CGPoint(x:contentView.frame.size.width/2,y:contentView.frame.size.height/2);
         gameScoreLabel.textColor = UIColor.orange
         
-        weiChatLoginButton = UIButton(frame: CGRect(origin: CGPoint(x:resetButton.frame.maxX + 10,y:contentView.frame.size.height - 50), size: CGSize(width: 40, height: 40)))
-        weiChatLoginButton.setTitle("微信", for: .normal)
-        weiChatLoginButton.setTitleColor(UIColor.black, for: .normal)
+        helPButton = UIButton(frame: CGRect(origin: CGPoint(x:resetButton.frame.maxX + 20,y:contentView.frame.size.height - 50), size: CGSize(width: 40, height: 36)))
+//        helPButton.setBackgroundImage(UIImage.init(named: "help.png"), for: .normal)
+        helPButton.setTitle("Help", for: .normal)
+        helPButton.titleLabel?.font = UIFont(name: "MComicHKS-Medium", size: 20)
+        helPButton.setTitleColor(UIColor.init(red: 1, green: 0.5, blue: 0.5, alpha: 1), for: .normal)
         
         activityView.activityIndicatorViewStyle = .gray
         activityView.hidesWhenStopped = true
@@ -74,7 +76,7 @@ class GameResultView: UIView {
         contentView.addSubview(randButton)
         contentView.addSubview(gameScoreLabel)
         contentView.addSubview(activityView)
-//        contentView.addSubview(weiChatLoginButton)
+        contentView.addSubview(helPButton)
     }
     
     required init?(coder aDecoder: NSCoder) {

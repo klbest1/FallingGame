@@ -11,6 +11,7 @@ import UIKit
 
 let handleGameResultsNotifiName = "GameResults"
 let handleGamePlayingNotifiName = "GamePlayingInfo"
+let kIsInstalled = "isInstalled"
 
 class GameSceneViewController: UIViewController,WXApiManagerDelegate {
 
@@ -20,9 +21,19 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
     var gameResultView:GameResultView!
     var gameCountingDownView:CountDownView?
     var gamePauseView:GamePauseview?
+    var gameRuleView:GameRuleView?
+    var gameHelpView:GameRuleView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        let isInstalled:Bool? = UserDefaults.standard.object(forKey: kIsInstalled) as! Bool?
+        if (isInstalled == nil || isInstalled == false){
+            UserDefaults.standard.set(true, forKey: kIsInstalled)
+            gameRuleView = GameRuleView.createView()
+            gameRuleView?.startPlayButton.addTarget(self, action: #selector(ruleStartPlayButtonCliked), for: .touchUpInside)
+
+        }
         //笔记  通知
         NotificationCenter.default.addObserver(self, selector: #selector(handleGameResult(_:)), name: NSNotification.Name(handleGameResultsNotifiName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleGamePlaying(_:)), name: NSNotification.Name(rawValue: handleGamePlayingNotifiName), object: nil)
@@ -45,6 +56,8 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
         //游戏结束
         //MVC 结构用户响应事件在控制层
         gameResultView.resetButton.addTarget(self, action: #selector(resetTouched(_:)), for: .touchUpInside)
+        gameResultView.helPButton.addTarget(self, action: #selector(helpButtonTouched(_:)), for: .touchUpInside)
+        
         //倒计时
         gameCountingDownView = CountDownView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size))
         //游戏暂停
@@ -68,6 +81,10 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated);
+        gameRuleView?.showRule(withType: .firstInstallGame)
+        if gameRuleView != nil {
+            gameSceneView?.gameEngin.gamePause()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -186,7 +203,28 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
         self.navigationController?.pushViewController(rankingCtrl, animated: true)
     }
     
-     
+    func ruleStartPlayButtonCliked(sender:UIButton)  {
+        if (sender.tag == RuleType.firstInstallGame.rawValue) {
+            contentView.addSubview(gameCountingDownView!)
+            gameCountingDownView?.countDownNumber = 3
+            gameCountingDownView?.startCouting()
+            gameCountingDownView?.setHint(hint: "游戏马上开始")
+            gameSceneView?.gameEngin.perform(#selector(gameSceneView?.gameEngin.gameContinue), with: nil, afterDelay: 3)
+            gameRuleView?.dismiss()
+        }else{
+            gameHelpView?.dismiss()
+        }
+    }
+    
+    
+    func helpButtonTouched(_ sender:UIButton)  {
+        if(gameHelpView == nil){
+            gameHelpView = GameRuleView.createView()
+            gameHelpView?.startPlayButton.addTarget(self, action: #selector(ruleStartPlayButtonCliked), for: .touchUpInside)
+        }
+        gameHelpView?.showRule(withType: .helpGame)
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }

@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  DropProjectsGame
+
+  Created by lin kang on 17/2/26.
+  Copyright © 2017年 lin kang. All rights reserved.
+*/
+"gameRuletext" = "首先，很高兴您能来玩这款娱乐小游戏😋😋\n如何玩？\n向上滑动您的纤细的(壮实的)手指，击中5颜6色的小方块即可。\n注意：\n只有方块移动的时候，才可以撞击得分;每次一定要接住球";
+"startPlay" = "开始游戏";
+"gameRule" = "游戏规则";

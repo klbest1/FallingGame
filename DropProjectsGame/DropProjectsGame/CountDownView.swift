@@ -23,8 +23,9 @@ class CountDownView: UIView {
         
         hintLabel.frame = CGRect(origin: CGPoint(x:0,y:0), size: CGSize(width: 300, height: 35))
         hintLabel.center = CGPoint(x:self.center.x,y:self.center.y - hintLabel.frame.size.height - 20)
-        hintLabel.textColor = UIColor.black
+        hintLabel.textColor = UIColor.orange
         hintLabel.textAlignment = .center
+        hintLabel.font = UIFont(name: "MComicHKS-Medium", size: 30)
         
         contentView.addSubview(countDownShowLabel)
         contentView.addSubview(hintLabel)

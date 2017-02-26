@@ -10,12 +10,7 @@ import UIKit
 
 
 class GameSceneView: BaseView,UICollisionBehaviorDelegate {
-    /*------常量-----------*/
-    struct  BallSize {
-        //代替define
-        static let width:CGFloat = 60
-    }
-    
+
     
     /*-------初始化------*/
     override init(frame: CGRect) {
@@ -47,14 +42,9 @@ class GameSceneView: BaseView,UICollisionBehaviorDelegate {
     
     func  addBallView()  {
         if ballView == nil {
-            ballView = BallView()
-            ballView?.backgroundColor = UIColor.white
+            ballView = BallView(frame: CGRect(origin: CGPoint(x:self.width-BallSize.width/2 ,y:self.center.y - BallSize.width/2), size: CGSize(width: BallSize.width, height: BallSize.width)))
 
         }
-        ballView!.frame = CGRect(origin: CGPoint(x:self.width-BallSize.width/2 ,y:self.center.y - BallSize.width/2), size: CGSize(width: BallSize.width, height: BallSize.width));
-        ballView!.layer.cornerRadius = BallSize.width/2;
-        ballView!.layer.masksToBounds = true;
-
         self.addSubview(ballView!);
     }
     

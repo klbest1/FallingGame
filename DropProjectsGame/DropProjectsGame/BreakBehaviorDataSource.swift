@@ -15,7 +15,7 @@ protocol BreakBehaviorDataSourceDelegate:class {
 
 class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     public var pushAngle:Double =  M_PI_4*3
-    public var pushMagnitude:CGFloat = 1.7;
+    public var pushMagnitude:CGFloat = 1.8;
     public weak var delegate:BreakBehaviorDataSourceDelegate?
 
     
