@@ -18,6 +18,7 @@ class BreakBehavior: UIDynamicBehavior {
         return collision;
     }()
     
+    let dynamicItemBehavior:UIDynamicItemBehavior = UIDynamicItemBehavior()
 
     var gravityBehavior:UIGravityBehavior = {
         let gravity = UIGravityBehavior();
@@ -29,7 +30,10 @@ class BreakBehavior: UIDynamicBehavior {
         super.init();
         self.addChildBehavior(collisionBehavior)
         self.addChildBehavior(gravityBehavior)
-       
+        self.addChildBehavior(dynamicItemBehavior)
+        dynamicItemBehavior.allowsRotation = true
+        dynamicItemBehavior.elasticity = 0.8
+
     }
     
     func addPush(item:UIView,angle:Double,magnitude:CGFloat) {

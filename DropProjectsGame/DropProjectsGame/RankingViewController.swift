@@ -48,8 +48,10 @@ class RankingViewController: UIViewController,UITableViewDataSource,UIAlertViewD
             LeanCloundDealer.share().selectUser(user: UserManager.share.currentUser) { (user) in
                 if (user != nil){
                     self.rankingView.myNameLabel.text = user?.accountName
-                    self.rankingView.myRanking.text = String(format: "%d", (user?.result?.ranking)!)
-                    self.rankingView.myScore.text = String(format: "%d", (user?.result?.score)!)
+                    if(user?.result?.ranking != nil){
+                        self.rankingView.myRanking.text = String(format: "%d", (user?.result?.ranking)!)
+                        self.rankingView.myScore.text = String(format: "%d", (user?.result?.score)!)
+                    }
                 }
                 self.activiView.stopAnimating()
             }
@@ -76,6 +78,7 @@ class RankingViewController: UIViewController,UITableViewDataSource,UIAlertViewD
         var cell:RankingTableViewCell? = tableView.dequeueReusableCell(withIdentifier: cellIdentify) as? RankingTableViewCell
         if (cell == nil){
             cell = RankingTableViewCell(style: .default, reuseIdentifier: cellIdentify)
+            cell?.selectionStyle = .none
         }
         
         let result = rankingResult[indexPath.row]
@@ -97,7 +100,12 @@ class RankingViewController: UIViewController,UITableViewDataSource,UIAlertViewD
     }
     
     func share()  {
-        shareView?.showShareView()
+        if(WXApi.isWXAppInstalled() ){
+            shareView?.showShareView()
+        }else{
+            let alertView:UIAlertView = UIAlertView(title: "", message: "weChatInstall".localString(), delegate: self, cancelButtonTitle: "Cancel".localString(), otherButtonTitles: "GoToInstall".localString())
+            alertView.show()
+        }
     }
     
     func editTouched()  {
@@ -111,20 +119,24 @@ class RankingViewController: UIViewController,UITableViewDataSource,UIAlertViewD
     func alertView(_ alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int) // after animation
     {
         if buttonIndex == 1{
-            activiView.startAnimating()
-            let gameUser = GameUser()
-            gameUser.accountName = UserManager.share.currentUser.accountName
-            UserManager.share.currentUser.accountName = alertView.textField(at: 0)?.text
-            LeanCloundDealer.share().updateUserInfo(oldUser: gameUser,newUser: UserManager.share.currentUser, complete: { (success) in
-                self.activiView.stopAnimating()
-                if (success){
-                    self.rankingView.myNameLabel.text = alertView.textField(at: 0)?.text
-                    appDelegate?.saveDataBase()
-                }else{
-                    self.view.alertInfo(msg: "该用户已存在");
-                    UserManager.share.currentUser.accountName = gameUser.accountName
-                }
-            })
+            if alertView.alertViewStyle == .plainTextInput{
+                activiView.startAnimating()
+                let gameUser = GameUser()
+                gameUser.accountName = UserManager.share.currentUser.accountName
+                UserManager.share.currentUser.accountName = alertView.textField(at: 0)?.text
+                LeanCloundDealer.share().updateUserInfo(oldUser: gameUser,newUser: UserManager.share.currentUser, complete: { (success) in
+                    self.activiView.stopAnimating()
+                    if (success){
+                        self.rankingView.myNameLabel.text = alertView.textField(at: 0)?.text
+                        appDelegate?.saveDataBase()
+                    }else{
+                        self.view.alertInfo(msg: "该用户已存在");
+                        UserManager.share.currentUser.accountName = gameUser.accountName
+                    }
+                })
+            }else{
+                UIApplication.shared.openURL(URL(string: "https://appsto.re/cn/S8gTy.i")!)
+            }
            
         }
     }

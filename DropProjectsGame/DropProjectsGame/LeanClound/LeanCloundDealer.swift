@@ -63,7 +63,7 @@ class LeanCloundDealer: NSObject {
             if let downLoadUser = objects?.first as? GameUser {
                 let query : AVQuery = Result.query()
                 query.limit = 1
-                let result = query.getObjectWithId((downLoadUser.result?.objectId)!) as! Result
+                let result = query.getObjectWithId((downLoadUser.result?.objectId)!) as? Result
                 downLoadUser.result = result
                 complete(_ :downLoadUser)
             }

@@ -75,7 +75,7 @@
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxx-qO-H73">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxx-qO-H73">
                             <rect key="frame" x="227" y="91" width="53" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="53" id="qLm-JU-up1"/>
@@ -85,7 +85,7 @@
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ空间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KO7-LL-yFq">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QQ空间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KO7-LL-yFq">
                             <rect key="frame" x="40" y="190" width="53" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="6GX-rg-Lyz"/>
@@ -140,6 +140,8 @@
                 <outlet property="kongJianRight" destination="1Vc-eR-FRX" id="8qe-8h-EAW"/>
                 <outlet property="kongjianTop" destination="ssR-Gd-UQi" id="ChV-87-PSc"/>
                 <outlet property="pengyouQuanCenter" destination="L6P-5E-c6i" id="KN4-zG-eAY"/>
+                <outlet property="qqButton" destination="cEc-FU-eLw" id="2yE-dR-wRZ"/>
+                <outlet property="qqKongjianButton" destination="O9V-As-1bL" id="6ig-PF-5kk"/>
                 <outlet property="qqRight" destination="dkg-f2-obL" id="MXU-DW-3dm"/>
                 <outlet property="shareContentView" destination="bEl-c1-MRz" id="MPY-mK-2OV"/>
                 <outlet property="shareContentViewBottom" destination="ecc-NB-0P2" id="NhD-nP-BKL"/>
@@ -147,7 +149,7 @@
                 <outlet property="weChatFriends" destination="F9x-Io-Tgt" id="hu4-TV-bou"/>
                 <outlet property="weChatMoment" destination="0W5-Y4-wcx" id="Rq2-qn-Xk5"/>
             </connections>
-            <point key="canvasLocation" x="-603" y="-333"/>
+            <point key="canvasLocation" x="-920" y="-350"/>
         </view>
     </objects>
     <resources>

@@ -14,6 +14,12 @@ class ShareView: UIView {
     let kShareItemWidth:CGFloat = 63
     var shareViewItemSpace:CGFloat = 0
     
+    @IBOutlet weak var qqButton: UIButton!
+    
+    @IBOutlet weak var qqKongjianButton: UIButton!
+    
+    
+    
     @IBOutlet weak var pengyouQuanCenter: NSLayoutConstraint!
 
     @IBOutlet weak var qqRight: NSLayoutConstraint!
@@ -47,6 +53,11 @@ class ShareView: UIView {
         cancelButton.layer.cornerRadius = 5
         cancelButton.layer.masksToBounds = true
         cancelButton.addTarget(self, action: #selector(dismiss), for: .touchUpInside)
+        
+        //隐藏QQ和QQ空间
+        qqButton.isHidden = true
+        qqKongjianButton.isHidden = true
+        
     }
     
     class func createShareView() -> ShareView {

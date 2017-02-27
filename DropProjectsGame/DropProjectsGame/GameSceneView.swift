@@ -18,6 +18,7 @@ class GameSceneView: BaseView,UICollisionBehaviorDelegate {
         self.addGestureRecognizer(panGuesture);
         let backGroundImageView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: frame.size))
         backGroundImageView.image = UIImage(named: "Background_Diffuse")
+//        backGroundImageView.backgroundColor = UIColor.colorFromRGB(rgbValue: 0xF1F3F7)
         self.addSubview(backGroundImageView)
         
         let originX = (self.width-self.paddleSize.width)/2.0
