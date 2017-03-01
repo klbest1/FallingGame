@@ -547,7 +547,7 @@
 				TargetAttributes = {
 					A097972A1E20B59A00DC3E2D = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = Q8C2NBM6JK;
+						DevelopmentTeam = ZW573C3S9X;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -848,7 +848,10 @@
 			baseConfigurationReference = BA1C4CD9C65AF5312503888E /* Pods-DropProjectsGame.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Q8C2NBM6JK;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = ZW573C3S9X;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = DropProjectsGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -882,8 +885,10 @@
 					"-Objc",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kl.push.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lin.dropball;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DropProjectsGame/-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -895,7 +900,10 @@
 			baseConfigurationReference = E32576F7D1446C5386CA7209 /* Pods-DropProjectsGame.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = Q8C2NBM6JK;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: kang lin (ZW573C3S9X)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = ZW573C3S9X;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = DropProjectsGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -929,8 +937,10 @@
 					"-Objc",
 					"-all_load",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kl.push.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lin.dropball;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DropProjectsGame/-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

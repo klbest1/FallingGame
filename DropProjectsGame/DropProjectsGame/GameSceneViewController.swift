@@ -169,7 +169,7 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
             contentView.addSubview(gameCountingDownView!)
             gameCountingDownView?.countDownNumber = GameEngine.share.timeDelayWhenGotoNext
             gameCountingDownView?.startCouting()
-            gameCountingDownView?.setHint(hint: "恭喜过关，下一关即将开始！")
+            gameCountingDownView?.setHint(hint: "恭喜过关😎")
         }else{
             print("到达加载游戏结果页面")
             //弹出游戏结果
@@ -211,6 +211,7 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
             gameCountingDownView?.setHint(hint: "游戏马上开始")
             gameSceneView?.gameEngin.perform(#selector(gameSceneView?.gameEngin.gameContinue), with: nil, afterDelay: 3)
             gameRuleView?.dismiss()
+            gameRuleView = nil
         }else{
             gameHelpView?.dismiss()
         }

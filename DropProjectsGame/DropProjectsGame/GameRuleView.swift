@@ -46,6 +46,8 @@ class GameRuleView: BaseView {
         textView.text = "gameRuletext".localString()
         textView.font = UIFont(name: "MComicHKS-Medium", size: 17)
         textView.backgroundColor = UIColor.clear
+        textView.isEditable = false;
+        textView.isSelectable = false;
         
         startPlayButton = UIButton(frame: CGRect(origin: CGPoint(x:76,y:439), size: CGSize(width: 128, height: 40)))
         startPlayButton.center = CGPoint(x: frame.size.width/2, y: 439)

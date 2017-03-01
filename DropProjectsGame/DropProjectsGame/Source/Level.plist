@@ -20,7 +20,7 @@
 			<key>fallingSpeed</key>
 			<integer>1</integer>
 			<key>scoreGoal</key>
-			<integer>200</integer>
+			<integer>100</integer>
 		</dict>
 		<dict>
 			<key>className</key>
@@ -38,7 +38,7 @@
 			<key>fallingSpeed</key>
 			<integer>2</integer>
 			<key>scoreGoal</key>
-			<real>1000</real>
+			<integer>200</integer>
 		</dict>
 		<dict>
 			<key>backGroundMusic</key>
@@ -56,7 +56,7 @@
 			<key>fallingSpeed</key>
 			<integer>3</integer>
 			<key>scoreGoal</key>
-			<real>1500</real>
+			<integer>300</integer>
 		</dict>
 		<dict>
 			<key>backGroundImageUrl</key>
@@ -74,7 +74,7 @@
 			<key>fallingSpeed</key>
 			<real>3.5</real>
 			<key>scoreGoal</key>
-			<real>3000</real>
+			<integer>1000</integer>
 		</dict>
 	</array>
 	<key>className</key>

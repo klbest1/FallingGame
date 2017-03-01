@@ -69,7 +69,7 @@ class RankingView: BaseView {
         myScoreHint.font = UIFont(name: "HYXueFengF", size: 21)
         myScoreHint.textColor = UIColor.white
         myScoreHint.textAlignment = .left
-        myScoreHint.text = "我的分数:"
+        myScoreHint.text = "最高得分:"
         contentView.addSubview(myScoreHint)
         
         myScore.frame = CGRect(origin: CGPoint(x:myScoreHint.frame.maxX - 30,y:myScoreHint.frame.minY + 4), size: CGSize(width: 150, height: 24))
@@ -101,7 +101,7 @@ class RankingView: BaseView {
         tableScoreHint.font = UIFont.systemFont(ofSize: 20)
         tableScoreHint.textColor = UIColor.white
         tableScoreHint.textAlignment = .left
-        tableScoreHint.text = "分数"
+        tableScoreHint.text = "得分"
         contentView.addSubview(tableScoreHint)
         
         tableView.frame = CGRect(origin: CGPoint(x:50,y:tableRankingHint.frame.maxY + 20), size: CGSize(width: 260, height: self.hight - tableRankingHint.frame.maxY - 20 - 40 ))

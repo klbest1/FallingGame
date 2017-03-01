@@ -264,11 +264,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/LeanClound/LeanCloundDealer.swift"
-            timestampString = "509632463.541193"
+            timestampString = "509875305.506568"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "updateUserPlayingResult(user:updateCompelete:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -301,22 +301,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "20"
             endingLineNumber = "20"
-            landmarkName = "updateUserPlayingResult(user:updateCompelete:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/LeanClound/LeanCloundDealer.swift"
-            timestampString = "509632463.541193"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
             landmarkName = "updateUserPlayingResult(user:updateCompelete:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -518,11 +502,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/RankingTableViewCell.swift"
-            timestampString = "509853439.419668"
+            timestampString = "509873744.448095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "setCell(result:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -582,11 +566,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/LeanClound/LeanCloundDealer.swift"
-            timestampString = "509632463.541193"
+            timestampString = "509875305.506568"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "updateUserInfo(oldUser:newUser:complete:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -646,11 +630,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/LeanClound/LeanCloundDealer.swift"
-            timestampString = "509633207.871285"
+            timestampString = "509875305.506568"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "updateUserInfo(oldUser:newUser:complete:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -742,11 +726,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/GameRuleView.swift"
-            timestampString = "509809251.555035"
+            timestampString = "509891840.996647"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "showRule(withType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -758,11 +742,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/GameSceneViewController.swift"
-            timestampString = "509806627.737442"
+            timestampString = "509892556.280926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "helpButtonTouched(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -774,12 +758,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/RankingTableViewCell.swift"
-            timestampString = "509853439.419668"
+            timestampString = "509873744.448095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "setCell(result:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DropProjectsGame/LeanClound/LeanCloundDealer.swift"
+            timestampString = "509875305.506568"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "updateUserPlayingResult(user:updateCompelete:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DropProjectsGame/LeanClound/LeanCloundDealer.swift"
+            timestampString = "509875539.586229"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "updateUserPlayingResult(user:updateCompelete:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

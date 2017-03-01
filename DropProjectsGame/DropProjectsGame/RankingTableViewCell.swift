@@ -16,7 +16,7 @@ class RankingTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         rankging.frame = CGRect(origin: CGPoint(x:5,y:(self.contentView.frame.size.height - 19)/2), size: CGSize(width: 100, height: 19));
-        rankging.font = UIFont(name: "HYXueFengF", size: 19)
+        rankging.font = UIFont(name: "MComicHKS-Medium", size: 19)
         rankging.textColor = UIColor.orange
         rankging.textAlignment = .left
         rankging.text = "NO.1"
@@ -30,7 +30,7 @@ class RankingTableViewCell: UITableViewCell {
         self.contentView.addSubview(name)
         
         score.frame = CGRect(origin: CGPoint(x:name.frame.maxX,y:(self.contentView.frame.size.height - 19)/2), size: CGSize(width: 100, height: 19));
-        score.font = UIFont(name: "HYXueFengF", size: 19)
+        score.font = UIFont(name: "MComicHKS-Medium", size: 19)
         score.textColor = UIColor.orange
         score.textAlignment = .left
         score.text = "1000"
@@ -42,7 +42,22 @@ class RankingTableViewCell: UITableViewCell {
     }
     
     func setCell(result:Result)  {
-        rankging.text = String(format: "%d", result.ranking)
+        var rankingStr = String(format: "%d", result.ranking)
+        switch result.ranking {
+        case 1:
+            rankingStr = "NO.1"
+            break;
+        case 2:
+            rankingStr = "NO.2"
+            break;
+        case 3:
+            rankingStr = "NO.3"
+            break;
+        default:
+                break;
+        }
+        
+        rankging.text = rankingStr
         if (result.user?.accountName == nil  ){
             if ( result.user != nil){
                 let query = GameUser.query()
