@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/GameSceneView.swift"
-            timestampString = "509865788.601508"
+            timestampString = "510140777.597529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "viewDisappedAnimation(view:animationCompletion:)"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
+            landmarkName = "checkAngle(firstPoint:lastPoint:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/GameSceneView.swift"
-            timestampString = "509865788.601508"
+            timestampString = "510140777.597529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "viewDisappedAnimation(view:animationCompletion:)"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "checkAngle(firstPoint:lastPoint:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/GameSceneView.swift"
-            timestampString = "509865788.601508"
+            timestampString = "510140777.597529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "viewDisappedAnimation(view:animationCompletion:)"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
+            landmarkName = "checkAngle(firstPoint:lastPoint:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/GameEngine.swift"
-            timestampString = "509635355.672054"
+            timestampString = "510065236.731906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "didScoreChanged(sender:aScore:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,13 +266,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/FallingObjectDatasource.swift"
-            timestampString = "509766133.151911"
+            timestampString = "510143946.519648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "removeDropsFromBehaviorForInstantStop()"
-            landmarkType = "7">
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "FallingObjectDatasource"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -329,54 +329,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/GameSceneView.swift"
-            timestampString = "509865788.601508"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "handPan(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/GameSceneView.swift"
-            timestampString = "509865788.601508"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "handPan(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/GameSceneView.swift"
-            timestampString = "509865788.601508"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "handPan(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/GameResultView.swift"
             timestampString = "509632757.829619"
             startingColumnNumber = "9223372036854775807"
@@ -394,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/GameEngine.swift"
-            timestampString = "508414396.695877"
+            timestampString = "510065236.731906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "gameStop()"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,43 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508504064.846865"
+            timestampString = "510147160.997751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "resetBallDynamic()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/GameSceneView.swift"
-            timestampString = "509865788.601508"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "addBallView()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508504064.846865"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "resetBallDynamic()"
             landmarkType = "7">
          </BreakpointContent>
@@ -458,12 +378,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508504064.846865"
+            timestampString = "510145594.120348"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "addBallBehaviors()"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "initBallBehaviors()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -479,7 +399,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
             endingLineNumber = "41"
-            landmarkName = "addPush(item:angle:magnitude:)"
+            landmarkName = "addPush(item:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -490,13 +410,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/FallingObjectDatasource.swift"
-            timestampString = "509766133.151911"
+            timestampString = "510143946.519648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "stopAnimator()"
-            landmarkType = "7">
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "FallingObjectDatasource"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -506,13 +426,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/FallingObjectDatasource.swift"
-            timestampString = "509766133.151911"
+            timestampString = "510143946.519648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "startAnimator()"
-            landmarkType = "7">
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "FallingObjectDatasource"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -522,11 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/FallingObjectDatasource.swift"
-            timestampString = "509766133.151911"
+            timestampString = "510143946.519648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "addDrops()"
             landmarkType = "7">
          </BreakpointContent>
@@ -538,12 +458,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/FallingObjectDatasource.swift"
-            timestampString = "508413062.620994"
+            timestampString = "510143946.519648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "addDrops()"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "unInitBehavior()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -554,11 +474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/FallingObjectDatasource.swift"
-            timestampString = "509766133.151911"
+            timestampString = "510143946.519648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "addDrops()"
             landmarkType = "7">
          </BreakpointContent>
@@ -586,75 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508504064.846865"
+            timestampString = "510145594.120348"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "startPushing()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/GameSceneView.swift"
-            timestampString = "509865788.601508"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "handPan(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508504064.846865"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "startPushing()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508210151.793974"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "lazyInitBehaviors()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508210151.793974"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "lazyInitBehaviors()"
             landmarkType = "7">
          </BreakpointContent>
@@ -666,7 +522,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/FallingObjectDatasource.swift"
-            timestampString = "508413062.620994"
+            timestampString = "510065236.731906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "66"
@@ -682,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508504064.846865"
+            timestampString = "510147160.997751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "resetBallDynamic()"
             landmarkType = "7">
          </BreakpointContent>
@@ -698,27 +554,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508210151.793974"
+            timestampString = "510147160.997751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "lazyInitBehaviors()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508504064.846865"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "stopAnimator()"
             landmarkType = "7">
          </BreakpointContent>
@@ -730,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508504064.846865"
+            timestampString = "510145594.120348"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "unInitBehavior()"
             landmarkType = "7">
          </BreakpointContent>
@@ -762,27 +602,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508210151.793974"
+            timestampString = "510147160.997751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "lazyInitBehaviors()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508504064.846865"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "startAnimator()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1322,11 +1146,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/GameEngine.swift"
-            timestampString = "508414396.695877"
+            timestampString = "510065236.731906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "sentGamePlayingInfoNoti()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1344,22 +1168,6 @@
             startingLineNumber = "67"
             endingLineNumber = "67"
             landmarkName = "init(frame:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508504064.846865"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "lazyInitBehaviors()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1450,11 +1258,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DropProjectsGame/FallingObjectDatasource.swift"
-            timestampString = "509766133.151911"
+            timestampString = "510143946.519648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "collisionBehavior(_:endedContactFor:withBoundaryIdentifier:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1488,22 +1296,6 @@
             startingLineNumber = "173"
             endingLineNumber = "173"
             landmarkName = "createExplode(location:color:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DropProjectsGame/BreakBehaviorDataSource.swift"
-            timestampString = "508504064.846865"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "lazyInitBehaviors()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

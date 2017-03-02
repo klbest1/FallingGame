@@ -14,7 +14,7 @@
 			<key>level</key>
 			<integer>1</integer>
 			<key>numberOfBalls</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>numberOfDrops</key>
 			<real>1000</real>
 			<key>fallingSpeed</key>
@@ -32,7 +32,7 @@
 			<key>level</key>
 			<integer>2</integer>
 			<key>numberOfBalls</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>numberOfDrops</key>
 			<real>2000</real>
 			<key>fallingSpeed</key>
@@ -54,7 +54,7 @@
 			<key>numberOfDrops</key>
 			<real>3000</real>
 			<key>fallingSpeed</key>
-			<integer>3</integer>
+			<real>2.5</real>
 			<key>scoreGoal</key>
 			<integer>300</integer>
 		</dict>
@@ -68,11 +68,11 @@
 			<key>level</key>
 			<integer>4</integer>
 			<key>numberOfBalls</key>
-			<integer>2</integer>
+			<integer>3</integer>
 			<key>numberOfDrops</key>
 			<real>4000</real>
 			<key>fallingSpeed</key>
-			<real>3.5</real>
+			<real>2.8</real>
 			<key>scoreGoal</key>
 			<integer>1000</integer>
 		</dict>

@@ -22,7 +22,7 @@ extension NSDictionary{
 
                 let keys = dicOrigin.keys;
                 
-                for var key in keys
+                for  key in keys
                 {
                     if key != classNameKey {
                         var value = dicOrigin[key];

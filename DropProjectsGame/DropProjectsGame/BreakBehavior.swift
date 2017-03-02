@@ -9,7 +9,7 @@
 import UIKit
 
 class BreakBehavior: UIDynamicBehavior {
-    var pushBehavior:UIPushBehavior? = nil
+//    var pushBehavior:UIPushBehavior? = nil
     
 
     var collisionBehavior:UICollisionBehavior = {
@@ -36,24 +36,24 @@ class BreakBehavior: UIDynamicBehavior {
 
     }
     
-    func addPush(item:UIView,angle:Double,magnitude:CGFloat) {
+    func addPush(item:BallView) {
 //        print("angle:\(angle)")
-        if(pushBehavior != nil){
-            self.removeChildBehavior(self.pushBehavior!);
-            self.pushBehavior = nil
+        if(item.pushBehavior != nil){
+            self.removeChildBehavior(item.pushBehavior!);
+            item.pushBehavior = nil
         }
-        pushBehavior = UIPushBehavior(items: [item], mode: UIPushBehaviorMode.instantaneous)
-        self.addChildBehavior(pushBehavior!)
+        item.pushBehavior = UIPushBehavior(items: [item], mode: UIPushBehaviorMode.instantaneous)
+        self.addChildBehavior(item.pushBehavior!)
         
-        pushBehavior?.magnitude = magnitude;
-        pushBehavior!.angle = CGFloat(angle);
+        item.pushBehavior?.magnitude = item.pushMagnitude;
+        item.pushBehavior!.angle = CGFloat(item.pushAngle);
         //笔记，区别
-        pushBehavior!.action = { [unowned self] in
-            if(self.pushBehavior != nil){
-                if(!self.pushBehavior!.active){
-                    self.pushBehavior?.removeItem(item)
-                    self.removeChildBehavior(self.pushBehavior!);
-                    self.pushBehavior = nil
+        item.pushBehavior!.action = { [unowned self] in
+            if(item.pushBehavior != nil){
+                if(!item.pushBehavior!.active){
+                    item.pushBehavior?.removeItem(item)
+                    self.removeChildBehavior(item.pushBehavior!);
+                    item.pushBehavior = nil
                 }
                 
             }

@@ -16,6 +16,12 @@ struct  BallSize {
 
 class BallView: UIView {
     
+    var touchedPaddle = false
+    var pushAngle:Double = M_PI_4*3
+    var pushMagnitude:CGFloat = 1.8
+    var firstPushBallDown:Bool = false
+    var pushBehavior:UIPushBehavior? = nil
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = BallSize.width/2;

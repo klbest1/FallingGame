@@ -56,15 +56,21 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     }
     
     func lazyInitBehavior()  {
+      
+        
         let behavior:FallingObjectBehavior = FallingObjectBehavior()
         behavior.collisionBehavior.collisionDelegate = self;
         //设定球下落的速度
         behavior.setfallingSpeed(speed: fallingSetting.fallingSpeed!)
         behavior.gravityBehavior.action = {[unowned self] in
             behavior.removeBundry()
-            let path = UIBezierPath(ovalIn: self.gameView!.ballView!.frame);
-            behavior.addBundry(name:PathNames.ballBundaryName as NSCopying, path: path)
-            for var dropItem in self.drops{
+            //把所有的球加入边界
+            for  ballView:BallView in (self.gameView?.ballViews)!{
+                let path = UIBezierPath(ovalIn: ballView.frame);
+                let ballBudayName = String(format: "%@_%d", PathNames.ballBundaryName,(self.gameView?.ballViews.index(of: ballView))!)
+                behavior.addBundry(name:ballBudayName as NSCopying, path: path)
+            }
+            for  dropItem in self.drops{
                 if (dropItem as UIView).frame.origin.y > (self.sceneHight - (self.gameView?.paddleSize.height)! - 20 - (self.dropSize?.height)!) {
                     print("到达底边界！\((dropItem as UIView).frame)")
                     self.delegate?.didCollisionWithTheBottomBundary(sender: self)
@@ -147,7 +153,7 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     
     /*刷新游戏*/
     func resetAnimator() {
-        for var item in drops{
+        for  item in drops{
             item.removeFromSuperview()
         }
         drops.removeAll()
@@ -156,7 +162,7 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     }
    
     func collisionBehavior(_ behavior: UICollisionBehavior, endedContactFor item: UIDynamicItem, withBoundaryIdentifier identifier:  NSCopying?){
-         if(identifier != nil) , identifier as! String == PathNames.ballBundaryName{
+         if(identifier != nil) , (identifier as! String).hasPrefix(PathNames.ballBundaryName) {
             let toucheditem:Drop = item as! Drop
             //保证只执行一次
             toucheditem.backgroundColor = UIColor.init(cgColor: toucheditem.layer.borderColor!)

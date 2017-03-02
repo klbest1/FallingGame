@@ -23,7 +23,7 @@ class LevelManager: NSObject {
         let levelDic = NSDictionary(contentsOfFile: path!)
         levelResponse = NSDictionary.decodeDic(dicOrigin: levelDic as! [String : AnyObject]) as? LevelResponse
         if levelResponse != nil {
-            for var item in (levelResponse?.results)!{
+            for  item in (levelResponse?.results)!{
                 print("Plist中的results:\(item.numberOfDrops)")
             }
         }

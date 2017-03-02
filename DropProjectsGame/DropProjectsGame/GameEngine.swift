@@ -36,8 +36,8 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
             //这里先写死，随后要改成根据用户来获取
             currentLevelIndex = Int((UserManager.share.currentUser.result?.level)!)
             currentLevel = (LevelManager.share.levelResponse?.results?[currentLevelIndex])!
-            gameSetting()
             self.breakBehaviorDataSource = BreakBehaviorDataSource(referenceView:self.referenceView!);
+            gameSetting()
             fallingBehaviorDataSource = FallingObjectDatasource(referenceView: self.referenceView!, fallingDropsSetting: self.fallingDropsSetting)
             fallingBehaviorDataSource?.delegate = self
             breakBehaviorDataSource?.delegate = self
@@ -49,11 +49,13 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
         super.init()
         
     }
-    
+    //游戏设置
     func gameSetting()  {
         fallingDropsSetting.fallingSpeed = currentLevel!.fallingSpeed! as Float?
         fallingDropsSetting.numberOfDrops = currentLevel!.numberOfBalls! as Int?;
+        breakBehaviorDataSource?.numberOfBallsInDifferentLevel = currentLevel!.numberOfBalls as! Int
     }
+    
     
     func gameStart(withReferenceView _referenceView:GameSceneView) {
         if referenceView == nil {

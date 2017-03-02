@@ -41,12 +41,19 @@ class GameSceneView: BaseView,UICollisionBehaviorDelegate {
         gameEngin.breakBehaviorDataSource!.addBundary(name: PathNames.paddleBundryName, path: path)
     }
     
-    func  addBallView()  {
-        if ballView == nil {
-            ballView = BallView(frame: CGRect(origin: CGPoint(x:self.width-BallSize.width/2 ,y:self.center.y - BallSize.width/2), size: CGSize(width: BallSize.width, height: BallSize.width)))
-
+    func  removeBallViews()  {
+        for view:UIView in ballViews{
+            view.removeFromSuperview()
         }
-        self.addSubview(ballView!);
+        ballViews.removeAll()
+        ballsNeedPushAtStart.removeAll()
+    }
+    
+    func  addBallView()  {
+        let  ballView:BallView = BallView(frame: CGRect(origin: CGPoint(x:self.width-BallSize.width/2 ,y:self.center.y - BallSize.width/2), size: CGSize(width: BallSize.width, height: BallSize.width)))
+        ballViews.append(ballView)
+        ballsNeedPushAtStart.append(ballView)
+        self.addSubview(ballView);
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -72,7 +79,7 @@ class GameSceneView: BaseView,UICollisionBehaviorDelegate {
    
     
     var paddleSize:CGSize{
-        let size = CGSize(width: 80, height: 20);
+        let size = CGSize(width: 80 * 2, height: 20);
         return size;
     }
     
@@ -80,14 +87,14 @@ class GameSceneView: BaseView,UICollisionBehaviorDelegate {
     
     var paddleView:UIView? = nil;
     
-    var ballView:BallView?
-    
+    public var ballViews:[BallView] = [BallView]()
+    public var ballsNeedPushAtStart:[BallView] = [BallView]()
 
     /*------------方法-------------*/
     
     override func layoutSubviews() {
      super.layoutSubviews()
-        
+      
     }
     //200 45du
     // X /200
@@ -95,19 +102,18 @@ class GameSceneView: BaseView,UICollisionBehaviorDelegate {
     // > 1 :PI/4  - x / 200  * 0.008
     
     func handPan(_ sender:UIPanGestureRecognizer)  {
+       
         let state = sender.state;
         let touchPoint:CGPoint = sender.location(in: self);
         var lastPoint:CGPoint = CGPoint.zero
-        var fistPoint:CGPoint = (ballView?.center)!
+        var fistPoint:CGPoint? = gameEngin.breakBehaviorDataSource?.ballsReadyToPush.first?.center
         switch state {
         case .began:
             fistPoint = touchPoint;
             break;
         case .changed:
             lastPoint = touchPoint;
-            //计算手指移动的距离
-            yFingerMovingDistance = fabs(Double(lastPoint.y - fistPoint.y))
-            let velocity = sender.velocity(in: self)
+          
              //计算PaddleView的x轴移动位置
             var touchX:CGFloat = touchPoint.x;
             if touchX < paddleSize.width / 2 {
@@ -120,9 +126,18 @@ class GameSceneView: BaseView,UICollisionBehaviorDelegate {
             
             let path:UIBezierPath = UIBezierPath.init(rect: paddleView!.frame);
             gameEngin.breakBehaviorDataSource!.addBundary(name: PathNames.paddleBundryName, path: path)
-            gameEngin.breakBehaviorDataSource!.pushAngle = checkAngle(firstPoint: fistPoint, lastPoint: lastPoint)
-            gameEngin.breakBehaviorDataSource!.pushMagnitude = checkingSpeed(velocity: velocity)
-//            print("velocity:\(velocity)")
+            
+            //计算球弹出的角度及强度
+            if (gameEngin.breakBehaviorDataSource?.ballsReadyToPush.count)! > 0{
+                let ballWillPush:BallView = (gameEngin.breakBehaviorDataSource?.ballsReadyToPush.first)! as BallView
+                //计算手指移动的距离
+                yFingerMovingDistance = fabs(Double(lastPoint.y - fistPoint!.y))
+                let velocity = sender.velocity(in: self)
+                ballWillPush.pushAngle = checkAngle(firstPoint: fistPoint!, lastPoint: lastPoint)
+                ballWillPush.pushMagnitude = checkingSpeed(velocity: velocity)
+                //            print("velocity:\(velocity)")
+            }
+          
             break;
         case .ended:
             if yFingerMovingDistance > 20  {
