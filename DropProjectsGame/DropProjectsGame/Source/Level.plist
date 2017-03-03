@@ -14,7 +14,7 @@
 			<key>level</key>
 			<integer>1</integer>
 			<key>numberOfBalls</key>
-			<integer>2</integer>
+			<integer>1</integer>
 			<key>numberOfDrops</key>
 			<real>1000</real>
 			<key>fallingSpeed</key>

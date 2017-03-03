@@ -38,6 +38,7 @@ class BreakBehavior: UIDynamicBehavior {
     
     func addPush(item:BallView) {
 //        print("angle:\(angle)")
+        print(gravityBehavior.gravityDirection)
         if(item.pushBehavior != nil){
             self.removeChildBehavior(item.pushBehavior!);
             item.pushBehavior = nil
@@ -89,6 +90,10 @@ class BreakBehavior: UIDynamicBehavior {
     func removeBundry(name:NSCopying) {
         collisionBehavior.removeAllBoundaries();
 
+    }
+    
+    func setfallingSpeed(speed:Float) {
+        gravityBehavior.gravityDirection = CGVector(dx: 0, dy:CGFloat(defaultYspeedItem*speed))
     }
 }
 

@@ -21,16 +21,21 @@ class BallView: UIView {
     var pushMagnitude:CGFloat = 1.8
     var firstPushBallDown:Bool = false
     var pushBehavior:UIPushBehavior? = nil
-
+    var breakObjectBehavior:BreakBehavior?
+    var backGroundView:UIImageView?
+    var index:Int?{
+        didSet{
+           let backGroudImageName = String(format: "ball_%d.png", index!)
+           backGroundView?.image =  UIImage.init(named: backGroudImageName)
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = BallSize.width/2;
         self.layer.masksToBounds = true;
         self.backgroundColor = UIColor.white
-        
-        let backGroundView =  UIImageView(image: UIImage.init(named: "ball.png"))
-        backGroundView.frame = CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width + 3, height:  frame.size.height + 3))
-        self.addSubview(backGroundView)
+        backGroundView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: frame.size.width + 3, height:  frame.size.height + 3)))
+        self.addSubview(backGroundView!)
     }
     
     required init?(coder aDecoder: NSCoder) {

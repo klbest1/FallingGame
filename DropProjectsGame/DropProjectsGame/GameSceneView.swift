@@ -15,6 +15,8 @@ class GameSceneView: BaseView,UICollisionBehaviorDelegate {
     /*-------初始化------*/
     override init(frame: CGRect) {
         super.init(frame: frame)
+        paddleSize = CGSize(width: 80, height: 20);
+
         self.addGestureRecognizer(panGuesture);
         let backGroundImageView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: frame.size))
         backGroundImageView.image = UIImage(named: "Background_Diffuse")
@@ -52,6 +54,7 @@ class GameSceneView: BaseView,UICollisionBehaviorDelegate {
     func  addBallView()  {
         let  ballView:BallView = BallView(frame: CGRect(origin: CGPoint(x:self.width-BallSize.width/2 ,y:self.center.y - BallSize.width/2), size: CGSize(width: BallSize.width, height: BallSize.width)))
         ballViews.append(ballView)
+        ballView.index = ballViews.index(of: ballView)
         ballsNeedPushAtStart.append(ballView)
         self.addSubview(ballView);
     }
@@ -78,9 +81,11 @@ class GameSceneView: BaseView,UICollisionBehaviorDelegate {
     
    
     
-    var paddleSize:CGSize{
-        let size = CGSize(width: 80 * 2, height: 20);
-        return size;
+    var paddleSize:CGSize!{
+        didSet{
+            paddleView?.frame.size = paddleSize
+            print(paddleSize)
+        }
     }
     
     var yFingerMovingDistance:Double = 0
