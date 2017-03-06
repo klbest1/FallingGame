@@ -28,6 +28,11 @@
 		A08B43501E224DCA00D5AF7E /* BreakBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08B434F1E224DCA00D5AF7E /* BreakBehavior.swift */; };
 		A08BA0451E46B13D00019428 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08BA0441E46B13D00019428 /* UserManager.swift */; };
 		A08D4D781E376BAF005C342C /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08D4D771E376BAF005C342C /* GameEngine.swift */; };
+		A08F6F251E6BD2A6005C99A0 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08F6F241E6BD2A6005C99A0 /* Share.swift */; };
+		A08F6F271E6BDF0A005C99A0 /* ball_2.png in Resources */ = {isa = PBXBuildFile; fileRef = A08F6F261E6BDF0A005C99A0 /* ball_2.png */; };
+		A08F6F2D1E6BFB8A005C99A0 /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A08F6F2C1E6BFB8A005C99A0 /* Admin.storyboard */; };
+		A08F6F301E6BFCA5005C99A0 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08F6F2E1E6BFCA5005C99A0 /* AdminViewController.swift */; };
+		A08F6F331E6C2130005C99A0 /* ball120.png in Resources */ = {isa = PBXBuildFile; fileRef = A08F6F321E6C2130005C99A0 /* ball120.png */; };
 		A091A6BF1E3E18A10025D2C2 /* backGroundMusic_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A091A6B71E3E18A10025D2C2 /* backGroundMusic_1.mp3 */; };
 		A091A6C01E3E18A10025D2C2 /* backGroundMusic_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A091A6B81E3E18A10025D2C2 /* backGroundMusic_2.mp3 */; };
 		A091A6C11E3E18A10025D2C2 /* backGroundMusic_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A091A6B91E3E18A10025D2C2 /* backGroundMusic_3.mp3 */; };
@@ -130,6 +135,11 @@
 		A08B434F1E224DCA00D5AF7E /* BreakBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BreakBehavior.swift; sourceTree = "<group>"; };
 		A08BA0441E46B13D00019428 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A08D4D771E376BAF005C342C /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
+		A08F6F241E6BD2A6005C99A0 /* Share.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
+		A08F6F261E6BDF0A005C99A0 /* ball_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball_2.png; sourceTree = "<group>"; };
+		A08F6F2C1E6BFB8A005C99A0 /* Admin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
+		A08F6F2E1E6BFCA5005C99A0 /* AdminViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
+		A08F6F321E6C2130005C99A0 /* ball120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ball120.png; sourceTree = "<group>"; };
 		A091A6B71E3E18A10025D2C2 /* backGroundMusic_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backGroundMusic_1.mp3; sourceTree = "<group>"; };
 		A091A6B81E3E18A10025D2C2 /* backGroundMusic_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backGroundMusic_2.mp3; sourceTree = "<group>"; };
 		A091A6B91E3E18A10025D2C2 /* backGroundMusic_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backGroundMusic_3.mp3; sourceTree = "<group>"; };
@@ -262,7 +272,9 @@
 		A00151B71E40763400398B58 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				A08F6F321E6C2130005C99A0 /* ball120.png */,
 				A0E2A64F1E699976007EC2A4 /* ball_1.png */,
+				A08F6F261E6BDF0A005C99A0 /* ball_2.png */,
 				A0BEFF911E63D78200E8EE5F /* ballBg.png */,
 				A0BEFF8F1E63D64F00E8EE5F /* logo1.png */,
 				A0BEFF8B1E63CC8600E8EE5F /* logo.png */,
@@ -347,6 +359,8 @@
 				A0E9F8A81E5D9747002C270C /* ShareView.xib */,
 				A094C2CD1E626E2400FAD0C1 /* GameRuleView.xib */,
 				A094C2CF1E627F0B00FAD0C1 /* GameRuleView.swift */,
+				A08F6F2C1E6BFB8A005C99A0 /* Admin.storyboard */,
+				A08F6F2E1E6BFCA5005C99A0 /* AdminViewController.swift */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -366,6 +380,7 @@
 				A0C27A131E438A8300FEC1C1 /* GameMusicEffectsDatasource.swift */,
 				A08BA0441E46B13D00019428 /* UserManager.swift */,
 				A0FC0A551E49CD24002D62FC /* TitleObject.swift */,
+				A08F6F241E6BD2A6005C99A0 /* Share.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -581,6 +596,7 @@
 			files = (
 				A091A6C11E3E18A10025D2C2 /* backGroundMusic_3.mp3 in Resources */,
 				A00505A11E5F0AC800641C6A /* edit.png in Resources */,
+				A08F6F2D1E6BFB8A005C99A0 /* Admin.storyboard in Resources */,
 				A094C2F11E62D76000FAD0C1 /* ball_0.png in Resources */,
 				A00505991E5EEA5800641C6A /* share.png in Resources */,
 				A0FC0A591E49D0EF002D62FC /* snow.ttf in Resources */,
@@ -604,6 +620,7 @@
 				A094C2D91E62963200FAD0C1 /* Localizable.strings in Resources */,
 				A091A6C81E3E1A720025D2C2 /* backGroundMusic_4.mp3 in Resources */,
 				A0E26C491E46DE5600E1A652 /* head.png in Resources */,
+				A08F6F271E6BDF0A005C99A0 /* ball_2.png in Resources */,
 				A09413AC1E4F2B2A002FD070 /* start.png in Resources */,
 				A0B888901E4CA84A00B8A980 /* DazHeart.png in Resources */,
 				A0E9F8AC1E5DA35A002C270C /* weixin@2x.png in Resources */,
@@ -613,6 +630,7 @@
 				A0A59CD71E5A94AC00FD58E3 /* README.txt in Resources */,
 				A091A6C31E3E18A10025D2C2 /* collision.wav in Resources */,
 				A0E9F8B51E5DA7CB002C270C /* pengyouquan@3x.png in Resources */,
+				A08F6F331E6C2130005C99A0 /* ball120.png in Resources */,
 				A094C2CE1E626E2400FAD0C1 /* GameRuleView.xib in Resources */,
 				A09413AB1E4F2B2A002FD070 /* pause.png in Resources */,
 				A0964A911E4DDD1A0006A905 /* Background_Diffuse.png in Resources */,
@@ -680,6 +698,7 @@
 			files = (
 				A0BDD26F1E25E775003FC07B /* BreakBehaviorDataSource.swift in Sources */,
 				A0A59CE11E5A94C900FD58E3 /* WXApiResponseHandler.m in Sources */,
+				A08F6F251E6BD2A6005C99A0 /* Share.swift in Sources */,
 				A0E9F8A71E5D96D1002C270C /* ShareView.swift in Sources */,
 				A0137A0D1E570CB000416A5C /* RankingView.swift in Sources */,
 				A0B519CB1E271E99006CDA4A /* UIkit Extension.swift in Sources */,
@@ -725,6 +744,7 @@
 				A093942F1E32F50F006C7E2E /* Drop.xcdatamodeld in Sources */,
 				A0137A111E571FAB00416A5C /* BaseView.swift in Sources */,
 				A0C27A121E43883D00FEC1C1 /* String Extension.swift in Sources */,
+				A08F6F301E6BFCA5005C99A0 /* AdminViewController.swift in Sources */,
 				A0137A0B1E570C6500416A5C /* RankingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -889,6 +909,7 @@
 					"-Objc",
 					"-all_load",
 				);
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lin.dropball;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -941,10 +962,12 @@
 					"-Objc",
 					"-all_load",
 				);
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lin.dropball;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "DropProjectsGame/-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -29,12 +29,11 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
     private var dynamicAnimator :UIDynamicAnimator?
     private var totalDrops:Int = 0
     
-    private var numberOfDrops:Int = 400;
     private var fallingSpeed:Float = 0
     public var numberOfDropsPerRow = 10;
     public var drops:[UIView] = [UIView]()
     public var fallingObjectBehavior:FallingObjectBehavior?
-    private var fallingSetting:FallingDropSetting!
+    public var fallingSetting:FallingDropSetting!
     private var currentScore:Int = 0
     
     public weak var delegate:FallingObjectDatasourceDelegate?
@@ -51,8 +50,6 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
         
 //431 - 40 - 38  353
         //设定下落球的总数
-        numberOfDrops = fallingDropsSetting.numberOfDrops!
-        fallingSetting = fallingDropsSetting
     }
     
     func lazyInitBehavior()  {
@@ -101,7 +98,7 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
             }
         }
 
-        if self.numberOfDrops == totalDrops {
+        if fallingSetting.numberOfDrops == totalDrops {
             dropTimer?.invalidate()
             return
         }

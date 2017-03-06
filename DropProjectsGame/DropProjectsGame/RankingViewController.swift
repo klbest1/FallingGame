@@ -15,7 +15,8 @@ class RankingViewController: UIViewController,UITableViewDataSource,UIAlertViewD
     var shareView:ShareView?
     var currenScene:WXScene = WXSceneTimeline
     var activiView:UIActivityIndicatorView = UIActivityIndicatorView()
-    
+    var shareData:Share = Share()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
@@ -33,6 +34,7 @@ class RankingViewController: UIViewController,UITableViewDataSource,UIAlertViewD
         rankingView = RankingView(frame: CGRect(origin: CGPoint.zero, size: self.view.frame.size))
         rankingView.tableView.dataSource = self
         rankingView.editButton.addTarget(self, action: #selector(editTouched), for: .touchUpInside)
+        rankingView.adminButton?.addTarget(self, action: #selector(adminClicked), for: .touchUpInside);
 
         self.view.addSubview(rankingView)
         
@@ -50,12 +52,17 @@ class RankingViewController: UIViewController,UITableViewDataSource,UIAlertViewD
                     self.rankingView.myNameLabel.text = user?.accountName
                     if(user?.result?.ranking != nil){
                         self.rankingView.myRanking.text = String(format: "%d", (user?.result?.ranking)!)
-                        self.rankingView.myScore.text = String(format: "%d", (user?.result?.score)!)
+                        self.rankingView.myScore.text = String(format: "%d(关卡:%d)", (user?.result?.score)!,(user?.result?.level)! + 1)
                     }
                 }
                 self.activiView.stopAnimating()
             }
         }
+        
+        shareData.getShareData { (shareIfo) in
+            self.shareData = shareIfo
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,14 +95,14 @@ class RankingViewController: UIViewController,UITableViewDataSource,UIAlertViewD
     
     func sendToFriend() {
         currenScene = WXSceneSession
-        let thumbImage:UIImage  =  UIImage.init(named: "head.png")!;
-        WXApiRequestHandler.sendLinkURL(kLinkURL, tagName: kLinkTagName, title: kLinkTitle, description: kLinkDescription, thumbImage: thumbImage, in: currenScene)
+        let thumbImage:UIImage  =  UIImage.init(named: shareData.linkImgName)!;
+        WXApiRequestHandler.sendLinkURL(shareData.linkURL , tagName: shareData.linkTagName, title: shareData.linkTitle, description: shareData.linkDesc, thumbImage: thumbImage, in: currenScene)
     }
     
     func shareToWeiChatMoment()  {
         currenScene = WXSceneTimeline
-        let thumbImage:UIImage  =  UIImage.init(named: "head.png")!;
-        WXApiRequestHandler.sendLinkURL(kLinkURL, tagName: kLinkTagName, title: kLinkTitle, description: kLinkDescription, thumbImage: thumbImage, in: currenScene)
+        let thumbImage:UIImage  =  UIImage.init(named: shareData.linkImgName)!;
+        WXApiRequestHandler.sendLinkURL(shareData.linkURL, tagName: shareData.linkTagName, title: shareData.linkTitle, description: shareData.linkDesc, thumbImage: thumbImage, in: currenScene)
         
     }
     
@@ -141,6 +148,13 @@ class RankingViewController: UIViewController,UITableViewDataSource,UIAlertViewD
         }
     }
     
+    func adminClicked()  {
+        let stBoard = UIStoryboard(name: "Admin", bundle: nil)
+        let adminCtrl = stBoard.instantiateViewController(withIdentifier: "admin")
+        self.present(adminCtrl, animated: true) { 
+            
+        }
+    }
     
     /*
     // MARK: - Navigation

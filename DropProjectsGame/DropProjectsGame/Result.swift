@@ -9,10 +9,11 @@
 import UIKit
 
 public class Result: AVObject {
+    //初始值
      public var score: Int32 = 0
      public var level: Int16 = 0
      public var passLevel:Bool = false
-    // 注意
+    // 注意 Number必须给初始值
      public var ranking:Int32 = 0
      public var user:GameUser?
     

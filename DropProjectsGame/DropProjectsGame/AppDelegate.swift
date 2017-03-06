@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AVOSCloud.setApplicationId("I4bnta9SCTCkgSYnQCPmhYoG-gzGzoHsz", clientKey: "WyARJ12gJOQCjtWWFFOgeSzW")
         GameUser.registerSubclass()
         Result.registerSubclass()
+        Share.registerSubclass()
         
         WXApi.registerApp(kWeiChatAppID, enableMTA: true)
         //向微信注册支持的文件类型

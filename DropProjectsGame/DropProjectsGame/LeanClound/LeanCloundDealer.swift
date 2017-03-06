@@ -31,28 +31,30 @@ class LeanCloundDealer: NSObject {
                     updateCompelete(success)
                 })
             }else{
-                // 第一个参数是 className，第二个参数是 objectId
                 if let downLoadUser = objects?.first as? GameUser {
-                   
                     let query : AVQuery = Result.query()
                     query.limit = 1
-                    let queryedResult = query.getObjectWithId((downLoadUser.result?.objectId)!) as? Result
-                  
-                    //游戏得分超过最高分才更新
-                    if(queryedResult != nil && (queryedResult?.score)! < (user.result?.score)!) {
-                        
-                        let recordUser:GameUser = GameUser.init(className: "GameUser", objectId: downLoadUser.objectId!)
-                        //笔记，赋值操作不会复制内存地址，
-                        //笔记，safeBlock
-                        recordUser.result = Result.init(className: "Result", objectId: (downLoadUser.result?.objectId)!)
-                        recordUser.profileImageUrl = (downLoadUser.profileImageUrl as! NSCopying) as? String
-                        recordUser.updateUser(newUser: UserManager.share.currentUser,compelete: { (success)in
-                            updateCompelete(success)
-                            
-                        })
-                    }else{
-                        updateCompelete(true)
-                    }
+                    query.getObjectInBackground(withId: (downLoadUser.result?.objectId)!, block: { (object, error) in
+                        if(object != nil){
+                            let queryedResult = object as? Result
+                            //游戏得分超过最高分才更新
+                            if(queryedResult != nil && (queryedResult?.score)! < (user.result?.score)!) {
+                                
+                                let recordUser:GameUser = GameUser.init(className: "GameUser", objectId: downLoadUser.objectId!)
+                                //笔记，赋值操作不会复制内存地址，
+                                //笔记，safeBlock
+                                recordUser.result = Result.init(className: "Result", objectId: (downLoadUser.result?.objectId)!)
+                                recordUser.profileImageUrl = (downLoadUser.profileImageUrl as! NSCopying) as? String
+                                recordUser.updateUser(newUser: UserManager.share.currentUser,compelete: { (success)in
+                                    updateCompelete(success)
+                                    
+                                })
+                            }else{
+                                updateCompelete(true)
+                            }
+                        }
+                    })
+                   
                 }
             }
         }

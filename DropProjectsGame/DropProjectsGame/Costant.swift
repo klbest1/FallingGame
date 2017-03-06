@@ -6,5 +6,9 @@
 //  Copyright © 2017年 lin kang. All rights reserved.
 //
 
-import UIKit
 
+#if DEBUG
+  let  isDebug = true
+#else
+  let   isDebug = false
+#endif

@@ -39,15 +39,26 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
            
             for itemDy in behavior.collisionBehavior.items{
                 let item:BallView = itemDy as! BallView
-                print("item.y\(item.frame)")
-                if( item.frame.origin.y > UIView.screenHight){
-                    self.stopAnimator()
-                    self.resetBallDynamic()
+//                print("item.y\(item.frame)")
+                //球已经被挤出边界了，重新设置
+                if(item.frame.origin.x < -item.frame.size.width * 1.5 ||
+                    item.frame.origin.x > (self.gameView?.frame.size.width)! + 10){
+                    self.unInitChosedBallBehavior(ballView: item)
+                    
+                    self.currentNumberOfBalls -= 1;
+                    self.gameView!.removeChosedBallView(ballView: item)
+                    //加上一个新球
+                    self.gameView!.addBallViewAtIndex(index: item.index!)
+                    //重新添加行为
+                    self.startAnimator()
                 }
                 
-                let emitatePoint = CGPoint(x: item.frame.origin.x, y: self.gameView!.center.y)
+                //判断是否到达拍子的位置
+                let emitatePoint = CGPoint(x: item.frame.origin.x, y: self.gameView!.paddleView!.center.y)
                 let isInthePaddleRange:Bool = self.gameView!.paddleView!.frame.contains(emitatePoint)
-                if(Int(item.frame.origin.y) > Int(self.gameView!.paddleView!.frame.origin.y - BallSize.width - 3) && isInthePaddleRange){
+//                print("item:\(item.frame)")
+//                print("border:\(self.gameView!.paddleView!.frame.origin.y - BallSize.width - 3)")
+                if(Int(item.frame.origin.y) > Int(self.gameView!.paddleView!.frame.origin.y - BallSize.width - 7) && isInthePaddleRange){
                     //                print("item.frame.origin.y:\(item.frame.origin.y)");
                     item.touchedPaddle = true;
                     if(!self.ballsReadyToPush.contains(item)){
@@ -58,7 +69,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
                         self.smallPush()
                     }
                 }
-                //            print("item:\(item.frame)")
+                //判断球是否到达底边界
                 if( item.frame.origin.y >=  (self.gameView!.hight - BallSize.width)){
                     self.delegate?.didBallfallingOnTheGround(sender: self)
                 }
@@ -70,57 +81,66 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
 //            let item:BallView = behavior.gravityBehavior.items.first as! BallView;
             for itemDy:UIDynamicItem in behavior.gravityBehavior.items{
                 let item = itemDy as! BallView
-//                if(Int(item.frame.origin.y) == Int(self.gameView!.paddleView!.frame.origin.y - BallSize.width - 6)){
-//                    //                print("item.frame.origin.y:\(item.frame.origin.y)");
-//                    item.touchedPaddle = true;
-//                    if(!self.ballsReadyToPush.contains(item)){
-//                        self.ballsReadyToPush.insert(item, at: 0)
-//                    }
-//                    //第一次接触板时让球停下
-//                    if (item.firstPushBallDown )  {
-//                        self.smallPush()
-//                    }
-//                }
-                //            print("item:\(item.frame)")
-                if( item.frame.origin.y >=  (self.gameView!.hight - BallSize.width)){
+//                print("item:\(item.frame)")
+//                print("border:\(self.gameView!.hight - BallSize.width)")
+                
+                //判断是否到达拍子的位置
+                let emitatePoint = CGPoint(x: item.frame.origin.x, y: self.gameView!.paddleView!.center.y)
+                let isInthePaddleRange:Bool = self.gameView!.paddleView!.frame.contains(emitatePoint)
+                if(Int(item.frame.origin.y) > Int(self.gameView!.paddleView!.frame.origin.y - BallSize.width - 7) && isInthePaddleRange){
+                    item.touchedPaddle = true;
+                    if(!self.ballsReadyToPush.contains(item)){
+                        self.ballsReadyToPush.insert(item, at: 0)
+                    }
+                }
+
+                //判断是否到达边界
+                if( item.frame.origin.y >=  (self.gameView!.hight - BallSize.width - 3)){
                     self.delegate?.didBallfallingOnTheGround(sender: self)
                 }
  
             }
                 
         }
-        //设置下落速度
-        if numberOfBallsInDifferentLevel > 1 {
-            behavior.setfallingSpeed(speed: 1)
-        }else{
-            behavior.setfallingSpeed(speed: 100/4)
-        }
-        
+      
         let ballView = gameView!.ballsNeedPushAtStart.first
         ballView?.breakObjectBehavior = behavior;
         dynamicBreakerAnimator!.addBehavior(behavior)
     }
-    
+    //取消固定球的行为
+    func unInitChosedBallBehavior(ballView:BallView)  {
+        let index = ballsReadyToPush.index(of: ballView)
+        if index != nil{
+            ballsReadyToPush.remove(at: index!)
+        }
+        ballView.breakObjectBehavior?.removeItemsFromBehaviors()
+        ballView.breakObjectBehavior?.removeChildBehavior(ballView.breakObjectBehavior!.collisionBehavior)
+        ballView.breakObjectBehavior?.removeChildBehavior(ballView.breakObjectBehavior!.gravityBehavior)
+        dynamicBreakerAnimator!.removeBehavior(ballView.breakObjectBehavior!)
+        ballView.breakObjectBehavior = nil;
+    }
+    //取消所有球的行为
     func unInitBehavior()  {
         ballsReadyToPush.removeAll()
         for balView in (gameView!.ballViews){
             balView.breakObjectBehavior?.removeItemsFromBehaviors()
             balView.breakObjectBehavior?.removeChildBehavior(balView.breakObjectBehavior!.collisionBehavior)
             balView.breakObjectBehavior?.removeChildBehavior(balView.breakObjectBehavior!.gravityBehavior)
-            dynamicBreakerAnimator!.removeBehavior(balView.breakObjectBehavior!)
+            if balView.breakObjectBehavior != nil {
+                dynamicBreakerAnimator!.removeBehavior(balView.breakObjectBehavior!)
+            }
             balView.breakObjectBehavior = nil;
         }
         dynamicBreakerAnimator!.removeAllBehaviors()
     }
     
-    func initBallBehaviors(){
+    func addBallToBehaviors(){
         let path:UIBezierPath = UIBezierPath.init(rect: gameView!.paddleView!.frame);
         addBundary(name: PathNames.paddleBundryName , path: path)
         let ballView = gameView!.ballsNeedPushAtStart.first
 
         ballView?.breakObjectBehavior!.removeItemsFromBehaviors()
         ballView?.breakObjectBehavior!.addCollisionForItems(items: [ballView!]);
-        //刚出现的球已经被推出，所以需要移除
         ballView?.firstPushBallDown = true
         currentNumberOfBalls += 1
     }
@@ -128,38 +148,50 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     func addExtralBallIntoBehaviors()  {
         let extralBall:BallView = gameView!.ballsNeedPushAtStart.first!
         lazyInitBehaviors()
-        initBallBehaviors()
+        addBallToBehaviors()
         //向上推出，这样不必判断板子的位置
         extralBall.firstPushBallDown = false
         extralBall.pushAngle =  M_PI_4*(-3)
         extralBall.pushMagnitude = 2.8
         extralBall.breakObjectBehavior!.addPush(item:gameView!.ballsNeedPushAtStart.first!);
         gameView!.ballsNeedPushAtStart.removeFirst()
-
+        
+        if numberOfBallsInDifferentLevel > 1 {
+            for ball in (gameView?.ballViews)!{
+                if ball.breakObjectBehavior != nil{
+                    ball.breakObjectBehavior!.setfallingSpeed(speed: 1)
+                }
+            }
+        }
     }
-    
+    //添加额外的球
     func addExtralBall()  {
-        let delayTime = DispatchTime.now()
-        DispatchQueue.main.asyncAfter(deadline: delayTime, execute: {
-            self.gameView?.addBallView()
-            self.addExtralBallIntoBehaviors()
-        })
+        self.gameView?.addBallView()
+        self.addExtralBallIntoBehaviors()
     }
     
+    //重设所有的球
     func resetBallDynamic() {
+        currentNumberOfBalls = 0
         gameView!.removeBallViews()
         gameView!.addBallView()
         startAnimator()
     }
-    
+    //开始弹初始化的第一个球
     func startAnimator()  {
         lazyInitBehaviors()
-        initBallBehaviors();
+        addBallToBehaviors();
         let ballView:BallView = gameView!.ballsNeedPushAtStart.first!
         ballView.breakObjectBehavior!.addPush(item:ballView);
         gameView!.ballsNeedPushAtStart.removeFirst()
-        currentNumberOfBalls = 1
-        print("start.....")
+    }
+    
+    func initBall()  {
+        lazyInitBehaviors()
+        addBallToBehaviors();
+        let ballView:BallView = gameView!.ballsNeedPushAtStart.first!
+        ballView.breakObjectBehavior!.addPush(item:ballView);
+        gameView!.ballsNeedPushAtStart.removeFirst()
     }
     
     func stopAnimator() {
@@ -213,7 +245,9 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
     }
     
     func smallPush()  {
+        //设置下落速度
         let ball:BallView? = ballsReadyToPush.first
+
         ball?.pushAngle = -M_PI_4
         ball?.pushMagnitude = 0.8
         ball?.breakObjectBehavior?.addPush(item: ball!);

@@ -20,6 +20,7 @@ class RankingView: BaseView {
     var tableView:UITableView = UITableView()
     
     var editButton:UIButton!
+    var adminButton:UIButton?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,7 +78,14 @@ class RankingView: BaseView {
         myScore.font = UIFont(name: "MComicHKS-Medium", size: 24)
         myScore.textColor = UIColor.brown
         myScore.textAlignment = .left
+        myScore.adjustsFontSizeToFitWidth = true
         contentView.addSubview(myScore)
+        
+        adminButton = UIButton()
+        adminButton?.frame = CGRect(origin: CGPoint(x:myScore.frame.minX + 100,y:myScore.frame.minY - 10 ), size: CGSize(width: 80, height: 44))
+        adminButton?.setTitle("管理员", for: .normal)
+        adminButton?.isHidden = !(TARGET_OS_SIMULATOR != 0)
+        contentView.addSubview(adminButton!)
         
         ///************列表 表头的提示****************/
         let tableRankingHint:UILabel = UILabel(frame: CGRect(origin: CGPoint(x:50 + 5,y:myScoreHint.frame.maxY + 20), size: CGSize(width: 100, height: 20)))
@@ -88,7 +96,7 @@ class RankingView: BaseView {
         tableRankingHint.text = "排名"
         contentView.addSubview(tableRankingHint)
         
-        let tableNameHint:UILabel = UILabel(frame: CGRect(origin: CGPoint(x:tableRankingHint.frame.maxX + 10,y:myScoreHint.frame.maxY + 20), size: CGSize(width: 100, height: 20)))
+        let tableNameHint:UILabel = UILabel(frame: CGRect(origin: CGPoint(x:tableRankingHint.frame.maxX - 10,y:myScoreHint.frame.maxY  + 20), size: CGSize(width: 100, height: 20)))
         //笔记 使用自定义字体
         tableNameHint.font = UIFont.systemFont(ofSize: 20)
         tableNameHint.textColor = UIColor.white

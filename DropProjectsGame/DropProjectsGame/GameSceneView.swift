@@ -51,9 +51,22 @@ class GameSceneView: BaseView,UICollisionBehaviorDelegate {
         ballsNeedPushAtStart.removeAll()
     }
     
+    func removeChosedBallView(ballView:BallView)  {
+        ballView.removeFromSuperview()
+        ballViews.remove(at: ballViews.index(of: ballView)!)
+    }
+    
     func  addBallView()  {
         let  ballView:BallView = BallView(frame: CGRect(origin: CGPoint(x:self.width-BallSize.width/2 ,y:self.center.y - BallSize.width/2), size: CGSize(width: BallSize.width, height: BallSize.width)))
         ballViews.append(ballView)
+        ballView.index = ballViews.index(of: ballView)
+        ballsNeedPushAtStart.append(ballView)
+        self.addSubview(ballView);
+    }
+    
+    func addBallViewAtIndex(index:Int)  {
+        let  ballView:BallView = BallView(frame: CGRect(origin: CGPoint(x:self.width-BallSize.width/2 ,y:self.center.y - BallSize.width/2), size: CGSize(width: BallSize.width, height: BallSize.width)))
+        ballViews.insert(ballView, at: index)
         ballView.index = ballViews.index(of: ballView)
         ballsNeedPushAtStart.append(ballView)
         self.addSubview(ballView);

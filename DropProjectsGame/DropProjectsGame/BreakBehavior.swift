@@ -22,7 +22,6 @@ class BreakBehavior: UIDynamicBehavior {
 
     var gravityBehavior:UIGravityBehavior = {
         let gravity = UIGravityBehavior();
-        print("1一次")
         return gravity;
     }();
     
@@ -38,7 +37,6 @@ class BreakBehavior: UIDynamicBehavior {
     
     func addPush(item:BallView) {
 //        print("angle:\(angle)")
-        print(gravityBehavior.gravityDirection)
         if(item.pushBehavior != nil){
             self.removeChildBehavior(item.pushBehavior!);
             item.pushBehavior = nil

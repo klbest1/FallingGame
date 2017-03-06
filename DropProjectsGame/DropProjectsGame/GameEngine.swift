@@ -20,7 +20,8 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
         return shareInstance
     }
     
-    public var score:Int = 0
+    var score:Int = 0
+    var lastLevelScore:Int = 0
     private let musicDatasource:GameMusicEffectsDatasource = GameMusicEffectsDatasource()
     private let particleHander:ParticleHandler = ParticleHandler()
     
@@ -33,12 +34,11 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     
     var referenceView:GameSceneView? {
         didSet{
-            //这里先写死，随后要改成根据用户来获取
             currentLevelIndex = Int((UserManager.share.currentUser.result?.level)!)
             currentLevel = (LevelManager.share.levelResponse?.results?[currentLevelIndex])!
             self.breakBehaviorDataSource = BreakBehaviorDataSource(referenceView:self.referenceView!);
-            gameSetting()
             fallingBehaviorDataSource = FallingObjectDatasource(referenceView: self.referenceView!, fallingDropsSetting: self.fallingDropsSetting)
+            gameSetting()
             fallingBehaviorDataSource?.delegate = self
             breakBehaviorDataSource?.delegate = self
             
@@ -53,6 +53,7 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     func gameSetting()  {
         fallingDropsSetting.fallingSpeed = currentLevel!.fallingSpeed! as Float?
         fallingDropsSetting.numberOfDrops = currentLevel!.numberOfBalls! as Int?;
+        fallingBehaviorDataSource?.fallingSetting = fallingDropsSetting
         breakBehaviorDataSource?.numberOfBallsInDifferentLevel = currentLevel!.numberOfBalls as! Int
     }
     
@@ -69,9 +70,9 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     
     func sentGamePlayingInfoNoti() {
         let titleObject = TitleObject()
-        titleObject.currenScore = score
+        titleObject.currenScore = lastLevelScore + score
         titleObject.currentLevel = currentLevelIndex
-        titleObject.goalScore = currentLevel?.scoreGoal! as Int?
+        titleObject.goalScore = currentLevel?.scoreGoal! as! Int + lastLevelScore
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: handleGamePlayingNotifiName), object: titleObject)
 
     }
@@ -92,6 +93,9 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     
     func gameRefresh()  {
         score = 0
+        if (!(UserManager.share.currentUser.result?.passLevel)!){
+            lastLevelScore = 0
+        }
         fallingBehaviorDataSource!.resetAnimator()
         breakBehaviorDataSource!.resetBallDynamic()
         referenceView?.resetPaddleView()
@@ -102,9 +106,10 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
     func gotoNextLevel() {
         currentLevelIndex += 1
         if currentLevelIndex >= (LevelManager.share.levelResponse?.results?.count)!{
-            currentLevelIndex = (LevelManager.share.levelResponse?.results?.count)!
+            currentLevelIndex = 0
         }
         currentLevel = (LevelManager.share.levelResponse?.results?[currentLevelIndex])!
+        lastLevelScore += score;
         gameSetting()
         gameRefresh()
     }
@@ -115,9 +120,11 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
         gameStop()
 
         let result:Result = Result()
-        result.score = Int32(score);
+        result.score = Int32(score + lastLevelScore);
         result.level = Int16(currentLevelIndex)
         result.passLevel = ((currentLevel?.scoreGoal?.intValue)! <= score)
+        UserManager.share.currentUser.result = result
+
         if(result.passLevel){
             musicDatasource.playMusic(musicType: .gameWin)
             self.perform(#selector(gotoNextLevel), with: nil, afterDelay: TimeInterval(timeDelayWhenGotoNext))
@@ -126,7 +133,6 @@ class GameEngine: NSObject,FallingObjectDatasourceDelegate,BreakBehaviorDataSour
         }
         NotificationCenter.default.post(name: NSNotification.Name(handleGameResultsNotifiName), object: result)
         print("执行了通知\(result)")
-        UserManager.share.currentUser.result = result
     }
     
     func didScoreChanged(sender:UIDynamicItem , aScore:Int)
