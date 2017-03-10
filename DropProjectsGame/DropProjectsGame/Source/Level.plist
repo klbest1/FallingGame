@@ -56,7 +56,7 @@
 			<key>fallingSpeed</key>
 			<real>2.3</real>
 			<key>scoreGoal</key>
-			<integer>300</integer>
+			<integer>150</integer>
 		</dict>
 		<dict>
 			<key>backGroundImageUrl</key>
@@ -72,7 +72,7 @@
 			<key>numberOfDrops</key>
 			<real>4000</real>
 			<key>fallingSpeed</key>
-			<real>2.8</real>
+			<real>2.3</real>
 			<key>scoreGoal</key>
 			<integer>1000</integer>
 		</dict>

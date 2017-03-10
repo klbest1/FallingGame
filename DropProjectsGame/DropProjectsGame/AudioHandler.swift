@@ -9,7 +9,6 @@
 import UIKit
 import AVFoundation
 
-//笔记，将功能和业务分开
 
 //新建数组或字典
 class AudioHandler: NSObject,AVAudioPlayerDelegate {

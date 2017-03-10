@@ -34,7 +34,6 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
             gameRuleView?.startPlayButton.addTarget(self, action: #selector(ruleStartPlayButtonCliked), for: .touchUpInside)
 
         }
-        //笔记  通知
         NotificationCenter.default.addObserver(self, selector: #selector(handleGameResult(_:)), name: NSNotification.Name(handleGameResultsNotifiName), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleGamePlaying(_:)), name: NSNotification.Name(rawValue: handleGamePlayingNotifiName), object: nil)
         WXApiManager.shared().delegate = self;
@@ -83,7 +82,7 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
         super.viewDidAppear(animated);
         gameRuleView?.showRule(withType: .firstInstallGame)
         if gameRuleView != nil {
-            gameSceneView?.gameEngin.gamePause()
+            gameSceneView?.gameEngin.fallingBehaviorDataSource?.pauseDrops()
         }
     }
     
@@ -100,11 +99,9 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
     }
     
     func testDataBase() {
-        //笔记
         let me:GameUser = GameUser()
         me.accountName = "kanglin"
         me.ballImageUrl = "http://xx.com"
-        //笔记
         me.lastLoginTime = DateFormatter().date(from: "2010/08/02")
         me.profileImageUrl = "http://xx.com"
         
@@ -152,8 +149,10 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
     }
     
     func pauseClicked()  {
-        gameSceneView?.gameEngin.gamePause()
-        contentView.addSubview(gamePauseView!)
+        if(gameResultView.superview == nil){
+            gameSceneView?.gameEngin.gamePause()
+            contentView.addSubview(gamePauseView!)
+        }
     }
     
     func resumeClicked()  {
@@ -172,6 +171,9 @@ class GameSceneViewController: UIViewController,WXApiManagerDelegate {
             gameCountingDownView?.setHint(hint: "恭喜过关😎")
         }else{
             print("到达加载游戏结果页面")
+            if(gamePauseView!.superview != nil){
+                gamePauseView?.removeFromSuperview()
+            }
             //弹出游戏结果
             gameResultView.gameScoreLabel.text = String(format: "%d", arguments: [result.score])
             gameResultView.randButton.isEnabled = false

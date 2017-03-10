@@ -107,7 +107,7 @@ class RankingViewController: UIViewController,UITableViewDataSource,UIAlertViewD
     }
     
     func share()  {
-        if(WXApi.isWXAppInstalled() ){
+        if(WXApi.isWXAppInstalled()){
             shareView?.showShareView()
         }else{
             let alertView:UIAlertView = UIAlertView(title: "", message: "weChatInstall".localString(), delegate: self, cancelButtonTitle: "Cancel".localString(), otherButtonTitles: "GoToInstall".localString())

@@ -19,7 +19,7 @@ public class GameUser: BaseObject {
 
      public var accountName: String?
      public var lastLoginTime: Date?
-     public var isCurrentUser:Bool = false //  笔记
+     public var isCurrentUser:Bool = false 
      public var ballImageUrl: String?
      public var profileImageUrl: String?
      public var result: Result?

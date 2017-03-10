@@ -9,10 +9,12 @@
 import UIKit
 
 extension CGFloat {
+
     static func random(max:Int) -> Int{
         let randomNumber = arc4random() % UInt32(max)
         return Int(randomNumber);
     }
+    
 }
 
 extension UIColor{

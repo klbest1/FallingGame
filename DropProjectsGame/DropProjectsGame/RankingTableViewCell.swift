@@ -68,7 +68,9 @@ class RankingTableViewCell: UITableViewCell {
                 query.getObjectInBackground(withId: (result.user?.objectId)!) { (object, error) in
                     let user:GameUser? = object as? GameUser
                     result.user?.accountName = user?.accountName
-                    self.name.text = user?.accountName
+                    if(self.name.text == nil){
+                        self.name.text = user?.accountName
+                    }
                 }
             }
         }

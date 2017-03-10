@@ -96,7 +96,6 @@ class GameRuleView: BaseView {
         let window:UIWindow = UIApplication.shared.keyWindow!
         window.addSubview(self)
 //        _ = self.ff_Fill(window)
-        //笔记
         resetFrame()
         self.gameRuleLabel.center = CGPoint(x:self.gameRuleLabel.center.x,y:-self.gameRuleLabel.center.y)
         self.textView.center = CGPoint(x:self.textView.center.x,y:-self.textView.center.y)

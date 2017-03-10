@@ -46,7 +46,6 @@ class BreakBehavior: UIDynamicBehavior {
         
         item.pushBehavior?.magnitude = item.pushMagnitude;
         item.pushBehavior!.angle = CGFloat(item.pushAngle);
-        //笔记，区别
         item.pushBehavior!.action = { [unowned self] in
             if(item.pushBehavior != nil){
                 if(!item.pushBehavior!.active){
@@ -59,7 +58,7 @@ class BreakBehavior: UIDynamicBehavior {
         }
     }
     
-    func addCollisionForItems(items:[UIView]) {
+    func addBehaviorsForItems(items:[UIView]) {
         for item in items{
             collisionBehavior.addItem(item);
             gravityBehavior.addItem(item)

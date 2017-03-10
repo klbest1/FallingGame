@@ -140,7 +140,7 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
         let ballView = gameView!.ballsNeedPushAtStart.first
 
         ballView?.breakObjectBehavior!.removeItemsFromBehaviors()
-        ballView?.breakObjectBehavior!.addCollisionForItems(items: [ballView!]);
+        ballView?.breakObjectBehavior!.addBehaviorsForItems(items: [ballView!]);
         ballView?.firstPushBallDown = true
         currentNumberOfBalls += 1
     }
@@ -198,11 +198,18 @@ class BreakBehaviorDataSource: NSObject,UICollisionBehaviorDelegate {
         unInitBehavior()
     }
     
-    func pauseAnimator()  {
+    func pauseBreaker()  {
         for balView in (gameView!.ballViews){
-            dynamicBreakerAnimator!.removeBehavior(balView.breakObjectBehavior!)
+            balView.breakObjectBehavior?.removeItemsFromBehaviors()
         }
-        dynamicBreakerAnimator!.removeAllBehaviors()
+    }
+    
+    func continueBreaker() {
+        for balView in (gameView!.ballViews){
+            balView.breakObjectBehavior?.addBehaviorsForItems(items: [balView])
+        }
+//        let path:UIBezierPath = UIBezierPath.init(rect: gameView!.paddleView!.frame);
+//        addBundary(name: PathNames.paddleBundryName , path: path)
 
     }
     

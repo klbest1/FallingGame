@@ -95,6 +95,8 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
             let number = CGFloat.random(max: numberOfDropsPerRow);
             if(!randomsLocation.contains(number)){
                 randomsLocation.append(number);
+            }else{
+                i -= 1;
             }
         }
 
@@ -114,7 +116,7 @@ class FallingObjectDatasource: NSObject,UICollisionBehaviorDelegate {
         fallingObjectBehavior!.addItems(items: drops)
         
         //统计产生的Drops
-        totalDrops += randomDropsPerRow
+        totalDrops += (randomDropsPerRow + 1)
 
         if dropTimer == nil{
             dropTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(addDrops), userInfo: nil, repeats: true);

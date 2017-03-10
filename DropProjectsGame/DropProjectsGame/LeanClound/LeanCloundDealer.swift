@@ -41,8 +41,6 @@ class LeanCloundDealer: NSObject {
                             if(queryedResult != nil && (queryedResult?.score)! < (user.result?.score)!) {
                                 
                                 let recordUser:GameUser = GameUser.init(className: "GameUser", objectId: downLoadUser.objectId!)
-                                //笔记，赋值操作不会复制内存地址，
-                                //笔记，safeBlock
                                 recordUser.result = Result.init(className: "Result", objectId: (downLoadUser.result?.objectId)!)
                                 recordUser.profileImageUrl = (downLoadUser.profileImageUrl as! NSCopying) as? String
                                 recordUser.updateUser(newUser: UserManager.share.currentUser,compelete: { (success)in
@@ -112,7 +110,6 @@ class LeanCloundDealer: NSObject {
                     // 第一个参数是 className，第二个参数是 objectId
                     if let downLoadUser = objects?.first as? GameUser {
                         let recordUser:GameUser = GameUser.init(className: "GameUser", objectId: downLoadUser.objectId!)
-                        //笔记，赋值操作不会复制内存地址，
                         if newUser.accountName != nil{
                             recordUser.setObject(newUser.accountName, forKey: kAcountNameKey)
                         }
